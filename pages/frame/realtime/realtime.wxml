@@ -1,0 +1,4 @@
+<view class="container">
+  <canvas canvas-id="clock"/>
+  <text>{{msg}}</text>
+</view>
