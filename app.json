@@ -1,0 +1,60 @@
+{
+  "pages":[
+    "pages/frame/frame",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/assembly/assembly",
+    "pages/apipage/apipage",
+    "pages/tool/tool",
+    "pages/cloudserver/cloudserver",
+    "pages/frame/fileStructure/fileStructure",
+    "pages/frame/configure/configure",
+    "pages/frame/logiclayer/logiclayer",
+    "pages/frame/viewlayer/viewlayer",
+    "pages/frame/custom/custom",
+    "pages/frame/pluginUnit/pluginUnit",
+    "pages/frame/subpackage/subpackage",
+    "pages/frame/multithreading/multithreading",
+    "pages/frame/baseLibrary/baseLibrary",
+    "pages/frame/compatible/compatible",
+    "pages/frame/operating/operating",
+    "pages/frame/performance/performance",
+    "pages/frame/fileSystem/fileSystem",
+    "pages/frame/updateLog/updateLog"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#cfcfcf",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#8E8E93",
+    "selectedColor": "#B18354",
+    "borderStyle": "black",
+    "position": "bottom",
+    "backgroundColor": "#cfcfcf",
+    "list": [
+      {
+        "pagePath": "pages/frame/frame",
+        "text": "框架"
+      },
+      {
+        "pagePath": "pages/assembly/assembly",
+        "text": "组件"
+      },
+      {
+        "pagePath": "pages/apipage/apipage",
+        "text": "API"
+      },
+      {
+        "pagePath": "pages/tool/tool",
+        "text": "工具"
+      },
+      {
+        "pagePath": "pages/cloudserver/cloudserver",
+        "text": "云服务器"
+      }
+    ]
+  }
+}

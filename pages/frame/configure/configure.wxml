@@ -1,0 +1,47 @@
+<view class="page">
+    <view class="page__hd">
+      <rich-text nodes="{{html}}" bindtap="tap"></rich-text>
+    </view>
+    <view>
+      <text class='text-box'>app.json文件用来对微信小程序进行全局配置，决定页面文件的路径、窗口表现、设置网络超时时间、设置多 tab 等。</text>
+      <view class="caption-wrap">
+        <i-collapse name="{{name}}">
+          <i-collapse-item title="全局配置app.json：" name="name2">
+              <view slot="content">
+                <view class="weui-cells__title">
+                  {{celltittle[0]}}
+                </view>
+                <view class="weui-cells">
+                  <view class="weui-cell weui-cell_access"  wx:for="{{onearray}}" key="index">
+                    <view class="weui-cell__bd">{{item.text1}}</view>
+                    <view class="weui-cell__bd">{{item.text2}}</view>
+                    <view class="weui-cell__bd">{{item.text3}}</view>
+                    <view class="weui-cell__bd">{{item.text4}}</view>
+                  </view>
+                </view>
+                <text class='text-box'>注：pages目录下的页面需要在app.json的pages内注册</text>
+              </view>
+          </i-collapse-item>
+          <i-collapse-item title="页面配置index.json：" name="name3">
+              <view slot="content">
+                <view class="weui-cells__title">
+                  {{celltittle[0]}}
+                </view>
+                <view class="weui-cells">
+                  <view class="weui-cell weui-cell_access"  wx:for="{{onearray}}" key="index">
+                    <view class="weui-cell__bd">{{item.text1}}</view>
+                    <view class="weui-cell__bd">{{item.text2}}</view>
+                    <view class="weui-cell__bd">{{item.text3}}</view>
+                    <view class="weui-cell__bd">{{item.text4}}</view>
+                  </view>
+                </view>
+                <text class='text-box'>注：pages目录下的页面需要在app.json的pages内注册</text>
+              </view>
+          </i-collapse-item>
+        </i-collapse>
+      </view>
+      
+    </view>
+    <view class="page__bd">
+    </view>
+</view>

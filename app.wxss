@@ -1,0 +1,9 @@
+/**app.wxss全局样式**/
+@import 'weui.wxss';
+
+.container{
+  background: #F0F2F5;
+}
+.text-box{
+  font-size: 12px;
+}

@@ -1,0 +1,6 @@
+.weui-cell__bd{
+  overflow: hidden;
+  box-sizing: border-box;
+  margin:3px;
+  font-size: 12px;
+}

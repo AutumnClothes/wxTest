@@ -1,0 +1,4 @@
+page,
+.container{
+  background: #F0F2F5;
+}

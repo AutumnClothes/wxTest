@@ -1,0 +1,15 @@
+<view class="page">
+    <!--页头-->
+    <view class="page__hd">
+    </view>
+    <!--主体-->
+    <view class="weui-grids">
+      <view class='weui-grid' wx:for="{{routers}}" wx:key="name" >
+        <navigator class='weui-grid__label' data-code='{{item.code}}' url='{{item.url}}' open-type="navigate">
+          <text>{{item.name}}</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="page__bd"></view>
+    <!--没有页脚-->
+</view>
