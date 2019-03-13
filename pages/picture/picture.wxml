@@ -1,0 +1,42 @@
+<!--裁剪图片浮层-->
+<view>
+  <top-box text="上传照片" backBox="true" delta='1'></top-box>
+  <view class='fixed-upimg' style='top:{{cH}}rpx'>
+    <view class="wx-content-info" style='top:{{cH}}rpx'>
+      <view class='wx-corpper-box' style="height:{{boxheight}}rpx;" >
+        <view class="wx-corpper" style="width:{{cropperInitW}}rpx;height:{{cropperInitH}}rpx;background:#000">
+          <view bindtap='upLoad'  class="wx-corpper-content" style="width:{{cropperW}}rpx;height:{{cropperH}}rpx;left:{{cropperL}}rpx;top:{{cropperT}}rpx">
+            <image src="{{imageSrc}}" style="width:{{cropperW}}rpx;height:{{cropperH}}rpx"></image>
+            <view class="wx-corpper-crop-box" bindtouchstart="contentStartMove" bindtouchmove="contentMoveing" style="width:{{cutW}}rpx;height:{{cutH}}rpx;left:{{cutL}}rpx;top:{{cutT}}rpx">
+              <view class="wx-cropper-view-box">
+                <view class="wx-cropper-dashed-h"></view>
+                <view class="wx-cropper-dashed-v"></view>
+                <view class="wx-cropper-line-t" data-drag="top" catchtouchstart="dragStart" catchtouchmove="dragMove"></view>
+                <view class="wx-cropper-line-r" data-drag="right" catchtouchstart="dragStart" catchtouchmove="dragMove"></view>
+                <view class="wx-cropper-line-b" data-drag="bottom" catchtouchstart="dragStart" catchtouchmove="dragMove"></view>
+                <view class="wx-cropper-line-l" data-drag="left" catchtouchstart="dragStart" catchtouchmove="dragMove"></view>
+								
+								
+								
+								
+                <view class="wx-cropper-point point-t" data-drag="top" catchtouchstart="dragStart" catchtouchmove="dragMove"></view>
+                <view class="wx-cropper-point point-tr" data-drag="topTight"></view>
+                <view class="wx-cropper-point point-r" data-drag="right" catchtouchstart="dragStart" catchtouchmove="dragMove"></view>
+                <view class="wx-cropper-point point-rb" data-drag="rightBottom" catchtouchstart="dragStart" catchtouchmove="dragMove"></view>
+                <view class="wx-cropper-point point-b" data-drag="bottom" catchtouchstart="dragStart" catchtouchmove="dragMove"></view>
+                <view class="wx-cropper-point point-bl" data-drag="bottomLeft"></view>
+                <view class="wx-cropper-point point-l" data-drag="left" catchtouchstart="dragStart" catchtouchmove="dragMove"></view>
+                <view class="wx-cropper-point point-lt" data-drag="leftTop"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <canvas canvas-id="myCanvas" style="position:absolute;border: 1px solid red; width:{{imageW}}rpx;height:{{imageH}}rpx;top:-9999px;left:-9999px;"></canvas>
+      <view class='bottom-button-box'>
+        <view class='bottom-button' bindtap="backOut"> 取消 </view>
+        <view class='bottom-button' bindtap="getImageInfo"> 确定 </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+<view>
+  <top-box text="海报预览"></top-box>
+  <form report-submit="true" data-formkey='pageback' bindsubmit="backTo">
+    <button form-type="submit" class="back" style='margin-top:{{H}}rpx'>
+      <image class='back-box' src='../../image/img/backpath.png'></image>
+    </button>
+  </form>
+  <view class='content' style='top:{{cH}}rpx'>
+    <image mode='aspectFit' class='poster-img' src='{{imgPath}}'  bindtap="preview" data-url='{{imgPath}}'></image>
+    <view class="canvas-box">
+      <canvas canvas-id="shareCanvas" style="width:750px;height:1224px"></canvas>
+      <canvas style="width: 200px; height: 200px;" canvas-id="myQrcode"></canvas>
+    </view>
+    <view class='advert-title'>{{txt}}</view>
+    <form report-submit="true" data-formkey='share' bindsubmit="shareBind" data-img='{{imgPath}}'>
+      <button form-type="submit" class='share-button' style='bottom:{{bm}}rpx'>保存图片,发送到朋友圈</button>
+    </form>
+  </view>
+</view>

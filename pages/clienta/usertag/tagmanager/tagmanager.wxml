@@ -1,0 +1,114 @@
+<!--pages/clienta/usertag/usertag.wxml-->
+<view class='container'>
+  <top-box text="管理标签"></top-box>
+  <form report-submit="true" bindsubmit="backTo">
+    <button form-type="submit" class="top-over-box" style='top:{{H}}rpx'>
+      <image style='width:32rpx;height:32rpx;margin-right:15rpx' src='../../../../image/img/tag-over.png'></image>
+      <text>完成</text>
+    </button>
+  </form>
+  <view class='modal-input-meng' wx:if="{{modalMeng}}"></view>
+  <view class='modal-input-box' wx:if="{{modalInput}}">
+    <view class='modal-title'>创建标签</view>
+    <input
+      class='modal-input'
+      focus='{{modalInput}}'
+      bindinput='inputEnd'
+      adjust-position='' 
+      maxlength='10'
+      ></input>
+    <view class='modal-button-box'>
+      <view class='modal-button modal-button-left'>
+        <form report-submit="true" data-formkey="inputclose" bindsubmit="modalCancel" >
+          <button form-type="submit">
+            取消
+          </button>
+        </form>
+      </view>
+      <view class='modal-button modal-button-right'>
+        <form report-submit="true" data-formkey="inputsave" bindsubmit="inputOver" >
+          <button form-type="submit">
+            完成
+          </button>
+        </form>
+      </view>
+    </view>
+  </view>
+  <view class='content' style='top:{{cH}}rpx'>
+    <view style="block">
+      <scroll-view scroll-y style='height:{{sH}}rpx' scroll-into-view='{{scrollTo}}'>
+        <view class='content-box'>
+          <view class="usertag-ul" wx:for="{{tagList}}" wx:key="{{index}}" data-groupid='{{item.groupid}}' data-name="{{item.groupname}}">
+            <view class='usertag-li-f'>
+              <view class='icon-left-box'>
+                <view wx:if="{{item.tagShow}}" class='usertag-li-f-g'>{{item.groupname}}</view>
+                <input
+                  wx:else
+                  class='alter-input' 
+                  data-groupid='{{item.groupid}}'
+                  data-value = '{{item.groupname}}'
+                  value="{{item.groupname}}"
+                  bindfocus='inputOn'
+                  bindinput='bindInput'
+                  bindblur='bindblur'
+                  bindconfirm='inputConfirm'
+                  confirm-type="done"
+                  focus = "{{focus}}"
+                  />
+              <view class='usertag-li-icon' style='background-color:{{item.color}}'></view>
+                <form report-submit="true" data-formkey="tagarr" bindsubmit="alterTagArr" data-groupid='{{item.groupid}}' data-show='{{item.tagShow}}' 
+                  wx:if="{{item.tagShow}}">
+                  <button form-type="submit" class='icon-left' >
+                    <image src="../../../../image/img/tag-edit.png" style='width:32rpx;height:32rpx;'/>
+                  </button>
+                </form>
+              </view>
+              <view class='icon-right-box'>
+                <form report-submit="true" data-formkey="tagadd" bindsubmit="tagAdd" data-groupid="{{item.groupid}}">
+                  <button form-type="submit" class="icon-right-img" >
+                    <image src='../../../../image/img/common-add.png' class='icon-right-add'></image>
+                  </button>
+                </form>
+                <form report-submit="true" data-formkey="tagdelarr" bindsubmit="deleteTagArr" data-name="{{item.groupname}}" data-groupid='{{item.groupid}}'>
+                  <button form-type="submit" class="icon-right-img" >
+                    <image src='../../../../image/img/common-del.png' class='icon-right-del'></image>
+                  </button>
+                </form>
+                <form report-submit="true" data-formkey="tagsort" bindsubmit="bindSort" data-ind='{{index}}'>
+                  <button form-type="submit" class="icon-right-img" >
+                    <image src='../../../../image/img/sort.png' class='icon-right-sort'></image>
+                  </button>
+                </form>
+              </view>
+            </view>
+            <view class="usertag-li-l">
+              <view wx:for="{{item.list}}" wx:for-index="int" wx:key="{{int}}" wx:for-item="ite">
+                <form report-submit="true" data-formkey="tagbind" bindsubmit="tagbind" data-groupid="{{item.groupid}}" data-selected="{{ite.selected}}" data-tagid="{{ite.tagid}}">
+                  <button form-type="submit" class="usertag-li-v {{ite.selected?'usertag-li-v-true':''}}">
+                    {{ite.tagname}}
+                  </button>
+                </form>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view style="width:100%;height:1rpx" id='scrollend'></view>
+      </scroll-view>
+      <view class='bottom-box bottom-box-two' style='bottom:{{bm}}rpx'>
+        <form report-submit="true" data-formkey="addtagarr" bindsubmit="addTagArr">
+          <button form-type="submit" class='bottom-box-two-left'>
+            <image src="../../../../image/img/common-add.png" style="width:32rpx;height:32rpx;margin-right:12rpx"/>
+            <text>添加分组</text>
+          </button>
+        </form>
+        <form report-submit="true" data-formkey="deletatag" bindsubmit="deleteTag">
+          <button form-type="submit" class='bottom-box-two-right'>
+            <image src="../../../../image/img/common-del.png" style="width:38rpx;height:34rpx;margin-right:12rpx"/>
+            <text>删除已选<text style="color:#ff8a01">({{tagArrLength}})</text></text>
+          </button>
+        </form>
+      </view>
+    </view>
+  </view>
+</view>
+

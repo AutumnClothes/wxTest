@@ -1,0 +1,293 @@
+<view>
+  <top-box text="详细资料" backBox="true" detal="1" ></top-box>
+  <view class='modal-input-meng' wx:if="{{modalMeng}}"></view>
+  <view class='modal-input-box' wx:if="{{modalInput}}">
+    <view class='modal-title'>{{title}}</view>
+    <input
+      class='modal-input'
+      focus='{{modalInput}}'
+      type='{{typeon}}'
+      maxlength='{{maxL}}'
+      bindinput='inputEnd'
+      adjust-position='' 
+      value="{{value}}"></input>
+    <view class='modal-button-box'>
+      <view class='modal-button modal-button-left'>
+        <form report-submit="true" data-formkey='inputclose' bindsubmit="modalCancel" >
+          <button form-type="submit">
+            取消
+          </button>
+        </form>
+      </view>
+      <view class='modal-button modal-button-right'>
+        <form report-submit="true" data-formkey='inputsave' bindsubmit="inputOver" >
+          <button form-type="submit">
+            完成
+          </button>
+        </form>
+      </view>
+    </view>
+  </view>
+  <view class='modal-textarea-box'style="display:{{modalTextarea?'block':'none'}}">
+    <view class='modal-title'>{{title}}</view>
+    <textarea
+      class='form-item-model-textarea' 
+      focus="{{modalTextarea}}"
+      maxlength='{{maxLength}}'
+			bindinput='inputEnd'
+      adjust-position='' 
+      value="{{value}}"
+      cursor="{{cursor}}"
+      ></textarea>
+    <view class='modal-button-box'>
+      <view class='modal-button modal-button-left'>
+        <form report-submit="true" data-formkey='textareaclose' bindsubmit="modalCancel" >
+          <button form-type="submit">
+            取消
+          </button>
+        </form>
+      </view>
+      <view class='modal-button modal-button-right'>
+        <form report-submit="true" data-formkey='textareasave' bindsubmit="textareaOver" >
+          <button form-type="submit">
+            完成
+          </button>
+        </form>
+      </view>
+    </view>
+  </view>
+  <view class='content' style='top:{{cH}}rpx'>
+    <scroll-view scroll-y style='height:{{sH}}rpx;'>
+      <view class='cus-title'>基础资料</view>
+      <view class='cus-list-box' >
+        <view class='item-title'>推荐人</view>
+        <view class='item-text'>{{cusData.fromwho == null ?"我自己":cusData.fromwho}}</view>
+      </view>
+      <view class='cus-list-box' >
+        <view class='item-title'>客户来源</view>
+        <view class='item-text'>{{cusData.entranceid}}</view>
+      </view>
+      <view class='cus-list-box' >
+        <view class='item-title'>昵称</view>
+        <view class='item-text'>{{cusData.nickname}}</view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>备注名</view>
+        <view class="{{cusData[fList[0].text] == '' || cusData[fList[0].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+          data-title="{{fList[0].title}}"
+          data-type="text"
+          data-field='{{fList[0].text}}'
+          data-value="{{cusData[fList[0].text]}}"
+          data-maxL="10"
+          bindtap="inputOn">{{cusData[fList[0].text] == '' || cusData[fList[0].text] == null ? fList[0].title : cusData[fList[0].text]}}
+        </view> 
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>性别</view>
+        <view  class="fList-placeholder-class">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{sexArray}}">
+            <view>
+              <text class='item-text' style="{{sexArray[index]?'':'color:#999'}}">{{sexArray[index]?sexArray[index]:'请选择:'}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>生日</view>
+        <view  class="fList-placeholder-class">
+          <picker mode="date" value="{{time}}" start="1900-01-01" end="{{newday}}" bindchange="bindTimeChange">
+            <view class="picker">
+              <text class='item-text' style="{{time?'':'color:#999'}}">{{time?time:'请选择:'}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>联系电话</view>
+        <view class="{{cusData[fList[3].text] == '' || cusData[fList[3].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+          data-title="{{fList[3].title}}"
+          data-type="number"
+          data-field='{{fList[3].text}}'
+          data-value="{{cusData[fList[3].text]}}"
+          data-maxL="11"
+          bindtap="inputOn">{{cusData[fList[3].text] == '' || cusData[fList[3].text] == null ? fList[3].title : cusData[fList[3].text]}}
+          <view class='storage-box' data-name='{{cusData.nickname}}' data-phonenum="{{cusData[fList[4].text]}}" catchtap='storageBind'>
+            存通讯录
+          </view> 
+        </view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>备用电话</view>
+        <view class="{{cusData[fList[4].text] == '' || cusData[fList[4].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+          data-title="{{fList[4].title}}"
+          data-type="number"
+          data-field='{{fList[4].text}}'
+          data-value="{{cusData[fList[4].text]}}"
+          data-maxL="13"
+          bindtap="inputOn">{{cusData[fList[4].text] == '' || cusData[fList[4].text] == null ? fList[4].title : cusData[fList[4].text]}}</view> 
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>邮箱</view>
+        <view class="{{cusData[fList[5].text] == '' || cusData[fList[5].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+          data-title="{{fList[5].title}}"
+          data-type="text"
+          data-field='{{fList[5].text}}'
+          data-value="{{cusData[fList[5].text]}}"
+          data-maxL="64"
+          bindtap="inputOn">{{cusData[fList[5].text] == '' || cusData[fList[5].text] == null ? fList[5].title : cusData[fList[5].text]}}</view> 
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>身份证</view>
+        <view class="{{cusData[fList[6].text] == '' || cusData[fList[6].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+          data-title="{{fList[6].title}}"
+          data-type="idcard"
+          data-field='{{fList[6].text}}'
+          data-value="{{cusData[fList[6].text]}}"
+          data-maxL="18"
+          bindtap="inputOn">{{cusData[fList[6].text] == '' || cusData[fList[6].text] == null ? fList[6].title : cusData[fList[6].text]}}</view> 
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>资金账户</view>
+        <view class="{{cusData[fList[7].text] == '' || cusData[fList[7].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+          data-title="{{fList[7].title}}"
+          data-type="number"
+          data-field='{{fList[7].text}}'
+          data-value="{{cusData[fList[7].text]}}"
+          data-maxL="64"
+          bindtap="inputOn">{{cusData[fList[7].text] == '' || cusData[fList[7].text] == null ? fList[7].title : cusData[fList[7].text]}}</view> 
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>开户日期</view>
+        <view  class="fList-placeholder-class">
+          <picker mode="date" value="{{Ktime}}" start="1900-01-01" end="{{newday}}" bindchange="bindKtimeChange">
+            <view class="picker">
+              <text class='item-text' style="{{Ktime?'':'color:#999'}}">{{Ktime?Ktime:'请选择:'}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>佣金率</view>
+        <view class="{{cusData[fList[9].text] == '' || cusData[fList[9].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+          data-title="{{fList[9].title}}"
+          data-type="text"
+          data-field='{{fList[9].text}}'
+          data-value="{{cusData[fList[9].text]}}"
+          data-maxL="14"
+          bindtap="inputOn">{{cusData[fList[9].text] == '' || cusData[fList[9].text] == null ? fList[9].title : cusData[fList[9].text]}}
+        </view> 
+      </view>
+      <view class='cus-title'>个性资料</view>
+      <view class='cus-list-box'>
+        <view class='item-title'>投资经验</view>
+        <view class="{{cusData[lList[0].text] == ''|| cusData[lList[0].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+        data-title="{{lList[0].title}}"
+        data-field='{{lList[0].text}}'
+        data-type='text'
+        data-maxL="42"
+        data-value="{{cusData[lList[0].text]}}"
+        bindtap='{{lList[0].bindtap?lList[0].bindtap:"inputOn"}}'
+        >{{cusData[lList[0].text] == '' || cusData[lList[0].text] == null ?lList[0].title : cusData[lList[0].text]}}</view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>投资偏好</view>
+        <view class="{{cusData[lList[1].text] == ''|| cusData[lList[1].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+        data-title="{{lList[1].title}}"
+        data-field='{{lList[1].text}}'
+        data-type='text'
+        data-maxL="42"
+        data-value="{{cusData[lList[1].text]}}"
+        bindtap='{{lList[1].bindtap?lList[1].bindtap:"inputOn"}}'
+        >{{cusData[lList[1].text] == '' || cusData[lList[1].text] == null ?lList[1].title : cusData[lList[1].text]}}</view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>学历</view>
+        <view  class="fList-placeholder-class">
+          <picker bindchange="educationChange" value="{{eindex}}" range="{{education}}">
+            <view>
+              <text class='item-text' style="{{education[eindex]?'':'color:#999'}}">{{education[eindex]?education[eindex]:'请选择:'}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>行业</view>
+        <view class="{{cusData[lList[3].text] == ''|| cusData[lList[3].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+        data-title="{{lList[3].title}}"
+        data-field='{{lList[3].text}}'
+        data-type='text'
+        data-maxL="14"
+        data-value="{{cusData[lList[3].text]}}"
+        bindtap='{{lList[3].bindtap?lList[3].bindtap:"inputOn"}}'
+        >{{cusData[lList[3].text] == '' || cusData[lList[3].text] == null ?lList[3].title : cusData[lList[3].text]}}</view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>职业</view>
+        <view class="{{cusData[lList[4].text] == ''|| cusData[lList[4].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+        data-title="{{lList[4].title}}"
+        data-field='{{lList[4].text}}'
+        data-type='text'
+        data-maxL="14"
+        data-value="{{cusData[lList[4].text]}}"
+        bindtap='{{lList[4].bindtap?lList[4].bindtap:"inputOn"}}'
+        >{{cusData[lList[4].text] == '' || cusData[lList[4].text] == null ?lList[4].title : cusData[lList[4].text]}}</view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>工作单位</view>
+        <view class="{{cusData[lList[5].text] == ''|| cusData[lList[5].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+        data-title="{{lList[5].title}}"
+        data-field='{{lList[5].text}}'
+        data-type='text'
+        data-maxL="42"
+        data-value="{{cusData[lList[5].text]}}"
+        bindtap='{{lList[5].bindtap?lList[5].bindtap:"inputOn"}}'
+        >{{cusData[lList[5].text] == '' || cusData[lList[5].text] == null ?lList[5].title : cusData[lList[5].text]}}</view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>地址</view>
+        <view class="{{cusData[lList[6].text] == ''|| cusData[lList[6].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+        data-title="{{lList[6].title}}"
+        data-field='{{lList[6].text}}'
+        data-type='text'
+        data-maxL="42"
+        data-value="{{cusData[lList[6].text]}}"
+        bindtap='{{lList[6].bindtap?lList[6].bindtap:"inputOn"}}'
+        >{{cusData[lList[6].text] == '' || cusData[lList[6].text] == null ?lList[6].title : cusData[lList[6].text]}}</view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>兴趣爱好</view>
+        <view class="{{cusData[lList[7].text] == ''|| cusData[lList[7].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+        data-title="{{lList[7].title}}"
+        data-field='{{lList[7].text}}'
+        data-type='text'
+        data-maxL="42"
+        data-value="{{cusData[lList[7].text]}}"
+        bindtap='{{lList[7].bindtap?lList[7].bindtap:"inputOn"}}'
+        >{{cusData[lList[7].text] == '' || cusData[lList[7].text] == null ?lList[7].title : cusData[lList[7].text]}}</view>
+      </view>
+      <view class='cus-list-box'>
+        <view class='item-title'>客户需求</view>
+        <view class="{{cusData[lList[8].text] == ''|| cusData[lList[8].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+        data-title="{{lList[8].title}}"
+        data-field='{{lList[8].text}}'
+        data-type='text'
+        data-maxL="42"
+        data-value="{{cusData[lList[8].text]}}"
+        bindtap='{{lList[8].bindtap?lList[8].bindtap:"inputOn"}}'
+        >{{cusData[lList[8].text] == '' || cusData[lList[8].text] == null ?lList[8].title : cusData[lList[8].text]}}</view>
+      </view>
+      <view class='cus-list-box' style="min-height:200rpx;border:none">
+        <view class='item-title'>备注</view>
+        <view class="{{cusData[lList[9].text] == ''|| cusData[lList[9].text] == null ? 'fList-placeholder-class' : 'item-text'}}"
+        data-title="{{lList[9].title}}"
+        data-field='{{lList[9].text}}'
+        data-type='text'
+        data-value="{{cusData[lList[9].text]}}"
+        bindtap='{{lList[9].bindtap?lList[9].bindtap:"inputOn"}}'
+        >{{cusData[lList[9].text] == '' || cusData[lList[9].text] == null ?lList[9].title : cusData[lList[9].text]}}</view>
+      </view>
+      <view class='liubai'></view>
+    </scroll-view>
+  </view>
+  <view class='liuBai'></view>
+</view>

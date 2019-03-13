@@ -1,0 +1,153 @@
+<view>
+  <view class='canvas-box'>
+    <canvas canvas-id="shareCanvas" style="width:750px;height:1224px"></canvas>
+    <canvas style="width: 200px; height: 200px;" canvas-id="myQrcode"></canvas>
+  </view>
+  <tabone bindtoNextButton="toNextButton" bindcourse8="course8Control" bindupdateUnread="updateUnread"  style="display:  {{ current == 'information'? 'block' :  'none' }}" tab1="{{taboneKey}}" id="tabone"></tabone>
+  <tabtwo style="display:  {{ current == 'customer'? 'block' :  'none' }}" tab2="{{tabtwoKey}}" id="tabtwo" ></tabtwo>
+  <tabthree style="display:  {{ current == 'jobs'? 'block' :  'none' }}" tab3="{{tabthreeKey}}" id="tabthree"></tabthree>
+  <tabfour style="display:  {{ current == 'mine'? 'block' :  'none' }}" tab4="{{tabfourKey}}" id="tabfour" ></tabfour>
+  <tabfive bindposterBind="posterBind" bindhandleChange="handleChange" style="display:  {{ current == 'home'? 'block' :  'none' }}" tab5="{{tabfiveKey}}" id="tabfive" ></tabfive>
+  <view class='tabbar-box' style='bottom:{{bm}}rpx'>
+    <i-tab-bar current="{{ current }}" bindchange="handleChange">
+      <i-tab-bar-item key="home" img="../../image/icon/home.png" current-img="../../image/icon/home-btn.png" title="{{homeTitle}}"></i-tab-bar-item>  
+      <i-tab-bar-item count="{{count}}" key="information" img="../../image/icon/information.png" current-img="../../image/icon/information-btn.png" title="消息"></i-tab-bar-item>
+      <i-tab-bar-item key="customer" img="../../image/icon/customer.png" current-img="../../image/icon/customer-btn.png" title="通讯录"></i-tab-bar-item>
+      <i-tab-bar-item key="jobs" img="../../image/icon/jobs.png" current-img="../../image/icon/jobs-btn.png" title="工作"></i-tab-bar-item>
+      <i-tab-bar-item key="mine" img="../../image/icon/mine.png" current-img="../../image/icon/mine-btn.png" title="我的"></i-tab-bar-item>
+    </i-tab-bar>
+  </view>
+  <!----关注公众号，可随意拖走，样式import--->
+  <view class='meng' wx:if='{{guidancemeng}}'></view>
+  <view class='public-box' wx:if='{{guidance}}'>
+    <view class='public-close' bindtap="closeBind">
+      <image src="../../image/img/close.png" class='public-close-img'/>
+    </view>
+    <view class='public-content-box'>
+      <image class='public-img public-img-left' src="../../image/img/public-topleft.png"/>
+      <view class='public-content'>功亏一篑就是：名片发了, 客情维护了, 产品推荐了, 但是因为咨询没有及时回复, 客户找了别人！</view>
+      <image class='public-img public-img-right' src="../../image/img/public-botright.png"/>
+    </view>
+    <view class="guidance-box">
+      <view class='guidance-triangle guidance-triangle-bottom guidance-triangle_public'></view>通过公众号, 客户阅读一秒提醒, 不再错过任何商机。</view>
+    <form report-submit="true" bindsubmit="publicGuide" >
+      <button class='public-button' form-type="submit">点此关注公众号</button>
+    </form>
+  </view>
+  <!----------------------------------------->
+  <view class='public-guide' wx:if='{{guidancePublic}}'>
+    <view class='public-guide-one'>1.点击<image src="../../image/img/guide-capsule.png" style='width:174rpx;height:64rpx;margin-left:22rpx'/></view>
+    <view class='public-guide-two'>
+      <view>2.点击「关于为斯顾问」</view>
+      <view class='public-guide-two-ite' style='border-top:none;margin-top:20rpx'>转发</view>
+      <view class='public-guide-two-ite'>添加到我的小程序</view>
+      <view class='public-guide-two-ite'>关于为斯顾问</view>
+    </view>
+    <view  class='public-guide-three'>
+      <view>3.点击相关公众号，进行关注</view>
+      <view class='public-guide-three-img'>
+        <image src="../../image/img/guide-logo.png" style='width:68rpx;height:68rpx;'/>
+        <view class='public-guide-three-img-title'>为斯顾问</view>
+        <view class='public-guide-three-img-txt'>一款为理财顾问打造的私人CRM助手。行业不限于证券、银行、保险、基金、财富管理、独立顾问。</view>
+      </view>
+      <view class='public-guide-three-img-tail'>
+        <view>相关公众号</view>
+        <view class='public-guide-three-img-tail-right'>
+          <image src="../../image/img/guide-logo.png" style='width:44rpx;height:44rpx;'/>
+          <view class='public-guide-three-img-tail-right-txt'>为斯顾问</view>
+          <image src="../../image/img/path.png" style='width:10rpx;height:20rpx;'/>
+        </view>
+      </view>
+      <form report-submit="true" bindsubmit="closeBind" data-formkey='know'>
+        <button class='public-guide-button' form-type="submit">我知道了</button>
+      </form>
+    </view>
+  </view>
+  <!----------------------------------------->
+  <view class='public-guide' wx:if='{{guidanceMini}}'>
+    <view class='public-guide-one'>1.点击<image src="../../image/img/guide-capsule.png" style='width:174rpx;height:64rpx;margin-left:22rpx'/></view>
+    <view class='public-guide-two'>
+      <view>2.点击「添加到我的小程序」</view>
+      <view class='public-guide-two-ite' style='border-top:none;margin-top:20rpx'>转发</view>
+      <view class='public-guide-two-ite'>添加到我的小程序</view>
+      <view class='public-guide-two-ite'>关于为斯顾问</view>
+    </view>
+    <view class='public-guide-three'>
+      <view>3.在微信首页下拉，快速进入“为斯顾问”</view>
+      <view class='public-guide-three-title'>微信</view>
+      <view class='public-guide-three-content'>
+        <view>
+          <text>我的小程序 ></text>
+        </view>
+        <image src="../../image/img/guide-logo.png" class='public-guide-three-image'/>
+        <view>为斯顾问</view>
+      </view>
+      <view class='public-guide-three-bottom'>
+        <view class='public-guide-three-bottom-sou'>搜索</view>
+      </view>
+      <form report-submit="true" bindsubmit="closeBind" data-formkey='know'>
+        <button class='public-guide-button' form-type="submit">我知道了</button>
+      </form>
+    </view>
+  </view>
+  <view wx:if='{{guidanceDone}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one">
+        <view bindtap="closeNextButton" class='guidance-close'>
+          <image src="../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="../../image/img/guidance-box-one.png" style='width:191rpx;height:201rpx;margin-top:25rpx'/>
+        <view class="guidance-box-one-text">
+          <text style='font-size:34rpx;font-weight:500'>{{donetitle}}</text>
+          <text style='margin-top:24rpx;text-align:center;color:rgb(118,113,113)'>{{donedesc}}</text>
+        </view>
+        <form report-submit="true" bindsubmit="clickNextButton" data-formkey='guidanceDone'>
+          <button class='guidance-btn' style='width:485rpx' form-type="submit">{{donebutton}}</button>
+        </form>
+        <view  class='guidance-bottom'>{{donerate}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{guidance3}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='mem-box'>
+      <form report-submit="true"  data-formkey='close' bindsubmit="closeBind">
+        <button class='mem-box-close' form-type="submit">
+          <image src="../../image/img/close.png" style='width:18rpx;height:18rpx'/>
+        </button>
+      </form>
+      <view class="mem-box-text-box">
+        <view class='mem-box-text'>加入种子用户群，提出你工作中得麻烦事，我们来为你解决，一同打造你最需要的产品。</view>
+      </view>
+      <image src="https://www.willsfintech.cn:9004/systemimg/mem-qr.jpg" style='width:500rpx;height:500rpx;'/>
+    </view>
+    <form report-submit="true"  data-formkey='saveQrcode' bindsubmit="saveQrcode">
+      <button class='guidance-btn guidance-btn-position' style='position:fixed' form-type="submit">保存图片，扫码邀请入群</button>
+    </form>
+  </view>
+  <!----------------------------------------->
+  <view wx:if='{{guidance4}}'>
+    <view class='guidance-meng' style='z-index:998;opacity: 0.4;'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one">
+        <view bindtap="closeGoodToolButton" class='guidance-close'>
+          <image src="../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="../../image/img/guidance-box-one.png" style='width:191rpx;height:201rpx;margin-top:25rpx'/>
+        <view class="guidance-box-one-text">
+          <text style='font-size:32rpx;font-weight:500'>这么好的工具，不推荐给同事吗？</text>
+          <text style='margin-top:24rpx;text-align:center;color:rgb(118,113,113)'>现在推荐给同事，还可免费领取一年会员，活动限时进行时</text>
+        </view>
+        <view class='bottom-button'>
+          <form report-submit="true" data-formkey='closevip' bindsubmit="closeGoodToolButton">
+            <button class='guidance-btn-left' form-type="submit">错过一年会员</button>
+          </form>
+          <button data-opentype="share" open-type="share" class='guidance-btn-right'>推荐到同事群</button>
+          <!-- <view bindtap="closeGoodToolButton" class='guidance-btn guidance-btn-left'>错过一年会员</view> -->
+        </view>
+      </view>
+    </view>
+  </view>
+  <!------------------------------------------>
+</view>

@@ -1,0 +1,26 @@
+<view>
+	<top-box text="顾问群" backBox="true" detal="1" />
+	<view class='content' style='top:{{cH}}rpx;border-top:1px solid #f0f1f6'>
+		<scroll-view wx:if='{{list.length != 0}}' scroll-y='{{scrolly}}' style='height:{{scH}}rpx'>
+      <view  wx:for='{{list}}' wx:key='gid' class='item-box' data-ind="{{index}}" 
+        bindtouchstart='touchS' bindtouchmove='touchM' bindtouchend='touchE'>
+        <view bindtap='pageTo' data-gid="{{item.gid}}" class='group-item-box' style='left:{{item.iteLeft}}rpx'>
+          <image mode="aspectFill" src="{{item.portrait}}" class='portrait-box'/>
+          <open-data open-gid="{{item.gid}}" type="groupName"></open-data>
+        </view>
+        <view data-gid="{{item.gid}}" bindtap="deleteTap" class='group-out' style='left:{{item.iteLeft}}rpx'>退群</view>
+      </view>
+      <view style='width:100%;height:128rpx;'></view>
+    </scroll-view>
+    <view wx:if="{{list.length == 0}}" class="chat-none-box" style='height:{{scH-cH-100}}rpx'>
+      <view class='chat-none-img'>
+        <image src='https://www.willsfintech.cn:9004/staticFile/image/circle.png' style='width: 225rpx;height: 225rpx;' />
+        <view style='margin-top:40rpx'>与同事、同业在一个微信群内，却不知道他们的详细信息？同一个团队，内部资讯、产品却无法共享？</view>
+      </view>
+    </view>
+    <form report-submit="true" bindsubmit="accreditTo">
+      <button form-type="submit" data-formkey='share' open-type='share' class='bottom-button' style='bottom:{{bm}}rpx'>分享到同业群，交换名片、共享资讯</button>
+    </form>
+	</view>
+</view>
+

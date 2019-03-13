@@ -1,0 +1,85 @@
+/* pages/clienta/information/groupcus/groupcus.wxss */
+.content{
+  position: fixed;
+  left:0;
+  right: 0;
+  bottom: 0;
+}
+.input-box{
+  display: flex;
+  align-items: center;
+  height:88rpx;
+  border-bottom:1rpx solid #f0f1f6;
+}
+.input-img{
+  width:75rpx;
+  height:88rpx;
+  line-height: 88rpx;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+}
+.input-placeholder{
+  font-size: 34rpx;
+  color: rgb(153, 153, 153);
+}
+.input-class{
+  height:88rpx;
+  line-height: 88rpx;
+  font-size: 34rpx;
+  color: #000;
+}
+.check-box{
+  background-color: #f0f1f6;
+  padding-top:20rpx;
+  box-sizing: border-box;
+}
+scroll-view{
+  border-top:1rpx solid #f0f1f6;
+  border-bottom:1rpx solid #f0f1f6;
+}
+.scroll-item-box{
+  height:110rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+.item-check{
+  width:46rpx;
+  height:46rpx;
+  margin: 32rpx 28rpx 32rpx 26rpx;
+  box-sizing: border-box;
+}
+.item-box{
+  border-bottom: 1rpx solid #f0f1f6;
+  box-sizing: border-box;
+  height:110rpx;
+  line-height: 110rpx;
+  width: 650rpx;
+  display: flex;
+  align-items: center;
+}
+.true-button-box{
+  width: 100%;
+  height:96rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  font-size: 34rpx;
+  color: rgb(51, 51, 51);
+}
+.item-portrait{
+  box-sizing: border-box;
+  border-radius: 50%;
+  width: 75rpx;
+  min-width: 75rpx;
+  height: 75rpx;
+  min-height: 75rpx;
+  margin-right:20rpx;
+}
+.item-name{
+  width: 520rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

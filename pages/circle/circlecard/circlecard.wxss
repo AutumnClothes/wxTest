@@ -1,0 +1,2 @@
+/* pages/circle/circlecard/circlecard.wxss */
+@import '../../clienta/mine/card/card.wxss'

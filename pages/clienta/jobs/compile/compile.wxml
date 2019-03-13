@@ -1,0 +1,86 @@
+<view>
+  <top-box text="资讯编辑" backBox delta="1"></top-box>
+  <view class='meng-box' wx:if='{{mengBoxShow}}'></view>
+    <view class='modal-textarea-box' style="display:{{modalTextarea?'block':'none'}}">
+      <view class='modal-title'>请输入标题</view>
+      <textarea
+      class='form-item-model-textarea' 
+      focus="{{modalTextarea}}"
+      maxlength='26'
+      fixed='true'
+			bindinput='inputEnd'
+      adjust-position='' 
+      value="{{value}}"
+      style="display:{{modalTextarea?'block':'none'}}"></textarea>
+      <view class='modal-button-box'>
+        <form report-submit="true" data-formkey='textareaclose' bindsubmit="modalCancel" >
+          <button form-type="submit"  class='modal-button modal-button-left'>取消</button>
+        </form>
+        <form report-submit="true" data-formkey='textareasave' bindsubmit="textareaOver" >
+          <button form-type="submit" class='modal-button modal-button-right'>完成</button>
+        </form>
+      </view>
+    </view>
+  <view class='content' style='top:{{cH}}rpx'>
+    <scroll-view scroll-y style='height:{{sH}}rpx;'>
+			<view class='article-title' bindtap='textareaOn'>
+				<view class="{{inputValue?'article-title-input':'input-placeholder-class'}}">{{inputValue?inputValue:'请输入标题'}}</view>
+			</view>
+      <view class='meng' wx:if='{{mengShow}}' bindtouchstart='addSelectFalse'></view>
+      <view class='add-box' style='margin-top:{{mT}}rpx' wx:if="{{show}}">
+        <view class='add-select-box' style="display:{{addShow?'none':'flex'}}">
+          <view class='add-select-item add-select-img' style='border-right:none;' bindtap='additem' data-keys='img' data-ind="0">
+            <image class='add-select-item-img' src='../../../../image/img/compileimg.png'></image>
+            <text>图片</text>
+          </view>
+          <view class='add-select-item add-select-txt'  bindtap='additem' data-keys='txt' data-ind="0">
+            <image class='add-select-item-img' src='../../../../image/img/compiletxt.png'></image>
+            <text>文字</text>
+          </view>
+          <view class='add-fan'></view>
+        </view>
+        <view class='add-img'>
+          <image style='width:50rpx;height:50rpx;' src='https://www.willsfintech.cn:9004/staticFile/image/compileadd.png' ></image>
+        </view>
+      </view>
+      <view wx:else>
+        <view wx:for="{{list}}" wx:key="index">
+          <view>
+            <view class='item-box' style='width:{{item.imgWidth}}rpx;height:{{item.imgHeight}}rpx' wx:if="{{item.keys == 'img'}}"  data-ind='{{index}}'>
+              <image class='item-box-close' data-ind='{{index}}' bindtap='closeitem' src='../../../../image/img/close.png'></image>
+              <image style='width:{{item.imgWidth}}rpx;height:{{item.imgHeight}}rpx' data-ind='{{index}}' bindtap='imgModify' data-img='{{item.src}}' src='{{item.src}}'></image>
+            </view>
+            <view  class='txt-box item-box' wx:if="{{item.keys == 'txt'}}" >
+              <image class='item-box-close' data-ind='{{index}}' bindtap='closeitem' src='../../../../image/img/close.png'></image>
+              <view bindtap="toedit"  data-ind='{{index}}'><text>{{item.content}}</text></view>
+            </view>
+            <view class='add-box'>
+              <view class='add-select-box' style="display:{{item.addShow?'none':'flex'}}">
+                <view class='add-select-item add-select-img' style='border-right:none;' bindtap='additem' data-keys='img' data-ind="{{index}}">
+                  <image class='add-select-item-img' src='../../../../image/img/compileimg.png'></image>
+                  <text>图片</text>
+                </view>
+                <view class='add-select-item add-select-txt'  bindtap='additem' data-keys='txt' data-ind="{{index}}">
+                  <image class='add-select-item-img' src='../../../../image/img/compiletxt.png'></image>
+                  <text>文字</text>
+                </view>
+                <view class='add-fan'></view>
+              </view>
+              <view class='add-img' data-ind="{{index}}" bindtap='addshow'>
+                <image style='width:50rpx;height:50rpx;' src='https://www.willsfintech.cn:9004/staticFile/image/compileadd.png' ></image>
+              </view>
+              <view class='sort-box' wx:if="{{item.sort}}" bindtap='bindsort' data-ind='{{index}}'>
+                <image style='width:50rpx;height:50rpx;' src='https://www.willsfintech.cn:9004/staticFile/image/compilesort.png'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view style='width:100%;height:20rpx;'></view>
+    </scroll-view>
+    <view bindtap="save" class='bottom-box'>
+      <image src='../../../../image/img/grouptrue.png' style='width:32rpx;height:32rpx;margin-right:12rpx'></image>
+      <text>完成</text>
+    </view>
+  </view>
+</view>

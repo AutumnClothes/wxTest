@@ -1,0 +1,106 @@
+/* pages/send/send.wxss */
+.content{
+  background-color: #f0f1f6
+}
+scroll-view{
+  background-color:#fff;
+  margin-top: 18rpx;
+}
+.top-box{
+  height:89rpx;
+  display: flex;
+  align-items: center;
+  font-size:34rpx;
+  color:#000; 
+  padding:28rpx 30rpx;
+  box-sizing: border-box;
+  background-color:#fff;
+}
+.search-input{
+  width: 90%;
+}
+.input-placeholder-class{
+  font-size: 34rpx;
+  color: #999;
+}
+.inputB-box{
+  text-align: center;
+  width: 150rpx;
+  font-size:30rpx; 
+  color: #ffa134;
+  height: 68rpx;
+  line-height: 68rpx;
+}
+/*列表CSS*/
+.linkman-box{
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #e5e5e5;
+  background-color: #fff;
+  height:110rpx;
+  padding: 17rpx;
+  display: flex;
+  align-items: center;
+}
+.linkman-portrait{
+  height: 72rpx;
+  width: 72rpx;
+  min-width: 72rpx;
+  min-height: 72rpx;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+.linkman-text{
+  width:480rpx;
+  padding-left: 20rpx;
+  line-height: 45rpx
+}
+.linkman-text-title{
+  color: #000;
+  font-size: 34rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.linkman-text-content{
+  font-size: 28rpx;
+  color: rgb(170, 170, 170);
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  width: 535rpx
+}
+.linkman-time{
+  position: relative;
+  top:-28rpx;
+  width: 140rpx;
+  color:#dfdfdf;
+  font-size: 24rpx;
+  text-align: right;
+}
+/*联系人样式*/
+.cuslist-box{
+  border-bottom: 1rpx solid #e5e5e5;
+  height:110rpx;
+  width:100%;
+  box-sizing: border-box;
+  padding:19rpx;
+  display: flex;
+  align-items: center;
+}
+.cuslist-img{
+  width:72rpx;
+  height:72rpx;
+  min-width:72rpx;
+  min-height:72rpx;
+  box-sizing: border-box;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.sou-title{
+  font-size: 28rpx;
+  padding:10rpx 20rpx;
+  box-sizing: border-box;
+  width:100%;
+  background-color: #fff;
+  border-bottom: 1rpx solid #e5e5e5;
+}

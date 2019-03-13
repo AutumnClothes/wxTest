@@ -1,60 +1,53 @@
 {
-  "pages":[
-    "pages/frame/frame",
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/assembly/assembly",
-    "pages/apipage/apipage",
-    "pages/tool/tool",
-    "pages/cloudserver/cloudserver",
-    "pages/frame/fileStructure/fileStructure",
-    "pages/frame/configure/configure",
-    "pages/frame/logiclayer/logiclayer",
-    "pages/frame/viewlayer/viewlayer",
-    "pages/frame/custom/custom",
-    "pages/frame/pluginUnit/pluginUnit",
-    "pages/frame/subpackage/subpackage",
-    "pages/frame/multithreading/multithreading",
-    "pages/frame/baseLibrary/baseLibrary",
-    "pages/frame/compatible/compatible",
-    "pages/frame/operating/operating",
-    "pages/frame/performance/performance",
-    "pages/frame/fileSystem/fileSystem",
-    "pages/frame/updateLog/updateLog"
+    "pages/cardbox/cardbox",
+    "pages/clienta/clienta",
+    "pages/clienta/cusdata/cusdata",
+    "pages/clienta/customer/customer",
+    "pages/clienta/detailed/detailed",
+    "pages/clienta/group/group",
+    "pages/clienta/group/groupcus/groupcus",
+    "pages/clienta/group/groupset/groupset",
+    "pages/clienta/information/information",
+    "pages/clienta/information/groupcus/groupcus",
+    "pages/clienta/jobs/jobs",
+    "pages/clienta/jobs/column/column",
+    "pages/clienta/jobs/columnadd/columnadd",
+    "pages/clienta/jobs/common/common",
+    "pages/clienta/jobs/compile/compile",
+    "pages/clienta/jobs/coveradd/coveradd",
+    "pages/clienta/jobs/newmsg/newmsg",
+    "pages/clienta/jobs/product/product",
+    "pages/clienta/jobs/productadd/productadd",
+    "pages/clienta/jobs/productread/productread",
+    "pages/clienta/mine/mine",
+    "pages/clienta/mine/card/card",
+    "pages/clienta/mine/editcard/editcard",
+    "pages/clienta/mine/uploadhi/uploadhi",
+    "pages/clienta/realchat/realchat",
+    "pages/clienta/send/send",
+    "pages/clienta/usertag/usertag",
+    "pages/clienta/view/view",
+    "pages/clientb/clientb",
+    "pages/clientb/card/card",
+    "pages/clientb/column/column",
+    "pages/clientb/product/productread/productread",
+    "pages/clientb/realchat/realchat",
+    "pages/clientb/view/view",
+    "pages/picture/picture",
+    "pages/minput/minput",
+    "pages/member/member",
+    "pages/poster/poster",
+    "pages/homeposter/homeposter",
+    "pages/clienta/protag/tagdetail/tagdetail",
+    "pages/accredit/accredit"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#cfcfcf",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  },
-  "tabBar": {
-    "color": "#8E8E93",
-    "selectedColor": "#B18354",
-    "borderStyle": "black",
-    "position": "bottom",
-    "backgroundColor": "#cfcfcf",
-    "list": [
-      {
-        "pagePath": "pages/frame/frame",
-        "text": "框架"
-      },
-      {
-        "pagePath": "pages/assembly/assembly",
-        "text": "组件"
-      },
-      {
-        "pagePath": "pages/apipage/apipage",
-        "text": "API"
-      },
-      {
-        "pagePath": "pages/tool/tool",
-        "text": "工具"
-      },
-      {
-        "pagePath": "pages/cloudserver/cloudserver",
-        "text": "云服务器"
-      }
-    ]
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "transfrom",
+    "navigationBarTitleText": "为斯理财",
+    "navigationBarTextStyle": "black"
   }
 }

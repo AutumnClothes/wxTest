@@ -1,0 +1,22 @@
+/* pages/clientb/column/column.wxss */
+@import '../../clienta/jobs/column/column.wxss';
+
+.chat-none-box{
+    font-size: 32rpx;
+    color: rgb(153, 153, 153);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.chat-none-img{
+    width:400rpx;
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 28rpx;
+    color:#717173;
+}

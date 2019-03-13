@@ -1,0 +1,19 @@
+<view>
+  <top-box text="请填写{{title}}" backBox="true" delta="1"></top-box>
+  <view class='content' style='top:{{tH}}rpx'>
+    <textarea
+      style='height:{{sH}}rpx'
+			value="{{text}}"
+			bindinput="bindinput"
+      maxlength='{{maxL}}'
+      auto-focus="true"
+      >
+    </textarea>
+    <form report-submit="true" data-formkey='save' bindsubmit="bindTrue" >
+      <button form-type="submit" class='true-button-box' style='bottom:{{bm}}rpx'>
+        <image src='../../image/img/grouptrue.png' style='width:34rpx;height:34rpx;margin-right:10rpx;'></image>
+        完成
+      </button>
+    </form>
+  </view>
+</view>

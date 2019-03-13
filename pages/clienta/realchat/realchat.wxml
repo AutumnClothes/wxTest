@@ -1,0 +1,240 @@
+<!--pages/clienta/realchat/realchat.wxml-->
+<view>
+  <top-box text="{{target}}" backBox="true" delta="{{delta}}"></top-box>
+  <view class='content' style='top:{{cH}}rpx;'>
+    <view class="adviser-box" style='top:{{cH}}rpx'>
+      <view class='adviser-portrait' style='background-image:url({{targetPortrait}})'></view> 
+      <view class="adviser-text-box" style="margin-right:7rpx;">{{countText}}</view>
+      <form  report-submit="true" data-formkey="push" bindsubmit="pushBind">
+        <button form-type="submit" class="button-box">
+          <text>立即推送</text>
+        </button>
+      </form>
+    </view>
+    <scroll-view upper-threshold='5rpx' bindscrolltoupper="scrolltoupper"  scroll-y style='height:{{scrollBottom-100}}rpx;margin-top:100rpx' scroll-into-view="{{chrildId}}">
+      <view class='liubai'></view>
+      <view id="t{{item.timeline}}"  wx:for="{{chatData}}" wx:key="timeline">
+        <template data="{{item,index:index}}" is="text"></template>
+      </view>
+			<view style='width:100%;height:1rpx' id='liubaiBottom'></view>
+    </scroll-view>
+    <view wx:if='{{guidance1}}' class="guidance-box-one" style='flex-direction: initial;position:fiexd'>
+      <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;min-width:191rpx;min-height:201rpx;'/>
+      <view class="guidance-box-one-text" style='margin-left:20rpx;margin-top:0'>
+        <text style='font-size:34rpx;font-weight:500'>如何给潜在客户发消息？</text>
+        <text style='margin-top:24rpx'>发送消息后，客户在小程序内可实时接收消息。</text>
+        <text >若客户未打开小程序，将于你发送最后一条消息后5~10分钟，向客户推送未读消息通知至微信</text>
+      </view>
+    </view>
+    <view class='input-bottom' style='bottom:{{inputBottom}}px' wx:if='{{!collectShow}}'>
+      <image class='input-bottom-img' bindtouchstart='collectBind' src='https://www.willsfintech.cn:9004/staticFile/image/heart.png'></image>
+      <view style='float:left' class='input-bottom-center'>
+        <textarea style="display:{{tareaShow?'block':'none'}}" focus="{{tareaFocus}}"
+          bindinput='inputBind' confirm-type="send" maxlength='-1'
+				  confirm-hold="true" adjust-position="{{false}}" value="{{inputText}}"
+					bindfocus="inputOn" bindblur="inputOut" auto-height fixed show-confirm-bar="{{false}}"></textarea>
+          <view style="display:{{tareaShow?'none':'block'}}" bindtap='textareaShow' class="textarea-view"></view>
+      </view>
+      <view wx:if="{{inputTrue}}" >
+				<form report-submit="true" data-formkey="send" bindsubmit="inputconfirm" >
+				  <button form-type="submit" class="input-bottom-send" >发送</button>
+				</form>
+      </view>
+      <image wx:else class='input-bottom-img' bindtouchstart='extendBind' src='https://www.willsfintech.cn:9004/staticFile/image/realchatadd.png'></image>
+      <view class='meng-box' wx:if="{{mengShow}}" style='top:{{cH}}rpx' bindtouchstart='extendBind'></view>
+    </view>
+    <view class='collect-box' style="bottom:{{inputBottom}}px;display:{{collectShow?'flex':'none'}}">
+        <button  bindtouchstart="collectBack" class="collect-button" style='border-right:1rpx solid #f0f1f6'>返回</button>
+        <button bindtouchstart="collectSave" class="collect-button" >
+          <image src='../../../image/img/collect.png' style='width:31rpx;height:32rpx;margin-right:13rpx'></image>存入资讯</button>
+    </view>
+    <view class='input-extend' style="display:  {{ extendHid ? 'block' :  'none' }}">
+      <view class='input-extend-item' wx:for="{{inputExtend}}" wx:key="{{index}}">
+        <view id="{{item.key}}" bindtap="menuClick" class='input-extend-icon' style="background-image:url({{item.img}});"></view>
+        {{item.text}}
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{guidance1}}" class="guidance-box guidance-box_four" style='bottom:{{inputBottom+110}}rpx'>
+    <view class='guidance-triangle guidance-triangle-bottom guidance-triangle_four'></view>点击发消息</view>
+  <view wx:if='{{guidance2}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one guidance-box-padding">
+        <view bindtap="closeDone" class='guidance-close'>
+          <image src="../../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;margin-top:25rpx'/>
+        <view class="guidance-box-one-text">
+          <text style='font-size:34rpx;font-weight:500'>{{donetitle}}</text>
+          <text style='margin-top:24rpx;text-align:center;color:rgb(118,113,113)'>{{donedesc}}</text>
+        </view>
+        <form report-submit="true" bindsubmit="toNextButton" data-formkey='guidanceDone'>
+          <button class='guidance-btn' style='width:485rpx' form-type="submit">{{donebutton}}</button>
+        </form>
+        <view class='guidance-bottom'>{{donerate}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{vipView}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one">
+        <view bindtap="closeVipView" class='guidance-close'>
+          <image src="../../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/mem-guide.png" class='mem-guide-position' style='width:610rpx;height:542rpx;'/>
+        <view class="guidance-box-one-text" style='width:520rpx;margin-top:260rpx'>
+          <text style='font-size:34rpx;font-weight:500;color:#333'>开通会员</text>
+          <text style='margin-top:30rpx;color:#333;font-size:28rpx;text-align:center'>{{guidanceTxt}}</text>
+        </view>
+        <view class='guidance-bottom-button'>
+          <form report-submit="true" bindsubmit="freeMonth" data-freetext="{{freeText}}" data-formkey='vipLeft'>
+            <button class='guidance-btn-vip guidance-btn-left-vip' form-type="submit">{{freeText}}</button>
+          </form>
+          <form report-submit="true" bindsubmit="toVipPage" data-formkey='vipright'>
+            <button class='guidance-btn-vip guidance-btn-right-vip' form-type="submit">立即开通</button>
+          </form>
+        </view>
+        <form report-submit='true' bindsubmit="toVipPage" data-formkey='knowvip'>
+					<button form-type="submit" class='guidance-bottom-text'>了解更多会员特权></button>
+				</form>
+      </view>
+    </view>
+  </view>
+</view>
+<template name="text">
+	<view wx:if="{{item.contenttype == 'update'}}"  class='news-time'>{{item.content}}</view>
+  <view wx:if="{{item.contenttype != 'update'}}">
+    <view wx:if="{{item.direction=='send'}}">
+      <view style='justify-content: flex-end'  class='news-box'>
+        <view class='send-err-box'>
+          <view wx:if="{{item.senderr}}"
+					 bindtap="resend" data-content="{{item.content}}" data-contenttype="{{item.contenttype}}"
+						data-timeline="{{item.timeline}}" class='send-err'>
+            <image src='../../../image/img/senderr.png' class='send-err-img' style=''></image>
+          </view>
+          <view wx:if="{{item.contenttype=='text'}}" class='news-two' data-content="{{item.content}}" bindlongtap="longTap">
+            <view><text>{{item.content}}</text></view>
+            <image class='news-two-self-tail' src='../../../image/img/tailright.png'></image>
+          </view>
+          <view wx:elif="{{item.contenttype=='img'}}">
+            <image class='news-img' lazy-load mode='aspectFit' lazy-load src="{{item.imgContent}}" data-img-path='{{item.imgContent}}' bindtap='previewImagebind'/>
+          </view>
+					<view bindtap="toarticleview" data-index="{{index}}" hidden="" wx:elif="{{item.contenttype=='article'}}" >
+						<!-- <view class='self-portrait' style='background-image:url({{item.selfProtrait}})'></view> -->
+						<view class='msg-box'>
+							<image src='{{item.content.titleimg}}' mode='aspectFill' style='min-width:140rpx;min-height:140rpx;max-width:140rpx;max-height:140rpx;margin-right:22rpx;'></image>
+							<view>
+								<view class='msg-title'>{{item.content.title}}</view>
+								<view class='msg-time'>{{item.content.showtime}}</view>
+							</view>
+						</view>
+					</view>
+					<!---一个关键词-->
+					<view bindtap="toproductview" data-index="{{index}}"  wx:elif="{{item.contenttype=='product' && item.content.style == '1'}}">
+						<view class='product-box-card'>
+							<view class='product-title-card'>{{item.content.title}}</view>
+              <view style='height:176rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+                <view class='product-bright-card'>
+                  <view class='product-bright-it-card'>
+                    <view class='product-bright-ite-num-card'>{{item.content.key1}}</view>
+                    <view class='product-bright-ite-txt-card'>{{item.content.keyp1}}</view>
+                  </view>
+                </view>
+                <view class='product-tag-card'>
+                  <view class='product-tag-ite-card' wx:for='{{item.content.tagsarr}}' wx:key='index' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+                </view>
+              </view>
+							<view class='producr-details-card'>{{item.content.profile}}</view>
+						</view>
+					</view>
+					<!---俩个关键词-->
+					<view bindtap="toproductview" data-index="{{index}}"  wx:elif="{{item.contenttype=='product' && item.content.style == '2'}}">
+						<view class='product-box-two-card'>
+							<view class='product-title-card' >{{item.content.title}}</view>
+              <view style='height:161rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+                <view class='product-tag-two'>
+                  <view class='product-tag-ite-card' wx:for='{{item.content.tagsarr}}' wx:key='index' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+                </view>
+                <view class='product-bright-two-card'>
+                  <view class='product-bright-ite-two-card' style='border-right:1rpx solid #e5e5e5'>
+                    <view class='product-bright-ite-num-two'  style="color:#ff523b">{{item.content.key1}}</view>
+                    <view class='product-bright-ite-txt-two'>{{item.content.keyp1}}</view>
+                  </view>
+                  <view class='product-bright-ite-two-card'>
+                    <view class='product-bright-ite-num-two'>{{item.content.key2}}</view>
+                    <view class='product-bright-ite-txt-two'>{{item.content.keyp2}}</view>
+                  </view>
+                </view>
+              </view>
+							<view class='producr-details-card' style='margin-top:33rpx;padding-top:15rpx'>{{item.content.profile}}</view>
+						</view>
+					</view>
+					<!---仨关键词-->
+					<view bindtap="toproductview" data-index="{{index}}"  wx:elif="{{item.contenttype=='product' && item.content.style == '3'}}">
+						<view class='product-box-the-card'>
+							<view class='product-title-card'>{{item.content.title}}</view>
+              <view style='height:161rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+                <view class='product-tag-the'>
+                  <view class='product-tag-ite-the' wx:for='{{item.content.tagsarr}}' wx:key='index' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+                </view>
+                <view class='product-bright-the-card'>
+                  <view class='product-bright-ite-the'>
+                    <view class='product-bright-ite-num-the-card' style="color:#ff523b">{{item.content.key1}}</view>
+                    <view class='product-bright-ite-txt-the'>{{item.content.keyp1}}</view>
+                  </view>
+                  <view class='product-bright-ite-the'>
+                    <view class='product-bright-ite-num-the-card' >{{item.content.key2}}</view>
+                    <view class='product-bright-ite-txt-the'>{{item.content.keyp2}}</view>
+                  </view>
+                  <view class='product-bright-ite-the'>
+                    <view class='product-bright-ite-num-the-card' >{{item.content.key3}}</view>
+                    <view class='product-bright-ite-txt-the'>{{item.content.keyp3}}</view>
+                  </view>
+                </view>
+              </view>
+							<view class='producr-details-the-card'>{{item.content.profile}}</view>
+						</view>
+					</view>
+					<!---图文-->
+					<view bindtap="toproductview" data-index="{{index}}"  wx:elif="{{item.contenttype=='product' && item.content.style == '4'}}">
+						<view class='product-img-card'>
+							<view class='product-img-content-card'>
+								<view class='product-img-title-box'>
+									<view class='product-img-title-card'>{{item.content.title}}</view>
+								</view>
+								<view class='product-img-text-box'>
+									<view class='product-img-text-card'>{{item.content.profile}}</view>
+								</view>
+                <view class='product-img-tag-card'>
+									<view class='product-img-tag-ite-card' wx:for="{{item.content.tagsarr}}" wx:key="index">{{item}}</view>
+								</view>
+							</view>
+							<image class='product-img-img-card' src='{{item.content.imgurl}}'></image>
+						</view>
+					</view>
+					<view  data-index="{{index}}"  bindtap='check' hidden="{{!(item.collectionFlag && item.contenttype=='text') }}" class='collect-item-box'>
+						<image src='https://www.willsfintech.cn:9004/staticFile/image/check{{item.check?"on":"out"}}.png' style='width:46rpx;height:46rpx;'></image>
+					</view>
+        </view>
+        <view class='self-portrait' style='background-image:url({{item.selfProtrait}})'></view>
+      </view>
+    </view>
+    <view wx:else>
+      <view  style='justify-content: flex-start' class='news-box' >
+        <view wx:if="{{!(item.collectionFlag && item.contenttype=='text')}}" bindtap="tocusdatapage" class='target-portrait' style="background-image:url({{item.targetPortrait}})"></view>
+        <view  wx:if="{{item.contenttype=='text'}}" class='target-news' data-content="{{item.content}}" bindlongtap="longTap">
+          <view><text>{{item.content}}</text></view>
+          <image class='news-two-target-tail' src='../../../image/img/tailleft.png'></image>
+        </view>
+        <view wx:elif="{{item.contenttype=='img'}}">
+          <image class='news-img' lazy-load style='float:left;margin-left:95rpx;' mode='aspectFit' lazy-load src="{{item.imgContent}}" data-img-path='{{item.imgContent}}' bindtap='previewImagebind'/>
+        </view>
+        <view  data-index="{{index}}"  bindtap='check' hidden="{{!(item.collectionFlag && item.contenttype=='text') }}" class='collect-item-box'>
+          <image src='https://www.willsfintech.cn:9004/staticFile/image/check{{item.check?"on":"out"}}.png' style='width:46rpx;height:46rpx;'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,9 @@
+<view class="i-class i-tab-bar {{ fixed ? 'i-tab-bar-fixed' : '' }}">
+    <slot></slot>
+    <view class="i-tab-bar-list">
+        <form report-submit="true" data-formkey='{{item.key}}' bindsubmit="handleClickItem" wx:for="{{ list }}" wx:key="{{ item.key }}" data-key="{{ item.key }}">
+          <button form-type="submit" class="i-tab-bar-layer" style="width: {{ 100 / list.length }}%">
+          </button>
+        </form>
+    </view>
+</view>

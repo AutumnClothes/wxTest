@@ -1,0 +1,171 @@
+<view class='container'>
+	<top-box text="消息" />
+	<form report-submit="true" data-formkey='group' bindsubmit="groupTo">
+		<button form-type="submit" class="group-box" style='left:{{7*gH}}rpx;top:{{H}}rpx;height:{{32*gH}}rpx;border:{{1*gH}}rpx solid #eaeaea'>
+			<image class='group-img' src='../../../image/img/group-add.png' />
+			<view class='group-text'>群发</view>
+		</button>
+	</form>
+	<view class='content' style='top:{{cH}}rpx'>
+		<view class='tab-box'>
+			<view class='tab-box-title'>
+				<view class="tab-box-title-l {{curr == 0?'tab-box-title-r-true':''}}" data-id="0" bindtap='tabBind'>
+					<view data-id="0" bindtap='tabBind' class="{{curr == 0?'tab-box-title-r-true':''}}">聊天</view>
+				</view>
+				<view class="tab-box-title-r {{curr== 1?'tab-box-title-r-true':''}}" data-id="1" bindtap='tabBind'>
+					<view data-id="1" bindtap='tabBind' class="{{curr == 1?'tab-box-title-r-true':''}}">动态</view>
+					<view wx:if="{{dynamicunread}}" class='dynamic-icon dynamic-icon-tab' />
+				</view>
+			</view>
+			<view class="{{curr == 0?'tab-box-solid':'tab-box-solid-false'}}" />
+		</view>
+		<swiper current="{{current}}" bindchange="swiperChange" style="height: {{sH}}rpx;">
+			<swiper-item class='chat-box'>
+				<scroll-view scroll-y style="height: {{sH}}rpx;">
+					<view wx:if="{{list.length != 0}}" style="display: {{attention == '' ? 'none':'block'}};">
+						<view bindtap="noticeClick" class='notice'>
+							<view class='bell-box' />
+							<view class='notice-text'>{{attention}}</view>
+							<view class='notice-time' />
+						</view>
+					</view>
+					<view wx:for="{{list}}" wx:key="forindex">
+						<view
+						 class='linkman-box'
+						 data-groupid='{{item.groupid}}'
+						 data-groupname='{{item.groupname}}'
+						 data-id='{{item.id}}'
+						 data-name="{{item.name?item.name:item.nickname}}"
+						 data-portraitpath="{{item.portrait}}"
+						 bindtap='toChat'
+						>
+							<image class='linkman-portrait' mode='aspectFill' src='{{item.portrait}}' />
+							<view wx:if="{{item.unread != 0}}" class='dynamic-portrait-icon'>{{item.unread}}</view>
+							<view class='linkman-text'>
+								<view wx:if="{{item.nickname.length != 0}}" class='linkman-text-title'>{{ item.name?item.name:item.nickname}}</view>
+								<view wx:if="{{item.content.length != 0}}" class='linkman-text-content'>{{item.content}}</view>
+							</view>
+							<view class='linkman-time'>
+								{{item.timestr}}
+							</view>
+						</view>
+					</view>
+					<view wx:if="{{list.length == 0}}" class='chat-none-box' style='height: {{sH}}rpx;'>
+						<view class='chat-none-img'>
+							<image src='https://www.willsfintech.cn:9004/staticFile/image/dynamic-none.png' style='width: 275rpx;height: 204rpx;' />
+							<view style='margin-top:20rpx'>邀请你的同事向你咨询吧</view>
+						</view>
+						<button class='chat-none-text' open-type="share">邀请同事</button>
+					</view>
+				</scroll-view>
+			</swiper-item>
+			<swiper-item class='dynamic-box'>
+				<view class='label-box'>
+					<view wx:for="{{labelList}}" wx:key="index">
+						<form
+						 report-submit="true"
+						 data-label-itm="{{item.name}}"
+						 data-index="{{index}}"
+						 bindsubmit="labelBind"
+						 data-formkey='dynamicitem'
+						>
+							<button form-type="submit" class='label-itm' style="color:{{label == item.name? '#ffa019':'#333'}};background-color:{{label == item.name? '#fff4e6':'#f5f5f5'}}">
+								{{item.name}}
+							</button>
+						</form>
+					</view>
+				</view>
+				<scroll-view  lower-threshold='50rpx' bindscrolltolower="scrolltobottom" scroll-y='{{!guidance2}}' style='height:{{sHt}}rpx'>
+					<view style='width:100%;height:20rpx' />
+					<view class='dynamic' wx:for="{{dynamicList}}" wx:key="forindex">
+						<view bindtap="tocusdatapage" data-id="{{item.cusid}}" class='dynamic-text-box'>
+							<view wx:if="{{item.reddot}}" class='dynamic-icon dynamic-icon-ite' />
+							<image class='linkman-portrait' mode='aspectFill' src='{{item.portrait}}' />
+              <view class='dynamic-text'>
+                <text style='margin-right:10rpx'>{{item.name?item.name:item.nickname}}</text><text style='color:#000;margin-right:10rpx'>{{item.contenttype}}</text>
+                <text class='dynamic-text-last'>{{item.content}}</text>
+              </view>
+							<view class='dynamic-time'>
+								{{item.timestr}}
+							</view>
+						</view>
+					</view>
+					<view wx:if="{{guidance1}}" class="chat-none-box">
+						<view class='chat-none-img'>
+							<image src='https://www.willsfintech.cn:9004/staticFile/image/dynamic-none.png' style='width: 275rpx;height: 204rpx;' />
+							<view style='margin-top:20rpx'>赶紧@同事查看名片试试吧</view>
+						</view>
+						<button class='chat-none-text' open-type="share">分享名片@同事</button>
+					</view>
+          <view wx:if="{{guidance1}}" class='guidance1-box'>
+            <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;'/>
+            <view class="guidance-box-one-text" style='width:450rpx;margin-left:14rpx;margin-top:0;align-items:flex-start'>
+              <text style='font-size:32rpx;font-weight:500'>在潜在客户微信群，如何获客?</text>
+              <text style='margin-top:14rpx'>【判断意向，建立联系】将名片发至微信群，潜在客户访问均有记录，不加微信即可沟通</text>
+              <text style='margin-top:14rpx'>先把同事当做“客户”体验教程吧</text>
+            </view>
+          </view>
+					<view wx:if="{{guidance2}}" class="guidance-box guidance-box_four">
+						<view class='guidance-triangle guidance-triangle-top guidance-triangle_four' style='left:38rpx;'></view>点击头像</view>
+					<view wx:if="{{guidance2}}" class='guidance1-box'>
+            <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;'/>
+            <view class="guidance-box-one-text" style='width:450rpx;margin-left:14rpx;align-items:flex-start;margin-top:0'>
+              <text style='font-size:34rpx;font-weight:500'>如何给潜在客户发消息？</text>
+              <text style='margin-top:14rpx'>【了解喜好】任意客户访问均有记录，访问了几次、查看了什么产品。</text>
+              <text style='margin-top:14rpx'>【及时跟进】判断客户意向后，马上发起沟通，不再错过任何客户。</text>
+            </view>
+          </view>
+					<view style='width:100%;height:1rpx' />
+				</scroll-view>
+			</swiper-item>
+		</swiper>
+	</view>
+  <view wx:if='{{startCourse}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one">
+        <view bindtap='closestartCourseClick' class='guidance-close'>
+          <image src="../../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;'/>
+        <view class="guidance-box-one-text">
+          <text style='font-size:34rpx'>新手教程</text>
+          <text style='margin-top:24rpx;color:rgb(118,113,113)'>带你快速上手，立即体验运用场景</text>
+          <text style='color:rgb(118,113,113)'>完成教程免费解锁功能，获得会员时长</text>
+        </view>
+        <form report-submit="true" bindsubmit="closestartCourseClick" data-formkey='ljks'>
+          <button class='guidance-btn' form-type="submit">立即开始</button>
+        </form>
+      </view>
+    </view>
+  </view>
+	<view wx:if='{{vipView}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one">
+        <view bindtap="closeVipView" class='guidance-close'>
+          <image src="../../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/mem-guide.png" class='mem-guide-position' style='width:610rpx;height:542rpx;'/>
+        <view class="guidance-box-one-text" style='width:520rpx;margin-top:260rpx'>
+          <text style='font-size:34rpx;font-weight:500;color:#333'>开通会员</text>
+          <text style='margin-top:30rpx;color:#333;font-size:28rpx;text-align:center'>开通会员，即刻享受群发功能，一键服务精准客户群，客户之间无打扰。</text>
+        </view>
+        <view class='guidance-bottom-button'>
+          <form report-submit="true" bindsubmit="freeMonth" data-freetext="{{freeText}}" data-formkey='vipLeft'>
+            <button class='guidance-btn-vip guidance-btn-left-vip' form-type="submit">{{freeText}}</button>
+          </form>
+          <form report-submit="true" bindsubmit="toVipPage" data-formkey='vipright'>
+            <button class='guidance-btn-vip guidance-btn-right-vip' form-type="submit">立即开通</button>
+          </form>
+        </view>
+				<form report-submit='true' bindsubmit="toVipPage" data-formkey='knowvip'>
+					<button form-type="submit" class='guidance-bottom-text'>了解更多会员特权></button>
+				</form>
+      </view>
+    </view>
+  </view>
+	<view  wx:if="{{guidance3}}" class="guidance-box guidance-box_thr" style='top:{{cH-30}}rpx'>
+		<view class='guidance-triangle guidance-triangle-top guidance-triangle_thr'></view>添加到我的小程序，下拉即可快速访问</view>
+</view>
+

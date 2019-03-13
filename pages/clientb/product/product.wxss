@@ -1,0 +1,49 @@
+/* pages/clienta/jobs/product/product.wxss */
+@import '../../style/product.wxss';
+@import '../../clienta/jobs/product/product.wxss';
+
+scroll-view{
+  background-color: #f0f1f6;
+}
+.liubai{
+  width:100%;
+  height:20rpx;
+}
+
+.bottom-box{
+  position: fixed;
+  height:100rpx;
+  width: 100%;
+  background-color: #fff;
+}
+.bottom-button{
+  height:100rpx;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-none-box{
+  font-size: 32rpx;
+  color: rgb(153, 153, 153);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chat-none-img{
+  width:400rpx;
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 28rpx;
+  color:#717173;
+}
+.product-box,.product-box-two,.product-box-the,.product-img {
+  margin-bottom:20rpx;
+  width:100%;
+}

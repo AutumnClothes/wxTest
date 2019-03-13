@@ -1,0 +1,341 @@
+<view>
+	<top-box
+	 bindback="bindback"
+	 backmethod='back'
+	 text="顾问群"
+	 backBox="true"
+	 detal="1"
+	/>
+
+	<view class='content' style='top:{{cH}}rpx;border:none'>
+		<view class='tab-box'>
+			<view class='tab-box-title'>
+				<view class="tab-box-title-l {{curr == 0?'tab-box-title-r-true':''}}" data-id="0" bindtap='tabBind'>
+					<view data-id="0" bindtap='tabBind' class="{{curr == 0?'tab-box-title-r-true':''}}">名片</view>
+				</view>
+				<view class="tab-box-title-r {{curr== 1?'tab-box-title-r-true':''}}" data-id="1" bindtap='tabBind'>
+					<view data-id="1" bindtap='tabBind' class="{{curr == 1?'tab-box-title-r-true':''}}">共享</view>
+					<view wx:if="{{dynamicunread}}" class='dynamic-icon dynamic-icon-tab' />
+				</view>
+			</view>
+			<view class="{{curr == 0?'tab-box-solid':'tab-box-solid-false'}}" />
+		</view>
+		<swiper current="{{current}}" bindchange="swiperChange" style="height: {{scH}}rpx;">
+			<swiper-item class="">
+				<scroll-view scroll-y='{{scrolly}}' style='height:{{scH}}rpx'>
+					<view style='width:100%;height:20rpx;' />
+					<view wx:if="{{createMyCard}}" bindtap="tocreate" class='card-box card-box-un' style='left:{{item.iteLeft}}rpx'>
+						<image style="width:36rpx;height:36rpx;margin-right:14rpx;" src="https://www.willsfintech.cn:9004/staticFile/image/identity.svg" />创建我的名片</view>
+					<view
+					 wx:for='{{cardArr}}'
+					 wx:key='mid'
+					 class=''
+					 data-ind="{{index}}"
+					 data-mid="{{item.mid}}"
+					 bindtap="cardTo"
+					 bindlongpress='longDelete'
+					>
+						<view class='card-box' style='left:{{item.iteLeft}}rpx'>
+							<image class='picture-box' src='{{item.headImgUrl}}' mode='aspectFill' />
+							<view class='card-name-box'>
+								<view class='name-box'>{{item.user_name}}</view>
+								<view class='position-box' wx:if="{{!item.compose}}">{{item.position}}</view>
+							</view>
+							<view class='place-box' style='margin-left:0;'>{{item.company}}<text wx:if="{{item.compose}}">{{item.position}}</text></view>
+							<view class='contact-box'>
+								<view class='phone'>
+									<image style='width: 16rpx;height:20rpx;' src='/image/img/phone.png' />
+									{{item.mobile_phone?item.mobile_phone:'咨询顾问获得电话'}}
+								</view>
+								<view class='address'>
+									<image style='width: 16rpx;height:21rpx;' src='/image/img/address.png' />
+									<text class='address-text'>{{item.city?item.city:'时刻在客户身边'}}</text>
+								</view>
+							</view>
+							<view class='synopsis-box'>
+								{{item.profile?item.profile:'您身边共享资讯的学习导师、随时助您理解的产品专家、了解客户全面需求的贴心管家'}}
+							</view>
+						</view>
+					</view>
+					<view class='bottom-text'>长按名片可删除顾问</view>
+					<view style='width:100%;height:135rpx;' />
+				</scroll-view>
+			</swiper-item>
+			<swiper-item class="">
+				<scroll-view bindscrolltolower="bottomEvent" wx:if="{{columnArr.length != 0}}" scroll-y='{{scrolly}}' style='height:{{scH}}rpx'>
+					<view style='width:100%;height:20rpx;' />
+					<view class='dynamic-item' wx:for='{{columnArr}}' wx:key='id'>
+            <image class="dynamic-ite-portrait" src="{{item.pp}}" mode="aspectFill"  />
+						<view bindtap="toproductview" data-index="{{index}}" wx:if="{{item.type == 'article'}}">
+							<view class='dynamic-title' style="{{item.titleStyle}}">
+                <!-- <view class='dynamic-item-dynamic' style='background-image:url({{item.background == "1"?backone:backtwo}})'>{{item.background == "1"?"动态":'点评'}}</view> -->
+                
+								<view class='dynamic-item-title'>
+									<text>{{item.remark}}</text>
+								</view>
+							</view>
+							<view class='msg-box'>
+								<image src='{{item.imgurl}}' style='min-width:140rpx;min-height:140rpx;max-width:140rpx;max-height:140rpx;margin-right:22rpx;' mode='aspectFill' />
+								<view>
+									<view class='msg-title'>{{item.title}}</view>
+									<view class='msg-time'>{{item.articletimestr}}</view>
+								</view>
+							</view>
+							<view class='dynamic-time'>
+								{{item.timestr}}
+							</view>
+						</view>
+						<view bindtap="toproductview" data-index="{{index}}" wx:elif="{{item.type == 'product' && item.style == '1'}}">
+							<view class='dynamic-title' style="{{item.titleStyle}}">
+								<view class='dynamic-item-title'>
+									<text>{{item.remark}}</text>
+								</view>
+							</view>
+							<view class='product-box-card'>
+								<view class='product-title-card'>
+									<text>{{item.title}}</text>
+								</view>
+								<view style='height:199rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+									<view class='product-bright-card'>
+										<view class='product-bright-ite-card'>
+											<view class='product-bright-ite-num-card'>{{item.key1}}</view>
+											<view class='product-bright-ite-txt-card'>{{item.keyp1?item.keyp1:''}}</view>
+										</view>
+									</view>
+									<view class='product-tag-card' wx:if='{{item.tagsarr.length != 0}}'>
+										<view
+										 class='product-tag-ite-card'
+										 wx:for='{{item.tagsarr}}'
+										 wx:key='ind'
+										 wx:for-index='ind'
+										 wx:for-item='ite'
+										>{{ite}}
+										</view>
+									</view>
+								</view>
+								<view class='producr-details-card'>{{item.profile}}</view>
+							</view>
+							<view class='dynamic-time'>
+								{{item.timestr}}
+							</view>
+						</view>
+						<view bindtap="toproductview" data-index="{{index}}" wx:elif="{{item.type == 'product' && item.style == '2'}}">
+							<view class='dynamic-title'>
+								<view class='dynamic-item-title'>
+									<text>{{item.remark}}</text>
+								</view>
+							</view>
+							<view class='product-box-two-card'>
+								<view class='product-title-two'>
+									<text>{{item.title}}</text>
+								</view>
+								<view style='height:204rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+									<view class='product-tag-two' wx:if='{{item.tagsarr}}'>
+										<view
+                     class='product-tag-ite-two'
+										 wx:for='{{item.tagsarr}}'
+										 wx:key='ind'
+										 wx:for-index='ind'
+										 wx:for-item='ite'
+										>{{ite}}
+										</view>
+									</view>
+									<view class='product-bright-two-card'>
+										<view class='product-bright-ite-two-card' style='border-right:1rpx solid #e5e5e5'>
+											<view class='product-bright-ite-num-two' style="color:#ff523b">{{item.key1}}</view>
+											<view class='product-bright-ite-txt-two'>{{item.keyp1?item.keyp1:''}}</view>
+										</view>
+										<view class='product-bright-ite-two-card'>
+											<view class='product-bright-ite-num-two'>{{item.key2}}</view>
+											<view class='product-bright-ite-txt-two'>{{item.keyp2?item.keyp2:''}}</view>
+										</view>
+									</view>
+								</view>
+								<view class='producr-details-two-card'>{{item.profile}}</view>
+							</view>
+							<view class='dynamic-time'>
+								{{item.timestr}}
+							</view>
+						</view>
+						<view bindtap="toproductview" data-index="{{index}}" wx:elif="{{item.type == 'product' && item.style == '3'}}">
+							<view class='dynamic-title'>
+								<view class='dynamic-item-title'>
+									<text>{{item.remark}}</text>
+								</view>
+							</view>
+							<view class='product-box-the-card'>
+								<view class='product-title-the'>
+									<text>{{item.title}}</text>
+								</view>
+								<view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+									<view class='product-tag-the'>
+										<view
+										 class='product-tag-ite-the'
+										 wx:key='ind'
+										 wx:for-index='ind'
+										 wx:for='{{item.tagsarr}}'
+										 wx:for-item='ite'
+										>{{ite}}
+										</view>
+									</view>
+									<view class='product-bright-the-card'>
+										<view class='product-bright-ite-the'>
+											<view class='product-bright-ite-num-the-card' style="color:#ff523b">{{item.key1}}</view>
+											<view class='product-bright-ite-txt-the'>{{item.keyp1?item.keyp1:''}}</view>
+										</view>
+										<view class='product-bright-ite-the'>
+											<view class='product-bright-ite-num-the-card'>{{item.key2}}</view>
+											<view class='product-bright-ite-txt-the'>{{item.keyp2?item.keyp2:''}}</view>
+										</view>
+										<view class='product-bright-ite-the'>
+											<view class='product-bright-ite-num-the-card'>{{item.key3}}</view>
+											<view class='product-bright-ite-txt-the'>{{item.keyp3?item.keyp3:''}}</view>
+										</view>
+									</view>
+								</view>
+								<view class='producr-details-the-card'>{{item.profile}}</view>
+							</view>
+							<view class='dynamic-time'>
+								{{item.timestr}}
+							</view>
+						</view>
+						<view bindtap="toproductview" data-index="{{index}}" wx:elif="{{item.type == 'product' && item.style == '4'}}">
+							<view class='dynamic-title'>
+								<view class='dynamic-item-title'>
+									<text>{{item.remark}}</text>
+								</view>
+							</view>
+							<view class='product-img-card'>
+								<view class='product-img-content-card'>
+									<view class='product-img-title-box'>
+										<view class='product-img-title-card'>
+											<text>{{item.title}}</text>
+										</view>
+									</view>
+									<view class='product-img-text-box'>
+										<view class='product-img-text-card'>{{item.profile}}</view>
+									</view>
+									<view class='product-img-tag-card'>
+										<view class='product-img-tag-ite-card' wx:for="{{item.tagsarr}}" wx:key="{{index}}">{{item}}</view>
+									</view>
+								</view>
+								<image bindtap="imgobjImg" class='product-img-img-card' src='{{item.imgurl}}' />
+							</view>
+							<view class='dynamic-time'>
+								{{item.timestr}}
+							</view>
+						</view>
+						<form
+						 wx:if="{{item.deleteButton}}"
+						 data-id="{{item.id}}"
+						 report-submit="true"
+						 bindsubmit="dynamicDelete"
+						 data-ind='{{index}}'
+						 data-formkey='delete'
+						>
+							<button form-type="submit" class='dynamic-delete'>
+								<image src='../../../image/img/common-del.png' mode='aspectFill' class='dynamic-delete-img' />
+							</button>
+						</form>
+					</view>
+					<view style='width:100%;height:135rpx;' />
+        </scroll-view>
+        <view wx:if="{{columnArr.length == 0}}" class='chat-none-box' style='height:{{scH-cH-100}}rpx'>
+          <image src='https://www.willsfintech.cn:9004/staticFile/image/productb-none.png' style='width: 273rpx;height: 169rpx;'></image>
+          <view style='margin-top:40rpx;text-align:center;width:540rpx'>共享资讯和产品到顾问群，群内顾问都可下载使用、协作编辑</view>
+        </view>
+			</swiper-item>
+		</swiper>
+		<form report-submit="true" bindsubmit="accreditTo">
+		<button
+		 form-type="submit" data-formkey='share' 
+		 wx:if='{{curr== 0}}'
+		 open-type='share'
+		 class='bottom-button'
+		 style='bottom:{{bm}}rpx'
+		>分享到同业群，交换名片、共享资讯
+		</button>
+		</form>
+		<view wx:if='{{curr== 1}}' class='bottom-button_one' style='bottom:{{bm}}rpx'>
+			<form report-submit="true" bindsubmit="shareMsg" data-formkey='shareMsg'>
+				<button form-type="submit" class='bottom-button-left'>共享资讯</button>
+			</form>
+			<view class='bottom-button-center' />
+			<form report-submit="true" bindsubmit="shareProduct" data-formkey='shareProduct'>
+				<button form-type="submit" class='bottom-button-right'>共享产品</button>
+			</form>
+		</view>
+	</view>
+	<view class="meng" wx:if="{{accreditType == 'toget' || accreditType == 'toset'}}" />
+	<view class='accredit' style="display: {{accreditType == 'toget' || accreditType == 'toset'? 'block' : 'none'}};">
+		<view class='accredit-box'>
+			<view style="display: {{accreditType == 'toget' ? 'none' : 'block'}};" class='accredit-close' bindtap='closeaccredit'>
+				<image src='../../../image/img/close.png' style='width:18rpx;height:18rpx;' />
+			</view>
+			<view class='accredit-title'>需要您的授权</view>
+			<view class='accredit-txt'>仅授权微信头像、微信昵称,授权后,您可以：</view>
+			<view class='accredit-item-box'>
+				<view class='accredit-txt-item'>
+					<view class='dian'>1</view>
+					获取名片
+				</view>
+				<view class='accredit-txt-item'>
+					<view class='dian'>2</view>
+					咨询顾问
+				</view>
+				<view class='accredit-txt-item'>
+					<view class='dian'>3</view>
+					阅读文章
+				</view>
+				<view class='accredit-txt-item'>
+					<view class='dian'>4</view>
+					查看产品
+				</view>
+			</view>
+			<form report-submit="true" bindsubmit="accreditTo">
+				<button
+         class='accredit-button'
+				 form-type="submit" 
+				 data-formkey='getUserInfo'
+				 style="display: {{accreditType == 'toget' ? 'flex' : 'none'}};"
+				 bindtap="closeaccredit"
+				 lang="zh_CN"
+				 bindgetuserinfo='onGotUserInfo'
+				 open-type="getUserInfo"
+				>前往授权
+				</button>
+				<button
+         class='accredit-button'
+				 form-type="submit" 
+				 data-formkey='getUserInfo'
+				 style="display: {{accreditType == 'toset' ?  'flex' : 'none'}};"
+				 bindtap="closeaccredit"
+				 bindopensetting="opensetting"
+				 lang="zh_CN"
+				 open-type="openSetting"
+				>前往授权
+				</button>
+			</form>
+		</view>
+	</view>
+  <view wx:if='{{guidance}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one">
+        <view bindtap="close_guidance" class='guidance-close'>
+          <image src="../../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;margin-top:25rpx'/>
+        <view class="guidance-box-one-text">
+          <text style='font-size:34rpx;font-weight:500'>请先创建你的名片</text>
+          <text style='margin-top:24rpx;text-align:center;color:rgb(118,113,113)'>{{createText}}</text>
+        </view>
+        <form report-submit="true" bindsubmit="tocreate" data-formkey='guidance'>
+          <button class='guidance-btn' style='width:485rpx' form-type="submit">创建我的名片</button>
+        </form>
+        <!-- <view  class='guidance-bottom'>{{donerate}}</view> -->
+      </view>
+    </view>
+  </view>
+</view>
+

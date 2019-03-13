@@ -1,0 +1,161 @@
+<view>
+	<top-box text="资讯阅读" backBox delta="1" />
+	<view id="meng" style="display:{{mengShow?'block':'none'}};bottom:{{bm+98}}rpx"/>
+  <view class='content' style='top:{{cH}}rpx'>
+    <view style='width:100%;height:100rpx' id='scrollid' />
+    <view class="adviser-box flex_row" style='top:{{cH}}rpx'>
+      <image class="adviser-portrait" src="{{headimg}}" />
+      <view class="info-box flex_1 flex_column" wx:if="{{companyPosition}}">
+        <view class="flex_row al_b">
+          <text class="name-box" style="margin-right:7rpx;">{{managerData.user_name}}</text>
+          <view class="pos_name">{{managerData.position}}</view>
+        </view>
+        <view class="pos_name">{{managerData.company}}</view>
+      </view>
+      <view class="info-box flex_1 flex_column" wx:else>
+        <view class="flex_row al_b">
+          <text class="name-box" style="margin-right:7rpx;">{{managerData.user_name}}</text>
+        </view>
+        <view class="pos_name">{{managerData.company}}{{managerData.position}}</view>
+      </view>
+      <view class="button-box-flex">
+        <form report-submit="true" data-formkey="consult" bindsubmit="consult">
+          <button form-type="submit" class="button-box" style='margin-right:0;'>
+            <text>点评</text>
+          </button>
+        </form>
+      </view>
+    </view>
+    <view bindtap="copeMy" class="bottom-box" style='bottom:{{bm}}rpx'>
+      <text>生成我的获客文章</text>
+    </view>
+    <scroll-view wx:if="{{exist}}" scroll-y style='height:{{sH-200}}rpx' scroll-into-view='{{scrollId}}'>
+      <view class="rich-text-title">{{articleTitle}}</view>
+      <view class="rich-text-from" wx:if='{{fromName}}'>来源：<text style="color:#576b95">{{fromName}}</text></view>
+      <view class='card-box'>
+        <view data-id="{{managerData.id}}" bindtap='listtap'>
+          <image class='picture-box' src='{{headimg}}' mode='aspectFill'></image>
+          <view class='card-name-box'>
+            <view class='name-box-card'>{{managerData.user_name}}</view>
+            <view class='position-box' wx:if="{{!managerData.compose}}">{{managerData.position}}</view>
+          </view>
+            <view class='place-box' style='margin-left:0;'>{{managerData.company}}<text wx:if="{{managerData.compose}}">{{managerData.position}}</text></view>
+          <view class='contact-box'>
+            <view class='phone'>
+              <image style='width: 16rpx;height:20rpx;' src='/image/img/phone.png'></image>
+              {{managerData.mobile_phone?managerData.mobile_phone:'咨询顾问获得电话'}}
+            </view>
+            <view class='address'>
+              <image style='width: 16rpx;height:21rpx;' src='/image/img/address.png'></image>
+              <text class='address-text'>{{managerData.city?managerData.city:'时刻在客户身边'}}</text>
+            </view>
+          </view>
+          <view class='synopsis-box'>{{managerData.profile?managerData.profile:'您身边共享资讯的学习导师、随时助您理解的产品专家、了解客户全面需求的贴心管家'}}</view>
+        </view>
+      </view> 
+      <view class="card-tap-text">点击名片查看顾问详情</view>
+      <rich-text bindtap="richtexttap" nodes='{{contentJson}}' />
+      <view class="exemption-box">以上文字、图片均来源于网络，不代表本平台观点或立场，若存在作品、版权或其他内容侵权等问题，请联系删除。</view>
+      <view class='self-product-box'  wx:if='{{pShowAdd}}'>
+        <view  class='self-column-title'>
+          <view class='self-column-title-l'>推荐产品</view>
+          <form report-submit="true" bindsubmit="toproductlist">
+            <button form-type="submit" data-formkey='more' class='self-column-title-r'>
+              <text>更多</text>
+              <image src='/image/img/path.png'></image>
+            </button>
+          </form>
+        </view>
+        <view wx:if="{{product!=null}}">
+          <!--一个关键词-->
+          <view bindtap="toproduct" wx:if="{{product.style == '1'}}" class='product-box-card'>
+            <view class='product-title-card product-title-flex'><text style="text-align:center">{{product.title}}</text></view>
+            <view style='height:212rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+              <view class='product-bright-card'>
+                <view class='product-bright-ite-card' >
+                  <view class='product-bright-ite-num-card'>{{product.key1}}</view>
+                  <view class='product-bright-ite-txt-card'>{{product.keyp1}}</view>
+                </view>
+              </view>
+              <view class='product-tag-card'>
+                <view class='product-tag-ite-card' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+            </view>
+            <view class='producr-details-card'>{{product.profile}}</view>
+          </view>
+          <!--俩个关键词-->
+          <view bindtap="toproduct" wx:elif="{{product.style == '2'}}" class='product-box-two-card'>
+            <view class='product-title-two product-title-flex' ><text style="text-align:center">{{product.title}}</text></view>
+            <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+              <view class='product-tag-two'>
+                <view class='product-tag-ite-two' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+              <view class='product-bright-two-card'>
+                <view class='product-bright-ite-two-card' style='border-right:1rpx solid #e5e5e5'>
+                  <view class='product-bright-ite-num-two' style="color:#ff523b">{{product.key1}}</view>
+                  <view class='product-bright-ite-txt-two'>{{product.keyp1}}</view>
+                </view>
+                <view class='product-bright-ite-two-card'>
+                  <view class='product-bright-ite-num-two' >{{product.key2}}</view>
+                  <view class='product-bright-ite-txt-two'>{{product.keyp2}}</view>
+                </view>
+              </view>
+            </view>
+            <view class='producr-details-two-card'>{{product.profile}}</view>
+          </view>
+          <!--仨关键词-->
+          <view bindtap="toproduct" wx:elif="{{product.style == '3'}}" class='product-box-the-card'>
+            <view class='product-title-the product-title-flex'><text style="text-align:center">{{product.title}}</text></view>
+            <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+              <view class='product-tag-the'>
+                <view class='product-tag-ite-the' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+              <view class='product-bright-the-card'>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the-card' style="color:#ff523b">{{product.key1}}</view>
+                  <view class='product-bright-ite-txt-the'>{{product.keyp1}}</view>
+                </view>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the-card' >{{product.key2}}</view>
+                  <view class='product-bright-ite-txt-the'>{{product.keyp2}}</view>
+                </view>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the-card' >{{product.key3}}</view>
+                  <view class='product-bright-ite-txt-the'>{{product.keyp3}}</view>
+                </view>
+              </view>
+            </view>
+            <view class='producr-details-the-card'>{{product.profile}}</view>
+          </view>
+          <!--图文-->
+          <view bindtap="toproduct" wx:elif="{{product.style == '4'}}" class='product-img-card'>
+            <view class='product-img-content-card'>
+              <view class='product-img-title-box'>
+                <view class='product-img-title-card'><text>{{product.title}}</text></view>
+              </view>
+              <view class='product-img-text-box'>
+                <view class='product-img-text-card'>{{product.profile}}</view>
+              </view>
+              <view class='product-img-tag-card'>
+                <view class='product-img-tag-ite-card' wx:for="{{product.tagsarr}}" wx:key="{{index}}">{{item}}</view>
+              </view>
+            </view>
+            <image bindtap="imgobjImg" class='product-img-img-card' src='{{product.imgurl}}'></image>
+          </view>
+        </view>
+        <form wx:else report-submit="true" bindsubmit="toproductlist">
+          <button form-type="submit" data-formkey='productadd'  class="product-add">
+            <image style="width:408rpx;height:432rpx;" src="../../../../image/img/column-img-add.png" mode="aspectFit"/>
+          </button>
+        </form>
+      </view>
+      <view style='width:100%;height:{{bm + 120}}rpx'/>
+    </scroll-view>
+    <view wx:else class='default-fzf' style='height: {{sH}}rpx;'>
+      <view class='chat-none-img'>
+        <image src='https://www.willsfintech.cn:9004/staticFile/image/latent-none.png' style='width: 179rpx;height: 185rpx;'></image>
+        <view style='margin-top:20rpx'>文章已删除 ! </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,136 @@
+<view>
+  <top-box text="{{tagname}}" backBox="true" detal="1"></top-box>
+  <view class="content" style="top:{{cH}}rpx">
+    <view class='crowd-name'>
+      <view class='crowd-name-title'>标签名称</view>
+      <!-- <view class='crowd-name-text'>{{crowdName}}</view> -->
+      <input disabled="{{tagcd}}" class='crowd-name-input' bindblur='tagnameBlur' confirm-type="done" maxlength='10' value="{{tagname}}"></input>
+    </view>
+    <scroll-view scroll-y style='height:{{sH}}rpx;background-color:#fff' >
+      <view class='item-box' wx:for="{{cusList}}" wx:key="index"  bindtap='toReadPage' data-ind='{{index}}'>
+				<!--一个关键词-->
+        <view class='product-box-card' wx:if="{{item.articleid != null && item.style == '1'}}">
+          <view class='product-title-card'>
+            <text>{{item.title}}</text>
+          </view>
+          <view style='height:199rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+            <view class='product-bright-card'>
+              <view class='product-bright-ite-card'>
+                <view class='product-bright-ite-num-card'>{{item.key1}}</view>
+                <view class='product-bright-ite-txt-card'>{{item.keyp1}}</view>
+              </view>
+            </view>
+            <view class='product-tag-card'>
+              <view
+                class='product-tag-ite-card'
+                wx:for='{{item.tagsarr}}'
+                wx:key='{{ind}}'
+                wx:for-index='ind'
+                wx:for-item='ite'
+              >{{ite}}
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-card'>{{item.profile}}</view>
+        </view>
+        <!--俩个关键词-->
+        <view class='product-box-two-card' wx:elif="{{item.articleid != null && item.style == '2'}}">
+          <view class='product-title-two'>
+            <text>{{item.title}}</text>
+          </view>
+          <view style='height:204rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+            <view class='product-tag-two'>
+              <view
+                class='product-tag-ite-two'
+                wx:for='{{item.tagsarr}}'
+                wx:key='{{ind}}'
+                wx:for-index='ind'
+                wx:for-item='ite'
+              >{{ite}}
+              </view>
+            </view>
+            <view class='product-bright-two-card'>
+              <view class='product-bright-ite-two-card' style='border-right:1rpx solid #e5e5e5'>
+                <view class='product-bright-ite-num-two' style="color:#ff523b">{{item.key1}}</view>
+                <view class='product-bright-ite-txt-two'>{{item.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-two-card'>
+                <view class='product-bright-ite-num-two'>{{item.key2}}</view>
+                <view class='product-bright-ite-txt-two'>{{item.keyp2}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-two-card'>{{item.profile}}</view>
+        </view>
+        <!--仨个关键词-->
+        <view class='product-box-the-card' wx:elif="{{item.articleid != null && item.style == '3'}}">
+          <view class='product-title-the'>
+            <text>{{item.title}}</text>
+          </view>
+          <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+            <view class='product-tag-the'>
+              <view
+                class='product-tag-ite-the'
+                wx:for='{{item.tagsarr}}'
+                wx:key='{{ind}}'
+                wx:for-index='ind'
+                wx:for-item='ite'
+              >{{ite}}
+              </view>
+            </view>
+            <view class='product-bright-the-card'>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the-card' style="color:#ff523b">{{item.key1}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the-card'>{{item.key2}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.keyp2}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the-card'>{{item.key3}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.keyp3}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-the-card'>{{item.profile}}</view>
+        </view>
+        <!--图文-->
+        <view class='product-img-card'  wx:elif="{{item.articleid != null && item.style == '4'}}">
+          <view class='product-img-content-card'>
+            <view class='product-img-title-box'>
+              <view class='product-img-title-card'>
+                <text>{{item.title}}</text>
+              </view>
+            </view>
+            <view class='product-img-text-box'>
+              <view class='product-img-text-card'>{{item.profile}}</view>
+            </view>
+            <view class='product-img-tag-card'>
+              <view class='product-img-tag-ite-card' wx:for="{{item.tagsarr}}" wx:key="{{index}}">{{item}}</view>
+            </view>
+          </view>
+          <image bindtap="imgobjImg" class='product-img-img-card' src='{{item.imgurl}}' />
+        </view>
+        <!--资讯-->
+        <view class='msg-box' wx:else>
+          <image src='{{item.imgurl}}' style='min-width:140rpx;min-height:140rpx;max-width:140rpx;max-height:140rpx;margin-right:22rpx;' mode='aspectFill' />
+          <view>
+            <view class='msg-title'>{{item.title}}</view>
+            <view class='msg-time'>{{item.scratchTime}}</view>
+          </view>
+        </view>
+        <form report-submit="true"
+          bindsubmit="articleDelete"
+          data-ind='{{index}}'
+          data-formkey='delete'
+          >
+          <button form-type="submit" class='dynamic-delete'>
+            <image src='../../../../image/img/common-del.png' mode='aspectFill' class='dynamic-delete-img' />
+          </button>
+        </form>
+      </view>
+      <view style='width:100%;height:60rpx;'></view>
+    </scroll-view>
+  </view>
+</view>

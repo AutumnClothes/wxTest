@@ -1,0 +1,45 @@
+/* dist/topbar/topbar.wxss */
+.top{
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  z-index: 998;
+  top:0;
+}
+.back{
+  position: absolute;
+  width:100rpx;
+  height:60rpx;
+}
+.top-box{
+  position: fixed;
+  top:0;
+  font-size: 37rpx;
+  font-weight: 500;
+  font-family: "PingFangSC";
+  width:100%;
+  height:60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  background: #fff;
+  color:#38383c;
+  display: flex;
+  z-index: 995;
+}
+/*返回按钮.css*/
+.back-box{
+  position: absolute;
+  width:20rpx;
+  height: 35rpx;
+  left:21rpx;
+  top:13.5rpx;
+  z-index: 999;
+}
+.top-text-box{
+  width: 40%;
+  margin:0 auto;
+  text-align: center;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}

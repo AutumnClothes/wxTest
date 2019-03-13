@@ -1,0 +1,244 @@
+<view>
+  <top-box text="封面编辑" backBox delta="1"></top-box>
+  <view class='modal-input-meng' wx:if="{{modalMeng}}"></view>
+    <view class='modal-input-box' wx:if="{{modalInput}}">
+      <view class='modal-title'>{{title}}</view>
+      <input
+        style='text-align:left'
+        class='modal-input'
+        focus='{{modalInput}}'
+        maxlength='{{inputMaxL}}'
+        bindinput='inputEnd'
+        ></input>
+      <view class='modal-button-box'>
+        <view class="modal-button modal-button-left">
+          <form report-submit="true" data-formkey='inputclose' bindsubmit="modalCancel" >
+            <button form-type="submit"  >取消</button>
+          </form>
+        </view>
+        <view class="modal-button modal-button-right">
+          <form report-submit="true" data-formkey='inputsave' bindsubmit="inputOver" >
+            <button form-type="submit"  >完成</button>
+          </form>
+        </view>
+      </view>
+    </view>
+    <view class='modal-textarea-box' style="display:{{modalTextarea?'block':'none'}}"  >
+      <view class='modal-title'>{{title}}</view>
+      <textarea
+        class='form-item-model-textarea' 
+        focus="{{modalTextarea}}"
+        maxlength='{{maxLength}}'
+        bindinput='inputEnd'
+        adjust-position='' 
+        value="{{value}}"
+        cursor="{{cursor}}"
+        ></textarea>
+      <view class='modal-button-box'>
+        <view class='modal-button modal-button-left'>
+          <form report-submit="true" data-formkey='textareaclose' bindsubmit="modalCancel" >
+            <button form-type="submit">取消</button>
+          </form>
+        </view>
+        <view class='modal-button modal-button-right'>
+          <form report-submit="true" data-formkey='textareasave' bindsubmit="textareaOver" >
+            <button form-type="submit">完成</button>
+          </form>
+        </view>
+      </view>
+    </view>
+  <view class='content' style='top:{{cH}}rpx'>
+    <swiper 
+			current="{{num-1}}"
+      style='height:500rpx;'
+      indicator-dots 
+      circular
+      previous-margin='30rpx'
+      next-margin='30rpx'
+      bindchange='tapChange'>
+      <swiper-item>
+        <view class='product-box-card'>
+          <view class='product-title-card'><text>{{product.title}}</text></view>
+          <view style='height:199rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+            <view class='product-bright-card'>
+              <view class='product-bright-ite-card' >
+                <view class='product-bright-ite-num-card'>{{product.key1}}</view>
+                <view class='product-bright-ite-txt-card'>{{product.keyp1}}</view>
+              </view>
+            </view>
+            <view class='product-tag-card'>
+              <view class='product-tag-ite-card' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+          </view>
+          <view class='producr-details-card'>{{product.profile}}</view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class='product-box-two-card'>
+          <view class='product-title-two' ><text>{{product.title}}</text></view>
+          <view style='height:204rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+            <view class='product-tag-two'>
+              <view class='product-tag-ite-two' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+            <view class='product-bright-two-card'>
+              <view class='product-bright-ite-two-card' style='border-right:1rpx solid #e5e5e5'>
+                <view class='product-bright-ite-num-two' style="color:#ff523b">{{product.key1}}</view>
+                <view class='product-bright-ite-txt-two'>{{product.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-two-card'>
+                <view class='product-bright-ite-num-two' >{{product.key2}}</view>
+                <view class='product-bright-ite-txt-two'>{{product.keyp2}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-two-card'>{{product.profile}}</view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class='product-box-the-card'>
+          <view class='product-title-the'><text>{{product.title}}</text></view>
+          <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+            <view class='product-tag-the'>
+              <view class='product-tag-ite-the' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+            <view class='product-bright-the-card'>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the-card' style="color:#ff523b">{{product.key1}}</view>
+                <view class='product-bright-ite-txt-the'>{{product.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the-card' >{{product.key2}}</view>
+                <view class='product-bright-ite-txt-the'>{{product.keyp2}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the-card' >{{product.key3}}</view>
+                <view class='product-bright-ite-txt-the'>{{product.keyp3}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-the-card'>{{product.profile}}</view>
+        </view>
+      </swiper-item>
+      <swiper-item style='display:flex;align-items: center'>
+        <view class='product-img-card'>
+          <view class='product-img-content-card'>
+            <view class='product-img-title-box'>
+              <view class='product-img-title-card'><text>{{product.title}}</text></view>
+            </view>
+            <view class='product-img-text-box'>
+              <view class='product-img-text-card'>{{product.profile}}</view>
+            </view>
+            <view class='product-img-tag-card'>
+              <view class='product-img-tag-ite-card' wx:for="{{product.tagsarr}}" wx:key="{{index}}">{{item}}</view>
+            </view>
+          </view>
+          <image bindtap="imgobjImg" class='product-img-img-card' src='{{product.imgurl?product.imgurl:productcope.imgurl}}'></image>
+        </view>
+      </swiper-item>
+    </swiper>
+    <scroll-view scroll-y style='height:{{sH}}rpx'>
+      <view class='edit-region'>
+        <view class='css-num'>
+          {{cssnum}}
+        </view>
+        <view class='cover-item'>
+          <view class='cover-item-title'>标题</view>
+          <view class='cover-item-input' bindtap='textareaOn' data-maxlength='18' data-title='请输入产品标题' data-value='{{editProduct.title}}'>
+            <text style="color:{{editProduct.title?'#000':'#999'}}">{{editProduct.title?editProduct.title:'请输入产品标题'}}</text>
+          </view>
+        </view>
+				<view style="display:{{num== 1 || num== 2 ||num== 3 ? 'block':'none' }};">
+        <view class='cover-item' >
+          <view class='cover-item-title'>关键词一</view>
+          <view class='cover-item-input'> 
+            <input value="{{editProduct.key1}}" placeholder='请输入产品关键词' bindinput='inputBright' maxlength="{{num == 1? 8 : 4}}" data-keys='key' data-ind='1' ></input>
+            <input style='margin-top:20rpx' value="{{editProduct.keyp1}}" placeholder='请输入产品关键词说明' bindinput='inputBright' maxlength="{{num == 1? 20 : 6}}" data-keys='keyp' data-ind='1' ></input>
+          </view>
+        </view>
+				</view>
+				<view style="display:{{ num== 2 ||num== 3 ? 'block':'none' }};">
+        <view class='cover-item'  >
+          <view class='cover-item-title'>关键词二</view>
+          <view class='cover-item-input'>
+            <input value="{{editProduct.key2}}" placeholder='请输入产品关键词' bindinput='inputBright' maxlength="4" data-keys='key' data-ind='2' ></input>
+            <input style='margin-top:20rpx' value="{{editProduct.keyp2}}" placeholder='请输入产品关键词说明' bindinput='inputBright' maxlength="6" data-keys='keyp' data-ind='2' ></input>
+          </view>
+        </view>
+				</view>
+				<view  style="display:{{  num == 3 ? 'block':'none' }};">
+				<view class='cover-item'>
+          <view class='cover-item-title'>关键词三</view>
+          <view class='cover-item-input'>
+            <input value="{{editProduct.key3}}" placeholder='请输入产品关键词' bindinput='inputBright' maxlength="4" data-keys='key' data-ind='3'></input>
+            <input style='margin-top:20rpx' value="{{editProduct.keyp3}}" placeholder='请输入产品关键词说明' bindinput='inputBright' maxlength="6" data-keys='keyp' data-ind='3' ></input>
+          </view>
+        </view>
+				</view>
+        <view class='cover-item'>
+          <view class='cover-item-title'>亮点</view>
+          <view class='cover-item-input' data-value='{{editProduct.profile}}' data-title='请输入产品亮点' data-maxlength='{{num == 4? 30 : 52 }}' bindtap='textareaOn'>
+            <!-- <text>{{editProduct.profile}}</text> -->
+            <text style="color:{{editProduct.profile?'#000':'#999'}}">{{editProduct.profile?editProduct.profile:'请输入产品亮点'}}</text>
+          </view>
+        </view>
+        <view class='cover-item'>
+          <view class='cover-item-title'>标签</view>
+          <view class='cover-item-input flex-box'>
+            <view class='tag-add' wx:if='{{tagaddShow}}' bindtap='inputOn' data-maxL='{{taglen}}' data-id='tag' data-type="text" data-title="添加标签">
+              <image class='tag-add-img' src='../../../../image/img/tagadd.png'></image>
+            </view>
+            <view class='tag-item-box' bindtap='tagDel' data-ind='{{index}}'  wx:for='{{editProduct.tagsarr}}' wx:key='index'>{{item}}</view>
+          </view>
+        </view>
+        <view class='cover-item' wx:if="{{num == 4}}">
+          <view class='cover-item-title'>封面图</view>
+          <view class='cover-item-input' style='display:flex;justify-content: flex-end'>
+            <image class='imgobj-img' bindtap='imgobjImg' src='{{editProduct.imgurl ?editProduct.imgurl:productcope.imgurl}}' style='width:220rpx;height:220rpx;'></image>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <form report-submit="true" data-formkey='add' bindsubmit="bindAdd">
+      <button form-type="submit" class='bottom-button' style='bottom:{{bm}}rpx'>
+        <image style='width: 32rpx;height: 32rpx;margin-right:12rpx' src='/image/img/grouptrue.png'></image>
+        <text>完成</text>
+      </button>
+    </form>
+  </view>
+  <view wx:if='{{guidance}}'>
+    <view class='guidance-meng'></view>
+    <view class='product-box-card guidance-product-box-card' style='top:{{cH}}rpx'>
+      <view class='product-title-card'><text>产品标题</text></view>
+      <view style='height:199rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+        <view class='product-bright-card'>
+          <view class='product-bright-ite-card' >
+            <view class='product-bright-ite-num-card'>关键词</view>
+            <view class='product-bright-ite-txt-card'>关键词说明</view>
+          </view>
+        </view>
+        <view class='product-tag-card'>
+          <view class='product-tag-ite-card'>标签</view>
+        </view>
+      </view>
+      <view class='producr-details-card'>产品亮点</view>
+    </view>
+    <view class='guidance1-box'>
+    <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:134rpx;height:141rpx;'/>
+      <view class="guidance-box-one-text" style='width:400rpx;margin-left:14rpx;margin-top:0'>
+        <text style='font-size:28rpx;font-weight:500'>专为金融产品及服务打造的四种封面样式，左右滑动即可切换</text>
+      </view>
+    </view>
+    <form report-submit="true" bindsubmit="iknow" data-formkey='know'>
+      <button class='jobs-diy jobs-diy_know' form-type="submit">知道了</button>
+    </form>
+  </view>
+  <form wx:if='{{guidance1}}' report-submit="true" data-formkey='add' bindsubmit="bindAdd">
+    <button form-type="submit" class='guidance-button' style='bottom:{{bm}}rpx'>
+      <image style='width: 32rpx;height: 32rpx;margin-right:12rpx' src='/image/img/grouptrue.png'></image>
+      <text>完成</text>
+    </button>
+  </form>
+  <view class='canvas-box'>
+    <canvas canvas-id="viewCanvas" style="width:750px;height:{{canvasHeight}}px"></canvas>
+  </view>
+</view>

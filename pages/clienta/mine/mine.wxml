@@ -1,0 +1,45 @@
+<view class='content' style='top:{{cH}}rpx'>
+  <view class='user-box'>
+    <!-- <view class='user-box-picture' style='background-image:url({{headImgUrl}})'></view> -->
+    <image class='user-box-picture' src='{{headImgUrl}}' mode='aspectFill'></image>
+    <view class='user-box-name'><text class='name-box'>{{managerInfo.user_name}}</text><text wx:if="{{newline}}" class='user-box-position'>{{managerInfo.position}}</text></view>
+    <view wx:if="{{newline}}" class='user-box-company'>{{managerInfo.company}}</view>
+    <view wx:else class='user-box-company'>{{mdcompany?managerInfo.company:'您身边的专业顾问'}}{{managerInfo.position?managerInfo.position:""}}</view>
+  </view>
+  <view class='mine-list' data-index="0" data-to="/pages/clienta/mine/card/card" bindtap='mineTo'>
+    <view class='mine-list-icon-box'>
+      <image class='mine-list-icon' src="/image/img/idcard.png" style='width: 32rpx;height:27rpx;'></image>
+    </view>
+    <view class='mine-list-title'>个人名片</view>
+    <image class='mine-list-path mine-list-icon' src='/image/img/path.png'></image>
+  </view>
+  <view class='mine-list' data-index="1" data-to="/pages/clientb/clientb" bindtap='mineTo'>
+    <view class='mine-list-icon-box'>
+      <image class='mine-list-icon' src="/image/img/identity.png" style='width: 32rpx;height: 28rpx;'></image>
+    </view>
+    <view class='mine-list-title'>切换身份</view>
+    <image class='mine-list-path mine-list-icon' src='/image/img/path.png'></image>
+  </view>
+  <view class='mine-list'data-index="2" data-to="/pages/member/member" bindtap='mineTo'>
+    <view class='mine-list-icon-box'>
+      <image class='mine-list-icon' src="/image/img/purchase.png" style='width:32rpx;height:34rpx'></image>
+    </view>
+    <view class='mine-list-title'>开通会员，限时免费</view>
+    <image class='mine-list-path mine-list-icon' src='/image/img/path.png'></image>
+  </view>
+  <button open-type="feedback" class='mine-list'>
+    <view class='mine-list-icon-box'>
+      <image class='mine-list-icon' src="/image/img/feedback.png" style='width: 32rpx;height: 31rpx;'></image>
+    </view>
+    <view class='mine-list-title'>意见反馈</view>
+    <image class='mine-list-path mine-list-icon' src='/image/img/path.png'></image>
+  </button>
+  
+  <view wx:if="{{guidance}}" class="guidance-box guidance-box_one" style='top:{{cH+390}}rpx;margin-top:0;width:auto'>
+    <view class='guidance-triangle guidance-triangle-left guidance-triangle_one'></view>切换回客户身份，查看名片</view>
+  <view wx:if="{{guidance1}}" class="guidance-box guidance-box_four" style='top:{{cH+270}}rpx;left:250rpx;'>
+    <view class='guidance-triangle guidance-triangle-left guidance-triangle_four'></view>生成名片海报</view>
+  <view style="display: {{show}};">
+    <button size="mini" open-type="getUserInfo">get</button>
+  </view>
+</view>

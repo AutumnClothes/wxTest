@@ -1,9 +1,420 @@
 /**app.wxss全局样式**/
-@import 'weui.wxss';
+/*@import 'weui.wxss';*/
 
-.container{
-  background: #F0F2F5;
+page{position: absolute;top:0;left: 0;bottom: 0;font-family: "PingFangSC" !important;}
+.content{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
-.text-box{
-  font-size: 12px;
+.meng{position: fixed;background-color: #909194;opacity:0.3;top:0;left:0;bottom: 0;right: 0;z-index: 998;}
+.meng-box{
+  position: fixed;
+  background-color: transparent;
+  top:0;bottom: 0;left: 0;right: 0;
+  z-index: 900;
+}
+.dian{
+  width:30rpx;
+  height:30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  border-radius: 50%;
+  background-color: rgb(102, 102, 102);
+  margin:0 10rpx;
+  font-size: 28rpx;
+  color:#fff;
+}
+.accredit-close{
+  position: absolute;
+  top:30rpx;
+  left:30rpx;
+  width: 50rpx;
+  height:50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.accredit{
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  background-color: #fff;
+  padding: 30rpx;
+  box-sizing: border-box;
+  z-index: 999;
+  border-radius: 8rpx;
+}
+.accredit-title{
+  font-size: 34rpx;
+  color: rgb(51, 51, 51);
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+}
+.accredit-txt{
+  margin-top:30rpx;
+  font-size: 28rpx;
+  color: rgb(102, 102, 102);
+  width: 100%;
+}
+.accredit-item-box{
+  display: flex;
+  align-items: center;
+  height:85rpx;
+  align-content: space-between;
+  flex-wrap:wrap;
+  margin-top:50rpx;
+}
+.accredit-txt-item{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  color: rgb(102, 102, 102);
+}
+.accredit-button{
+  margin-top:60rpx;
+  border-radius: 8rpx;
+  background-color: rgb(255, 160, 25);
+  font-size: 34rpx;
+  color: rgb(255, 255, 255);
+  width: 460rpx;
+  height: 88rpx;
+  line-height:1 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.accredit-button button{
+  width:100%;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 160, 25);
+  font-size: 34rpx;
+  color: rgb(255, 255, 255);
+}
+input{
+  min-height: 0;
+}
+button{
+  padding:0 !important;
+  background-color:transparent;
+}
+.button-hover{
+  background-color:transparent;
+}
+button::after {
+  border: none;
+}
+.Ixliubai{
+  position: fixed;
+  bottom: 0;
+  height:50rpx;
+  width: 100%;
+}
+/*引导气泡样式,具体定位在页面做*/
+.guidance-box{
+  padding:28rpx 35rpx;
+  box-sizing: border-box;
+  opacity: 0.902;
+  background-image: -webkit-linear-gradient( -180deg, rgb(255,95,25) 0%, rgb(255,114,0) 100%);
+  font-size: 34rpx;
+  line-height: 1;
+  color:#fff;
+  position: fixed;
+  z-index: 999;
+  border-radius: 16rpx;
+}
+.guidance-triangle{
+  width:28rpx;
+  height:28rpx;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 999;
+}
+.guidance-triangle-bottom{
+  border:14rpx solid transparent;
+  border-top:14rpx solid #fe7b1c;
+}
+.guidance-triangle-top{
+  border:14rpx solid transparent;
+  border-bottom:14rpx solid #fe7b1c;
+}
+.guidance-triangle-left{
+  border:14rpx solid transparent;
+  border-right:14rpx solid #fe7b1c;
+}
+.guidance-triangle-right{
+  border:14rpx solid transparent;
+  border-left:14rpx solid #fe7b1c;
+}
+.guidance-button{
+  background-color: rgb(25, 25, 25);
+  border-radius: 8rpx;
+  height:88rpx;
+  width:650rpx;
+  margin-left:50rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  position: fixed;
+  z-index: 999;
+  font-size: 34rpx;
+  color:#cfae82 !important;
+}
+.guidance-meng{
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index: 900;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.6;
+}
+.canvas-box{
+  position: fixed;
+  left:9999px;
+  width:750px;
+  height:940px;
+}
+.guidance-box-one-box{
+  position: relative;
+  z-index: 999;
+  width: 100%;
+  position: fixed;
+  top:0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.guidance-box-one{
+  border-radius: 14rpx;
+  width: 660rpx;
+  /* height: 322rpx; */
+  background-color: #fff;
+  padding:60rpx 30rpx 60rpx 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color:#333;
+  position: relative;
+}
+.guidance-box-one-text{
+  width:490rpx;
+  /* height:180rpx; */
+  margin-top:24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color:#333;
+}
+.guidance-close{
+  position: absolute;
+  top:0rpx;
+  left:0rpx;
+  width:100rpx;
+  height:100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.guidance-close-img{
+  width:18rpx;
+  height:18rpx;
+}
+.guidance-btn{
+  margin-top:40rpx;
+  color:#cfae82 !important;
+  background-color: rgb(25, 25, 25);
+  width:240rpx;
+  height:88rpx;
+  line-height:1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  border-radius: 8rpx;
+}
+.guidance-btn-vip{
+  margin-top:50rpx;
+  color:#cfae82 !important;
+  background-color: rgb(25, 25, 25);
+  width:240rpx;
+  height:88rpx;
+  line-height:1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  border-radius: 8rpx;
+}
+.guidance-box_four{
+  position: fixed;
+  margin-top:0;
+  width:auto;
+  height:auto;
+  z-index:999;
+  color:#cfae82 !important;
+  background-color: rgb(25, 25, 25) !important;
+  background-image: none;
+  right:20rpx;
+}
+.guidance-triangle_four{
+  border-bottom-color:rgb(25, 25, 25) !important;
+  top:-26rpx;
+  right:10%;
+}
+.guidance1-box{
+  position: fixed;
+  bottom:20rpx;
+  left:50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:30rpx 30rpx 30rpx 20rpx;
+  background-color: #fff;
+  font-size:28rpx;
+  z-index: 999;
+  border-radius: 14rpx;
+}
+.guidance1-box-shadow{
+  box-shadow:0rpx 5rpx 40rpx 0rpx rgba(179, 179, 179, 0.33);
+}
+.mem-guide-position{
+  position: absolute;
+  top:12rpx;
+  left:50%;
+  transform: translateX(-50%)
+}
+.guidance-box-one-text{
+  z-index: 999;
+}
+.guidance-bottom-button{
+  z-index: 999;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.guidance-btn-left{
+  border:1px solid #3f3f3f;
+  color:#1c1c1c !important;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.guidance-btn-right{
+  background-color: rgb(255, 160, 25) !important;
+  color:#fff !important;
+  margin-left:20rpx
+}
+.guidance-btn-left-vip{
+  border:1px solid #3f3f3f;
+  color:#1a1a1a !important;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.guidance-btn-right-vip{
+  background-color: rgb(255, 160, 25) !important;
+  color:#fff !important;
+  margin-left:20rpx
+}
+.guidance-box-one_two{
+  position: fixed;
+  bottom:100rpx;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  flex-direction: initial;
+  align-items: center;
+  left:50%;
+  transform: translateX(-50%);
+  padding:40rpx 20rpx 40rpx 10rpx;
+  box-sizing: border-box;
+}
+.guidance-bottom-text{
+  text-align: center;
+  margin-top:32rpx;
+  color:#999;
+  font-size: 24rpx;
+}
+.guidance-bottom{
+  font-size: 26rpx;
+  color:#c9c9c9;
+  position: absolute;
+  bottom:20rpx;
+  right:35rpx;
+}
+.guidance_close{
+  position: absolute;
+  left: 0;
+  top:0;
+  height:100rpx;
+  width:100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mem-guide-portrait{
+  width:200rpx;
+  height:200rpx;
+  min-width:200rpx;
+  min-height:200rpx;
+  border-radius: 100rpx;
+  z-index:999;
+  position: relative;
+  margin-top:30rpx;
+}
+.guidance-box-one-text-two{
+  margin-top:35rpx;
+  color:#333;
+  font-size:34rpx;
+  text-align:center;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2; 
+}
+.guidance-button_one{
+  position: static;
+  width:500rpx;
+  margin:55rpx auto 8rpx auto;
+}
+.rich-text-title{
+  font-size: 44rpx;
+  line-height: 1.4;
+  width:686rpx;
+  margin:40rpx 32rpx 28rpx 32rpx;
+}
+.rich-text-from{
+  font-size: 30rpx;
+  line-height: 1;
+  width:686rpx;
+  margin-left:32rpx;
+  color: rgba(0,0,0,0.3);
+}
+.card-tap-text{
+  font-size:26rpx;
+  color:#aaa;
+  width:100%;
+  text-align: center;
 }

@@ -1,0 +1,87 @@
+<view>
+  <form report-submit="true" bindsubmit="leftup" >
+    <button form-type="submit" class='top-add' data-formkey='leftTop' style='top:{{H}}rpx;height:{{gH}}rpx' >
+      <image src='https://www.willsfintech.cn:9004/staticFile/image/identity.svg'></image>
+      <text>{{leftupText}}</text>
+    </button>
+  </form>
+  <view wx:if="{{guidance}}" class="guidance-box" style='top:{{gT}}rpx;left:30rpx;text-align:center'>
+    <view class='guidance-triangle guidance-triangle-top'></view>创建你的专属名片，获客成交快人一步</view>
+  <view wx:if="{{guidanceOnce}}" class="guidance-box" style='top:{{gT}}rpx;left:30rpx;text-align:center'>
+    <view class='guidance-triangle guidance-triangle-top'></view>切换回顾问身份</view>
+  <view class='content' style='top:{{cH}}rpx'>
+    <scroll-view scroll-y style='height:{{sH}}rpx'>
+      <view class='liubai'></view>
+      <view class='card-box' wx:for="{{list}}" wx:key="{{index}}">
+        <view data-id="{{item.id}}" bindtap='listtap'>
+          <image class='picture-box' src='{{item.headImgUrl}}' mode='aspectFill'></image>
+          <view class='card-name-box'>
+            <view class='name-box'>{{item.user_name}}</view>
+            <view class='position-box' wx:if="{{!item.compose}}">{{item.position}}</view>
+          </view>
+            <view class='place-box' style='margin-left:0;'>{{item.company}}<text wx:if="{{item.compose}}">{{item.position}}</text></view>
+          <view class='contact-box'>
+            <view class='phone'>
+              <image style='width: 16rpx;height:20rpx;' src='/image/img/phone.png'></image>
+              {{item.mobile_phone?item.mobile_phone:'咨询顾问获得电话'}}
+            </view>
+            <view class='address'>
+              <image style='width: 16rpx;height:21rpx;' src='/image/img/address.png'></image>
+              <text class='address-text'>{{item.city?item.city:'时刻在客户身边'}}</text>
+            </view>
+          </view>
+          <view class='synopsis-box'>
+            {{item.profile?item.profile:'您身边共享资讯的学习导师、随时助您理解的产品专家、了解客户全面需求的贴心管家'}}
+          </view>
+        </view>
+      </view>
+      <view class='liubai'></view>
+    </scroll-view>
+  </view>
+  <view class="meng" wx:if="{{accreditType == 'toget' || accreditType == 'toset'}}"></view>
+  <view class='accredit' wx:if="{{accreditType == 'toget' || accreditType == 'toset'}}">
+    <view class='accredit-box'>
+      <view style="display: {{accreditType == 'toget' ? 'none' : 'block'}};" class='accredit-close' bindtap='closeaccredit'>
+        <image src='../../../../image/img/close.png' style='width:18rpx;height:18rpx;'></image>
+      </view>
+      <view class='accredit-title'>需要您的授权</view>
+      <view class='accredit-txt'>仅授权微信头像、微信昵称，授权后，您可以：</view>
+      <view class='accredit-item-box'>
+        <view class='accredit-txt-item'>
+          <view class='dian'>1</view>获取名片</view>
+        <view class='accredit-txt-item'>
+          <view class='dian'>2</view>咨询顾问</view>
+        <view class='accredit-txt-item'>
+          <view class='dian'>3</view>阅读文章</view>
+        <view class='accredit-txt-item'>
+          <view class='dian'>4</view>查看产品</view>
+      </view>
+      <form  report-submit="true" bindsubmit="accreditTo">
+        <button class='accredit-button' form-type="submit" data-formkey='getUserInfo' style="display: {{accreditType == 'toget' ? 'flex' : 'none'}};" bindtap="closeaccredit" bindgetuserinfo="onGotUserInfo" open-type="getUserInfo">前往授权</button>
+        <button class='accredit-button' form-type="submit" data-formkey='openSetting' style="display: {{accreditType == 'toset' ?  'flex' : 'none'}};" bindtap="closeaccredit" bindopensetting="opensetting" open-type="openSetting">前往授权</button>
+      </form>
+    </view>
+  </view>
+  <view wx:if='{{guidance1}}'>
+    <view class='guidance-meng'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one">
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;min-width:191rpx;min-height:201rpx;'/>
+        <view class="guidance-box-one-text" style='margin-top:0'>
+          <text>为斯顾问，是一张名片。</text>
+          <text>产品专栏尽显专业，不加微信即可沟通。</text>
+          <text style='margin-top:28rpx'>为斯顾问，不只是名片。</text>
+        </view>
+      </view>
+      <form report-submit="true" bindsubmit="" data-formkey='know'>
+        <button class='guidance-btn' form-type="submit">知道了</button>
+      </form>
+    </view>
+    <form report-submit="true" bindsubmit="leftup">
+      <button form-type="submit" class='top-add ' data-formkey='leftTop' style='top:{{H}}rpx;height:{{gH}}rpx;z-index:999;background-color:#fff' >
+        <image src='https://www.willsfintech.cn:9004/staticFile/image/identity.svg'></image>
+        <text>创建我的名片</text>
+      </button>
+    </form>
+  </view>
+</view>

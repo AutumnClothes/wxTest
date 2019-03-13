@@ -1,0 +1,166 @@
+/* pages/clienta/jobs/product/product.wxss */
+@import '../../../style/product.wxss';
+
+.scrollview{
+  background-color: #f0f1f6;
+}
+.liubai{
+  width:100%;
+  height:20rpx;
+}
+
+.private-line{
+  position: relative;
+  padding: 31rpx 30rpx 47rpx 30rpx;
+  box-sizing: border-box;
+}
+.line-box{
+  height:2rpx;
+  background-color: rgb(199, 199, 204);
+}
+.private-box{
+  display: flex;
+  align-items: center;
+  padding:23rpx 9rpx 20rpx 15rpx;
+  box-sizing: border-box;
+  background-color: #f0f1f6;
+  position: absolute;
+  left:50%;
+  height:78rpx;
+  top:-10rpx;
+  transform: translateX(-50%);
+}
+.bottom-box{
+  position: fixed;
+  height:100rpx;
+  width: 100%;
+  background-color: #fff;
+  border-top:1rpx solid #f0f1f6;
+}
+.bottom-button{
+  height:100rpx;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-border-box{
+  height:212rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;
+}
+
+.chat-none-box{
+  font-size: 32rpx;
+  color: rgb(153, 153, 153);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height:700rpx;
+}
+.chat-none-img{
+  position: static;
+  transform: translateY(0);
+  width:400rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 28rpx;
+  line-height:42rpx;
+  color:#717173;
+}
+
+
+.guidance-box_one{
+  padding:25rpx 0 !important;
+  text-align: center;
+  width:400rpx;
+  left:50%;
+  transform: translateX(-50%);
+  color:#cfae82 !important;
+  background-color: rgb(25, 25, 25) !important;
+  background-image: none;
+}
+.guidance-triangle_one{
+  position: absolute;
+  bottom:-26rpx;
+  left:50%;
+  transform: translateX(-50%);
+  border-top-color:rgb(25, 25, 25) !important;
+}
+.guidance-meng{
+  z-index:998;
+}
+.guidance1-box{
+  bottom:50%;
+}
+.jobs-diy_know{
+  z-index:999;
+  position: fixed;
+  top:65%;
+  left:50%;
+  transform: translateX(-50%);
+  text-align: center;
+  border:1px solid #fff;
+  color:#fff;
+  background-color: transparent;
+}
+.jobs-diy{
+  width: 220rpx;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+  height:88rpx;
+  line-height: 86rpx;
+  font-size: 34rpx;
+}
+.guidance-box-padding{
+  padding:60rpx 30rpx 60rpx 30rpx
+}
+.guidance-box-one-text{
+  margin-top:34rpx
+}
+.guidance-btn{
+  position: relative;
+  z-index: 999
+}
+.statistics-box{
+  border-top:1px solid #f0f1f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width:750rpx;
+  height:66rpx;
+  padding:0 28rpx;
+  background-color:#fff; 
+  box-sizing: border-box;
+  margin-bottom:20rpx;
+}
+.statistics-box-img{
+  width:48rpx;
+  height:48rpx;
+  border-radius: 24rpx;
+  border:1px solid #fff;
+  box-sizing: border-box;
+  margin:0 -8rpx 0 0;
+}
+.statistics-box-img-box{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.statistics-box-btn{
+  margin:0;
+  font-size:32rpx;
+  color:rgb(171, 171, 171);
+  height:66rpx;
+  width:200rpx;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.product-box,.product-box-two,.product-box-the,.product-img{
+  margin-bottom: 0;
+  width:100%;
+}

@@ -1,0 +1,37 @@
+<view>
+    <top-box text="{{groupname}}" backBox="true" detal="1"></top-box>
+    <view class="content" style="top:{{cH}}rpx">
+      <view class='crowd-name'>
+        <view class='crowd-name-title'>群名称</view>
+        <!-- <view class='crowd-name-text'>{{crowdName}}</view> -->
+        <input 
+          class='crowd-name-input' 
+					value='{{groupname}}'
+					bindinput="bindinput"
+          placeholder-class='crowd-name-input-null'
+          bindblur='crowdBlur'></input>
+      </view>
+      <view class='crowd-list'>
+        <view class='crowd-name'>
+          <view class='crowd-name-title'>群成员{{num}}人</view>
+          <view class='crowd-name-text' bindtap='bindAdd' >
+            <image src='../../../../image/img/common-add.png'></image>添加成员</view>
+        </view>
+        <scroll-view scroll-y="{{scrolly}}" style='height:{{sH}}rpx'>
+          <view class='item-box' wx:for="{{grouplist}}" wx:key="{{index}}" data-id="{{item.id}}" >
+            <view bindtap="tocusdatapage" class='crowd-item-box' 
+              bindtouchstart="touchS"  bindtouchmove="touchM" bindtouchend='touchE' data-ind="{{index}}"
+							data-id="{{item.id}}" data-ind="{{index}}"
+              style='left:{{item.txtStyle}}rpx'>
+              <!-- <view style='background-image:url({{item.portraitpath}})' class='crowd-item-portrait'></view> -->
+              <image class='crowd-item-portrait' src='{{item.portraitpath}}' mode='aspectFill'></image>
+              <view class='crowd-item-name'>{{item.name?item.name:item.nickname}}</view>
+            </view>
+            <view data-index="{{index}}" data-id="{{item.id}}" bindtap="deleteTap" class='crowd-item-del' style='left:{{item.txtStyle}}rpx'>
+              <image src="../../../../image/img/itedel.png" style=' width: 38rpx;height: 34rpx;'></image>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+</view>

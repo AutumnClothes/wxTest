@@ -1,0 +1,20 @@
+<view class='container'>
+  <view class='top' style="background-image:url('https://www.willsfintech.cn:9004/staticFile/image/city.svg')">
+    <top-box top-box-style="top-box-style" text="工作"></top-box>
+  </view>
+  <view class='content'>
+    <view class='job-list-item' wx:for="{{jobList}}" wx:key="{{index}}" bindtap='nextTo' data-to-url="{{item.to}}">
+      <image style='{{item.style}}' class='job-list-item-l' src='{{item.imgputh}}'></image>
+      <view class='job-list-item-title'>{{item.title}}</view>
+      <image class='job-list-item-r' src='/image/img/path.png'></image>
+    </view>
+    <view wx:if="{{guidance1}}" class="guidance-box guidance-box_four">
+      <view class='guidance-triangle guidance-triangle-left guidance-triangle_four'></view>新增一篇资讯</view>
+    <view wx:if="{{guidance2}}" class="guidance-box guidance-box_four">
+      <view class='guidance-triangle guidance-triangle-left guidance-triangle_four'></view>推荐一篇资讯</view>
+    <view wx:if="{{guidance3}}" class="guidance-box guidance-box_four" style='top:1044rpx;left:300rpx;'>
+      <view class='guidance-triangle guidance-triangle-left guidance-triangle_four'></view>发布一篇专栏</view>
+    <view wx:if="{{guidance4}}" class="guidance-box guidance-box_four" style='top:874rpx;left:330rpx;'>
+      <view class='guidance-triangle guidance-triangle-left guidance-triangle_four'></view>新增一款产品</view>
+  </view>
+</view>

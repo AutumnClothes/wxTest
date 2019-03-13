@@ -1,0 +1,16 @@
+.tabbar-box{
+  position: fixed;
+  width: 100%;
+  height:100rpx;
+  z-index: 997;
+  background-color: #fff;
+  font-size: 20rpx;
+  color: rgb(127, 131, 137);
+  text-align: center;
+}
+.canvas-box{
+  position: fixed;
+  left:9999px;
+  width:750px;
+  height:940px;
+}

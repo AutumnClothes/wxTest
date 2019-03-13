@@ -1,0 +1,38 @@
+/* pages/clientb/view/view.wxss */
+@import '../../clienta/view/view.wxss';
+
+.button-img {
+  box-sizing: border-box;
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0;
+}
+.form-button{
+  margin-right:24rpx;
+  line-height: 60rpx;
+  width:105rpx;
+  height:60rpx;
+  text-align: center;
+  padding:0 !important;
+}
+.tomainpage-box{
+  width:524rpx;
+  display:flex;
+  align-items: center;
+}
+.share-item{
+  width:375rpx;
+  margin:0;
+}
+.accredit-button_one{
+  position: static;
+  margin:0;
+  border-radius: 0;
+  width:750rpx;
+  height:128rpx;
+  font-size: 34rpx;
+}

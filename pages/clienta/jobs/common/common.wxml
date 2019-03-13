@@ -1,0 +1,79 @@
+<view class="container">
+  <top-box text="常用语" backBox="{{backBox}}" delta="1"></top-box>
+  <view class='go-back-box' bindtap='goBack'  style="top:{{cH-100}}rpx;display:{{backBox?'none':'block'}}"></view>
+  <view class='modal-input-meng' wx:if="{{modalMeng}}"></view>
+  <view class='modal-input-box' wx:if="{{modalInput}}">
+      <view class='modal-title'>新增分组</view>
+      <input
+        class='modal-input'
+        focus='{{modalInput}}'
+        bindinput='inputEnd'
+        maxlength='{{maxL}}'
+        value="{{textareavalue}}"
+        adjust-position='' 
+				></input>
+      <view class='modal-button-box'>
+        <view class='modal-button modal-button-left'>
+          <form report-submit="true" data-formkey='imputclose' bindsubmit="modalCancel" >
+            <button form-type="submit" style="color:#333301">
+              取消
+            </button>
+          </form>
+        </view>
+        <view class='modal-button modal-button-right'>
+          <form report-submit="true" data-formkey='imputsave' bindsubmit="inputOver" >
+            <button form-type="submit" style="color:#ffa019">
+              完成
+            </button>
+          </form>
+        </view>
+      </view>
+    </view>
+  <view class='content' style="top:{{cH}}rpx">
+    <scroll-view scroll-y='{{scrollY}}' class='content-left' style='height:{{scrollHeight}}rpx'>
+      <view class="content-left-item {{itemId == item.id?'item-true':''}}" wx:for="{{leftList}}" wx:key="{{index}}" data-ite-id="{{item.id}}" bindtap='bindLeft'>
+        {{item.title}}
+        <view class='triangle' style="display:{{itemId == item.id?'block':'none'}}"></view>
+      </view>
+    </scroll-view>
+    <scroll-view scroll-y="{{scrolly}}" class='content-right' wx:for="{{leftList}}" wx:key="{{index}}" style="display:{{itemId == item.id?'block':'none'}};height:{{scrollHeight}}rpx" >
+    <view>
+      <view style='position:absolute;'>
+        <view wx:for="{{item.list}}" wx:key="ind" wx:for-item="ite"  wx:for-index = "ind"
+          class="{{classShow?'content-right-ite':'content-right-ite-false'}}">
+          <view class='content-right-ite-text' 
+          bindtap='realchatTo' 
+          bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" 
+          data-value="{{ite.text}}" data-index="{{index}}" data-ind = "{{ind}}"
+          style='left:{{ite.txtStyle}}rpx'><text>{{ite.text}}</text></view>
+            <view  data-pid="{{item.id}}" data-id="{{ite.id}}" data-text="{{ite.text}}" class='content-right-ite-edit' style='left:{{ite.txtStyle}}rpx' bindtap='editBind'>
+              <image class='content-right-ite-image' src='../../../../image/img/edit.png'></image>
+            </view>
+            <view data-pid="{{item.id}}" data-id="{{ite.id}}" class='content-right-ite-itedel' style='left:{{ite.txtStyle}}rpx' bindtap='itedelBind'>
+              <image class='content-right-ite-image' src='../../../../image/img/itedel.png'></image>
+            </view>
+        </view>
+      </view>
+    </view>
+    </scroll-view>
+    <view class='function-box-left function-box' hidden='{{funHidden}}' style='bottom:{{bm}}rpx'>
+      <form report-submit="true" data-formkey='comadd' bindsubmit="bindAddL" hidden='{{often}}'>
+        <button form-type="submit">
+          <image class='function-img' src='/image/img/common-add.png' style='width:32rpx;height:32rpx'></image>
+        </button>
+      </form>
+      <form report-submit="true" data-formkey='comdel' bindsubmit="bindDel" hidden='{{often}}'>
+        <button form-type="submit">
+          <image class='function-img' src='/image/img/common-del.png'></image>
+        </button>
+      </form>
+    </view>
+    <view class='function-box-right function-box'  hidden='{{often}}' style='bottom:{{bm}}rpx'>
+      <form report-submit="true" data-formkey='commonadd' bindsubmit="bindAddR" >
+        <button form-type="submit" class='function-box-form'>
+          新增
+        </button>
+      </form>
+    </view>
+  </view>
+</view>

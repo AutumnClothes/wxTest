@@ -1,0 +1,42 @@
+<view>
+  <top-box text="开通会员" backBox delta="1"></top-box>
+  <view class='content' style='top:{{cH}}rpx'>
+    <view class='table-box'>
+      <view class='table-item'>
+        <view class='table-ite'></view>
+        <view class='table-can'>
+          <text>免费版</text>
+        </view>
+        <view class='table-can'>
+          <text>会员特权</text>
+        </view>
+      </view>
+      <view class='table-item' wx:for='{{list}}' wx:for-index='index' wx:key='index'>
+        <view class='table-ite'>{{item.term}}</view>
+        <view wx:if='{{index == 2}}' class='table-can'>
+          <view class='guidance-btn'>{{guidanceTxt}}</view>
+        </view>
+        <view wx:else class='table-can'>
+          <image wx:if='{{item.free}}' src='../../image/img/true.png' style='width:27rpx;height:21rpx;' />
+          <image wx:else src='../../image/img/false.png' style='width:25rpx;height:25rpx;' />
+        </view>
+        <view class='table-can'>
+          <image wx:if='{{item.mem}}' src='../../image/img/true.png' style='width:27rpx;height:21rpx;' />
+          <image wx:else src='../../image/img/false.png' style='width:25rpx;height:25rpx;' />
+        </view>
+      </view>
+      <view class='table-item table-item-font' style='justify-content: center;'>更多会员特权, 敬请期待</view>
+      <view class='table-item table-item-font' style='justify-content: center;height:70rpx;border:none'>会员到期: {{time}}</view>
+    </view>
+    <view style='width:100%;height:124rpx'></view>
+    <view class='bottom-button' style='bottom:{{bm+20}}rpx'>
+      <form report-submit='true' data-freeText="{{freeText}}" data-formkey='free' bindsubmit='freeBind'>
+        <button form-type="submit" class='botton-item botton-left'>{{freeText}}</button>
+      </form>
+      <form report-submit='true' data-formkey='membind' bindsubmit='memBind'>
+        <button form-type="submit" class='botton-item botton-right'>会员免费领<text style='text-decoration:line-through;margin-left:15rpx'>198/年</text></button>
+      </form>
+    </view>
+    <view style='width:100%;height:20rpx;'></view>
+  </view>
+</view>

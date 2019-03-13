@@ -1,0 +1,210 @@
+<view>
+  <view class='top' style='height:{{sH}}rpx'>
+    <top-box text="编辑名片" backBox="true" delta="1"></top-box>
+  </view>
+  <view class='modal-input-meng' wx:if="{{modalMeng}}"></view>
+  <view class='modal-input-box' wx:if="{{modalInput}}">
+    <view class='modal-title'>{{title}}</view>
+    <input
+      class='modal-input'
+      focus='{{modalInput}}'
+      maxlength='{{inputMaxL}}'
+      type='{{typeStr}}'
+      bindinput='inputEnd'
+      adjust-position='' value="{{value}}"></input>
+    <view class='modal-button-box'>
+      <view class="modal-button modal-button-left">
+        <form report-submit="true" bindsubmit="modalCancel" >
+          <button form-type="submit"  >
+            取消
+          </button>
+        </form>
+      </view>
+      <view class="modal-button modal-button-right">
+        <form report-submit="true" bindsubmit="inputOver" >
+          <button form-type="submit"  >
+            完成
+          </button>
+        </form>
+      </view>
+    </view>
+  </view>
+  <view class='modal-textarea-box'  style="display:{{modalTextarea?'block':'none'}}">
+    <view class='modal-title'>{{title}}</view>
+    <textarea
+      class='form-item-model-textarea' 
+      focus="{{modalTextarea}}"
+      maxlength='{{maxLength}}'
+      bindinput='textareaEnd'
+      adjust-position='' 
+      value="{{value}}"
+      cursor="{{cursor}}"
+      ></textarea>
+    <view class='modal-button-box'>
+      <view class="modal-button modal-button-left">
+        <form report-submit="true" bindsubmit="modalCancel" >
+          <button form-type="submit"  >
+            取消
+          </button>
+        </form>
+      </view>
+      <view class="modal-button modal-button-right">
+        <form report-submit="true" bindsubmit="textareaOver" >
+          <button form-type="submit"  >
+            完成
+          </button>
+        </form>
+      </view>
+    </view>
+  </view>
+  <view class='content' style='top:{{sH}}rpx'>
+    <scroll-view scroll-y style='height:{{scH}}rpx'>
+      <view class='essential-information-box'>
+        <view class='form-item-box' data-img="{{managerData.portrait_path}}"  bindtap='changeAvatar'>
+          <view class='form-item-title'>
+            头像
+          </view>
+          <view class='form-item-model'>
+            <image class='edit-righr-bar' src='{{headImgUrl}}' mode='aspectFill'></image>
+          </view>
+        </view>
+        <view class='form-item-box' >
+          <view class='form-item-title'>
+            姓名
+          </view>
+          <view class='form-item-model' >
+            <view bindtap='inputOn' class="{{managerData.user_name == null ||  managerData.user_name == '' ?'input-placeholder-class':'form-item-model-input'}}" data-maxL='6'
+						data-id='user_name' data-type="text" data-title="{{inputList[0].title}}" data-value="{{managerData.user_name}}" >
+						{{managerData.user_name==null || managerData.user_name== ''?inputList[0].title:managerData.user_name}}
+						</view>
+          </view>
+        </view>
+        <view class='form-item-box' >
+          <view class='form-item-title'>
+            公司
+          </view>
+          <view class='form-item-model'>
+            <view  bindtap='inputOn' class="{{managerData.company == null ||  managerData.company == '' ?'input-placeholder-class':'address-box'}}"
+						 data-id='company' data-type="text" data-title="{{inputList[1].title}}"  data-value="{{managerData.company}}" data-maxL='16' >
+						 {{managerData.company==null || managerData.company== ''?inputList[1].title:managerData.company}}  </view>
+          </view>
+        </view>
+        <view class='form-item-box' >
+          <view class='form-item-title'>
+            职位
+          </view>
+          <view class='form-item-model'>
+						<view  bindtap='inputOn' class="{{managerData.position == null ||  managerData.position == '' ?'input-placeholder-class':'form-item-model-input'}}"
+						 data-id='position' data-type="text" data-title="{{inputList[2].title}}" data-value="{{managerData.position}}" data-maxL='6'>
+						 {{managerData.position==null || managerData.position== ''?inputList[2].title:managerData.position}}</view>
+          </view>
+        </view>
+        <view class='form-item-box' >
+          <view class='form-item-title'>
+            电话
+          </view>
+          <view class='form-item-model'>
+						<view bindtap='inputOn' class="{{managerData.mobile_phone == null ||  managerData.mobile_phone == '' ?'input-placeholder-class':'form-item-model-input'}}" data-maxL='11'
+						 data-id='mobile_phone' data-type="number" data-title="{{inputList[3].title}}" data-value="{{managerData.mobile_phone}}"  >{{managerData.mobile_phone==null || managerData.mobile_phone== ''?inputList[3].title:managerData.mobile_phone}}</view>
+          </view>
+        </view>
+        <view class='form-item-box'>
+          <view class='form-item-title'>
+            座机
+          </view>
+          <view class='form-item-model'>
+						<view  bindtap='inputOn' class="{{managerData.telephone == null ||  managerData.telephone == '' ?'input-placeholder-class':'form-item-model-input'}}" data-maxL='13'
+						 data-id='telephone' data-type="number" data-title="{{inputList[4].title}}" data-value="{{managerData.telephone}}" >{{managerData.telephone==null || managerData.telephone== ''?inputList[4].title:managerData.telephone}}</view>
+          </view>
+        </view>
+        <view class='form-item-box' >
+          <view class='form-item-title'>
+            微信
+          </view>
+          <view class='form-item-model'>
+						<view bindtap='inputOn' class="{{managerData.wechat == null ||  managerData.wechat == '' ?'input-placeholder-class':'form-item-model-input'}}" data-maxL='20'
+						 data-id='wechat' data-type="text" data-title="{{inputList[5].title}}" data-value="{{managerData.wechat}}" >{{managerData.wechat==null || managerData.wechat== ''?inputList[5].title:managerData.wechat}}</view>
+          </view>
+        </view>
+				<view class='form-item-box' >
+					<view class='form-item-title'>
+						邮箱
+					</view>
+					<view class='form-item-model'>
+						<view bindtap='inputOn' class="{{managerData.email == null ||  managerData.email == '' ?'input-placeholder-class':'form-item-model-input'}}" data-maxL='64'
+						data-id='email' data-type="text" data-title="{{inputList[6].title}}" data-value="{{managerData.email}}" >{{managerData.email==null || managerData.email== ''?inputList[6].title:managerData.email}}</view>
+					</view>
+				</view>
+        <view class='form-item-box' >
+          <view class='form-item-title'>
+            所在地区
+          </view>
+          <view class='form-item-model'>
+            <picker style='margin-right: 0' mode="region" bindchange="bindRegionChange" value="{{region}}">
+              <view class="picker">
+                <view class='address-city-true' wx:if="{{region[0] != region[1]}}">{{region[0]}}{{region[1]}}{{region[2]}}</view>
+                <view class='address-city-true' wx:if="{{region[0] == region[1]}}">{{region[0]}}{{region[2]}}</view>
+                <view class='input-placeholder-class' style='margin-right:0' wx:if="{{region[0] == ''}}">请选择省市区</view>
+                <view><image style='width:16rpx;height:26rpx;margin-left:30rpx;' src='../../../../image/img/path.png'></image></view>
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class='item-address-box' >
+          <view class='form-item-title'>
+            详细地址
+          </view>
+          <view class='form-item-model'>
+            <view  bindtap='textareaOn' 
+             class="{{managerData.address == null || managerData.address == ''?'input-placeholder-class':'address-box'}}"
+						 data-id='address' data-maxLength="36" 
+             data-title="{{textareaList[0].title}}"  
+             data-value="{{managerData.address}}">{{managerData.address==null || managerData.address== ''?textareaList[0].text:managerData.address}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='form-item-introduce'  >
+        <view class='content-introduce-title'><text style='margin-right:25rpx;'>亮点介绍</text>(不超过45字)</view>
+        <view class='content-introduce-content'>
+        <view  bindtap='textareaOn' class="{{managerData.profile == null || managerData.profile == ''?'textarea-placeholder-class':'textarea-txt'}}"
+				 data-id='profile' data-maxLength="45" 
+         data-title="{{textareaList[1].title}}" 
+         data-value="{{managerData.profile}}">{{managerData.profile==null || managerData.profile== ''?textareaList[1].text:managerData.profile}}</view>
+        </view>
+      </view>
+      <view class='form-item-introduce'>
+        <view class='content-introduce-title'>我的标签</view>
+        <view class='content-introduce-tag'>
+          <view class='tag-box' bindtap='bindTagAddErr' wx:if="{{managerData.key_word.length != 0}}" wx:for="{{managerData.key_word}}" wx:key="{{index}}" data-id='{{index}}'>{{item}}</view>
+          <view class='tag-add' bindtap='inputOn' data-maxL='10' data-id='key_word' data-type="text" data-title="添加标签">
+            <image class='tag-add-img' src='../../../../image/img/tagadd.png'></image>
+          </view>
+        </view>
+      </view>
+      <view class='form-item-introduce'  >
+        <view class='content-introduce-title'>个人简介</view>
+        <view class='content-introduce-content'>
+        <view  bindtap='toBiginput' class="{{managerData.introduce == null || managerData.introduce == ''?'textarea-placeholder-class':'textarea-txt'}}"
+				 data-id='introduce' data-maxLength="190" 
+         data-title="{{textareaList[2].title}}" 
+         data-value="{{managerData.introduce}}"><text>{{managerData.introduce==null || managerData.introduce== ''?textareaList[2].text:managerData.introduce}}</text></view>
+        </view>
+      </view>
+      <view class='division'></view>
+      <view wx:if="{{guidance}}" class="guidance-box" style='bottom:{{bm+114}}rpx'>
+        <view class="guidance-triangle guidance-triangle-bottom"></view>名片已创建，完善内容后，看看哪些人对你感兴趣吧</view>
+    </scroll-view>
+    <view class='bottom-box' style='bottom:{{bm}}rpx'>
+      <form wx:if="{{confirmText}}" report-submit="true" bindsubmit="cardSave">
+        <button form-type="submit" class='bottom-button'>
+          <text style='font-size:32rpx;color:#333'>完成</text>
+        </button>
+      </form>
+      <form wx:else report-submit="true" bindsubmit="cardSave">
+        <button form-type="submit" class='guidance-button' style="margin:6rpx 50rpx;">
+          <text style='font-size:32rpx;color:#cfae82'>完成创建</text>
+        </button>
+      </form>
+    </view>
+  </view>
+</view>

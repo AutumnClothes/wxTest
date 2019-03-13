@@ -1,0 +1,294 @@
+<view>
+	<view class='top_box' style='height:{{cH}}rpx'>
+		<top-box
+		 wx:if="{{needBack}}"
+		 text="资讯阅读"
+		 bindback="bindback"
+		 backmethod='back'
+		 backBox
+		 delta="1"
+		/>
+		<top-box
+		 wx:else
+		 text="资讯阅读"
+		 bindback="bindback"
+		 backmethod='back'
+		 delta="1"
+		/>
+	</view>
+	<view class='meng' wx:if="{{shareShow}}" style='bottom:{{bm+100}}rpx;z-index:998;background-color:rgb(0,0,0);opacity:0.4'></view>
+  <view id="share-box" style="display:{{shareShow?'block':'none'}}">
+    <view class="share" style='bottom:{{bm+98}}rpx'>
+      <form report-submit="true" data-formkey='wx' bindsubmit="shareBind">
+        <button form-type="submit" open-type="share" class="share-item">
+          <view class="share-image">
+            <image style="width:60rpx;height:48rpx;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAnCAYAAABJ0cukAAAEMElEQVRYhcXZe6xcUxTH8c+djFuPKhdJVT2a9g9uvaNBH6gIIaqkRAR/oNQzoqqJIK2GP4hXRDwaJVH84VESjyZUX0iJR8SVqJaSevaWaqtUS1v+WDPu3Mk5557pnKlvMpmzz6xZZ6199tn7t/Zpm/TSuRrgUJyCE3EIBmEA2rAOq7Acn2AB3sfWRi7QKG05EtgP1+ASDG7QfzeewSP4utHg8lDK+K0/7sFXuFXjwcNATMEyzKq0CyUtgePxGW7CLgVcp4yJWIoLC/D3H0kJXIy3MaTIC1XowLO4Tzw3TVOfwEWYjZ2KcJ7BjXhcAUnUJjAaTxbhNCcTMa1ZJ9UE+otb255i9z2uxEjcjC19+F0qhuJI3J1hNw1j8gabRLnyPRUHpdhsw8liNiLm9iG4KsX+D4zF6hr7I3F6gm0JM3F45ToNUxK9f32Gze9YUXfuiwz7lXqCr/J5hv1wnJfxeyYljMeeGTYDcGlNu4wJGfadevf2rjijjzgu7+P3VMo4M4fdE7hM9OQoISnSaMNczMO3YvgNS7Bbi1/wG/ZHP2zOG3iVMo7KaTu68slDG06rO7cBL+MVLMFPOX1lUhbZt5J1uAuPit6Gg8WwOkxorb3wN9aI5+0jLBbPXyZlMcZbxetivu+uXGdKpd2Z47+b8BoeEsogkRLWNx1mMnfgLBH8RKFG75UveNhZzE6L8aaUab6kZ34vkulikeoQ434W9m7C36noEotjL0pioSmS50Tv74E3cE5BfgfgadxQe7IkeqgoVuFqIQbnYkSBvqvcr0YFlLAQXxbk/E4xv88Q60Uaf+bwtSnlfBsexNFEAttwW/4YU1kr1OxQIZeT2IDjxOo8HhsTbLbhfFFIjcCPCTbteIAeNfq85ofSHNGz10pXtW/hg8rxq5ifYLMcL1SOPxYqOYmTMKa2HrhCczPSwsp3ljAbpWfh7JS8sg/FsZXjQRiX4e+Cck1jjRBh86VL6yy6ROF/YIbNQKFkvxHbMuUEm3a8I+7EMNk1+Zj6knKF6JWufDH3olu+Ono3ISGSgq/SXrHpa0NhWFJR/4OopNLGXhp/iYdzR9IvbVtlo8YXuA782lw8DbM6a2Or0SppuBjfLd1KrOPDtHG4L06oaS8S+qZL1A/HiFnkAD0aZx9RD7+nyUK9AeakJTBBrBGLcbtIoMqiunY9s+2YBL7Di2lDaKAoBcfKDjaJ2Vq0kVvHVGxKS2C6xgOvslmIrX+28/95eEqo3szd6WaYh1ta5HsBJlUbrUqAqINnKPZOLMDZYs1BaxMgJoBxok5olllC6vQq9FudAFHYHIGHbce+Tw3vip2LXuyIBOBnXCeU6GQxPacVNVvxKR7Te0syUZXmeUfWKspCbQ4WMmS90GEr9RQ61Tc707G7WCw31zv5v9gi3p0t68NmphCWk4UCWFJr8C9T+M6kuMZxhwAAAABJRU5ErkJggg=="
+            />
+          </view>
+          <view>微信</view>
+        </button>
+      </form>
+      <form report-submit="true" data-formkey='pyquan' bindsubmit="posterPre">
+        <button form-type="submit" class="share-item">
+          <view class="share-image">
+            <image style="width:50rpx;height:50rpx;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAEi0lEQVRYhbXZW2gcVQDG8f9Ot0nD9hJGJF5Ss6xW+qDsprVpVLSJUfESu3XJgxUKorM7gqBQy/og+hIRoQrVp6ZbRRAKQlyKCpUqyaZK24iVjUlRqBnaF2kQ0rFpi0ltx4czk0yWnemZme0HIZmzZ878mDOz55IYITM/kEsAfcAjwGZgA9AKrLarXAQuAGeAKnAKONI8XP4nzPXiIZF7gEFglU+1tfZPB/C4XVYFOjXdzAATB4daLdlrKrIVraK6xSqqn1pF9TagBPwme64rMfv358Cvmm72yZ54Q6hVVFdbRXU/MA68DPzUlKqsAZ4Efg5uXUwG+EHTzUOabqqRoFZRvR/RXTpLd+NuoGJje4HRCFiAnUBV083NoaBWUe0DTtiw2jhYFegnOnY9MKbp5lOBoFZR7QWOAAmfxhuNTQBfa7q5XQpqFdU0cBhYKdF4WOycR/lK4EtNNx/whVpFtdVGrpW8IITDXvP5bBVQ1nSz1RMKfAIkAyCduLFPA9+EaMOd9bZlMYtQ+7ncFaFxB9sODBAdu0vTzW3OgfuOfhixYRDYsaZU5S4ag33D+SMOYBXVDLACmAAsIMx4HGdpnN/XlKq8uGD0DADDwHMh2psGXncOYj4VG5L5gVwTS9iJ5uFyRtPNCrDN57RpoGe2nTlgZ/md1v1x62RbAjiGuKNBcwJ4LdY9c92rQvNweWF+IOc8Bm0SbbqRR4GNuUHzszhiqrYpBHIUeNMPWYN9HngvILLLLn80DmwNieyPdc9ckT2hebh8BdhtH9Yb8byQAA8piEnvTUXWSe2oNwU86IEE6FSAewNcoBHI2kwBj822s0B9JNjQWyQbHAX6Sy2JUKsCj8ggAVQFuXHdQd4BHGqMURoJsEZmKeJGVpDvAb9MIo8ExBDqNeWqh7wTmI/u5JUgSOCqgljSyiIbktl2WpBHAvylINbdtblpyNyguY5gSIDTCvBLTaEUMl9NBp4nhEQCnFKAsaBIOx/kq8l1AZC3Aj+GQAIcj9ugy4g1epDu3goczleTz5YyZ30HgNyguQJ4F5hl+Y2RyX/AaAzAOtmmA19IIscKaaMnX01WEFM10Qs3wEZNHCDWPTN0YCJ1jwSyXnqBb/PVZH/pnJEADgIyj8QC0CRR7wWyynn3cLg3BNKJwHak+kvnjPcRL0yQlaxXviOrnIfla6a9ERt1sJOIfamLEdu7DrzlHCxCC2njOKLboqSR2H1klcUdw9qxfjdgRGgcGoOdAt52FyyDFtLGHLAD8XUVJVGwfwM7yCr/ekIBCmljEtiOeCujJAz2MvAMWWW69oO607xC2hgBniDc+t6dINgLQB9ZpXZI94YCFNLGMeBh4M8IUFjC/o43dhLYQlYZ92rEd+JcSBungU5gyFUssx1Zm17g+3xH6g+WY68BHwFd9bpbGmpjLxXSxqtAN2Kc9tvc9UsXcNSF/QrYRFbZU/vi1Iv0Qq2QNsaBngMTqQ12kd8ep1c2Ai+RVT5GbKJJJ/TeU76abEF0aTdib+A+4HaWHo1LiNnSGcQ/w0aAkVLm7NUw1/sfFSuA5KkpMh4AAAAASUVORK5CYII="
+            />
+          </view>
+          <view>朋友圈</view>
+        </button>
+      </form>
+    </view>
+    <form report-submit="true" bindsubmit="unshareShowBind" data-formkey='unshareShow'>
+      <button form-type="submit" class="bottom-close" style='height:{{bm+98}}rpx'>
+        <image style="width:14px;height:14px" src="../../../image/img/close.png" alt=""></image>
+      </button>
+    </form>
+  </view>
+	<view class='content' style='top:{{cH}}rpx'>
+		<view class="adviser-box flex_row">
+			<view bindtap="tomainpage" class="tomainpage-box">
+				<image class="adviser-portrait" src="{{headimg}}" />
+				<view class="info-box flex_1 flex_column" wx:if="{{companyPosition}}">
+					<view class="flex_row al_b">
+						<text class="name-box" style="margin-right:7rpx;">{{managerData.name}}</text>
+						<view class="pos_name">{{managerData.position}}</view>
+					</view>
+					<view class="pos_name">{{managerData.company}}</view>
+				</view>
+
+				<view class="info-box flex_1 flex_column" wx:else>
+					<view class="flex_row al_b">
+						<text class="name-box" style="margin-right:7rpx;">{{managerData.name}}</text>
+					</view>
+					<view class="pos_name">{{managerData.company}}{{managerData.position}}</view>
+				</view>
+			</view>
+			<form report-submit="true" data-formkey='consult' bindsubmit="consult">
+				<button form-type="submit" class="button-box form-button">咨询</button>
+			</form>
+			<form report-submit="true" data-formkey='consult' bindsubmit="accreditTo">
+				<button form-type="submit" data-formkey='share' class="button-img">
+					<image src='https://www.willsfintech.cn:9004/staticFile/image/column-share.png' style='width:50rpx;height:50rpx;' />
+				</button>
+			</form>
+		</view>
+		<scroll-view wx:if="{{exist}}" scroll-y style='height:{{sH}}rpx'>
+			<view style='width:100%;height:100rpx;' />
+			<view class="input-value">
+				<view wx:if="{{comment!=null}}" class=" bg_f5">
+					<view class="bg_triangle" />
+					<view class="bg_mark">
+						<image style="width: 34rpx;height: 28rpx;" src="../../../image/img/mark.png" />
+					</view>
+					<view class="bg_span">
+						<text >{{comment}}</text>
+					</view>
+				</view>
+      </view>
+      <view class="rich-text-title">{{articleTitle}}</view>
+      <view class="rich-text-from" wx:if='{{fromName}}'>来源：<text style="color:#576b95">{{fromName}}</text></view>
+      <view  bindtap="tomainpage" class='card-box'>
+        <view data-id="{{managerData.id}}" >
+          <image class='picture-box' src='{{headimg}}' mode='aspectFill'></image>
+          <view class='card-name-box'>
+            <view class='name-box'>{{managerData.name}}</view>
+            <view class='position-box' wx:if="{{!managerData.compose}}">{{managerData.position}}</view>
+          </view>
+            <view class='place-box' style='margin-left:0;'>{{managerData.company}}<text wx:if="{{managerData.compose}}">{{managerData.position}}</text></view>
+          <view class='contact-box'>
+            <view class='phone'>
+              <image style='width: 16rpx;height:20rpx;' src='/image/img/phone.png'></image>
+              {{managerData.phone?managerData.phone:'咨询顾问获得电话'}}
+            </view>
+            <view class='address'>
+              <image style='width: 16rpx;height:21rpx;' src='/image/img/address.png'></image>
+              <text class='address-text'>{{managerData.city?managerData.city:'时刻在客户身边'}}</text>
+            </view>
+          </view>
+          <view class='synopsis-box'>{{managerData.profile?managerData.profile:'您身边共享资讯的学习导师、随时助您理解的产品专家、了解客户全面需求的贴心管家'}}</view>
+        </view>
+      </view>
+      <view class="card-tap-text">点击名片查看顾问详情</view>
+			<rich-text nodes='{{contentJson}}' />
+			<view class="exemption-box">以上文字、图片均来源于网络，不代表本平台观点或立场，若存在作品、版权或其他内容侵权等问题，请联系删除。</view>
+      <view class='self-product-box' wx:if="{{productTj!=null}}">
+        <view  class='self-column-title'>
+          <view class='self-column-title-l'>推荐产品</view>
+          <form report-submit="true" bindsubmit="toproductList">
+            <button form-type="submit" data-formkey='more' class='self-column-title-r'>
+              <text>更多</text>
+              <image src='/image/img/path.png'></image>
+            </button>
+          </form>
+        </view>
+        <view>
+          <!--一个关键词-->
+          <view bindtap="toproduct" data-id="{{productTj.articleid}}" wx:if="{{productTj.style == '1'}}" class='product-box-card'>
+            <view class='product-title-card product-title-flex'><text style="text-align:center">{{productTj.title}}</text></view>
+            <view style='height:212rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+              <view class='product-bright-card'>
+                <view class='product-bright-ite-card' >
+                  <view class='product-bright-ite-num-card'>{{productTj.key1}}</view>
+                  <view class='product-bright-ite-txt-card'>{{productTj.keyp1}}</view>
+                </view>
+              </view>
+              <view class='product-tag-card'>
+                <view class='product-tag-ite-card' wx:for='{{productTj.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+            </view>
+            <view class='producr-details-card'>{{productTj.profile}}</view>
+          </view>
+          <!--俩个关键词-->
+          <view bindtap="toproduct" data-id="{{productTj.articleid}}" wx:elif="{{productTj.style == '2'}}" class='product-box-two-card'>
+            <view class='product-title-two product-title-flex' ><text style="text-align:center">{{productTj.title}}</text></view>
+            <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+              <view class='product-tag-two'>
+                <view class='product-tag-ite-two' wx:for='{{productTj.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+              <view class='product-bright-two-card'>
+                <view class='product-bright-ite-two-card' style='border-right:1rpx solid #e5e5e5'>
+                  <view class='product-bright-ite-num-two' style="color:#ff523b">{{productTj.key1}}</view>
+                  <view class='product-bright-ite-txt-two'>{{productTj.keyp1}}</view>
+                </view>
+                <view class='product-bright-ite-two-card'>
+                  <view class='product-bright-ite-num-two' >{{productTj.key2}}</view>
+                  <view class='product-bright-ite-txt-two'>{{productTj.keyp2}}</view>
+                </view>
+              </view>
+            </view>
+            <view class='producr-details-two-card'>{{productTj.profile}}</view>
+          </view>
+          <!--仨关键词-->
+          <view bindtap="toproduct" data-id="{{productTj.articleid}}" wx:elif="{{productTj.style == '3'}}" class='product-box-the-card'>
+            <view class='product-title-the product-title-flex'><text style="text-align:center">{{productTj.title}}</text></view>
+            <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+              <view class='product-tag-the'>
+                <view class='product-tag-ite-the' wx:for='{{productTj.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+              <view class='product-bright-the-card'>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the-card' style="color:#ff523b">{{productTj.key1}}</view>
+                  <view class='product-bright-ite-txt-the'>{{productTj.keyp1}}</view>
+                </view>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the-card' >{{productTj.key2}}</view>
+                  <view class='product-bright-ite-txt-the'>{{proproductTjduct.keyp2}}</view>
+                </view>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the-card' >{{productTj.key3}}</view>
+                  <view class='product-bright-ite-txt-the'>{{productTj.keyp3}}</view>
+                </view>
+              </view>
+            </view>
+            <view class='producr-details-the-card'>{{productTj.profile}}</view>
+          </view>
+          <!--图文-->
+          <view bindtap="toproduct" data-id="{{productTj.articleid}}" wx:elif="{{productTj.style == '4'}}" class='product-img-card'>
+            <view class='product-img-content-card'>
+              <view class='product-img-title-box'>
+                <view class='product-img-title-card'><text>{{productTj.title}}</text></view>
+              </view>
+              <view class='product-img-text-box'>
+                <view class='product-img-text-card'>{{productTj.profile}}</view>
+              </view>
+              <view class='product-img-tag-card'>
+                <view class='product-img-tag-ite-card' wx:for="{{productTj.tagsarr}}" wx:key="{{index}}">{{item}}</view>
+              </view>
+            </view>
+            <image bindtap="imgobjImg" class='product-img-img-card' src='{{productTj.imgurl}}'></image>
+          </view>
+        </view>
+      </view>
+      <view style='width:100%;height:100rpx'></view>
+      <form wx:if='{{showCreateButton}}' report-submit="true" bindsubmit="addFreecard">
+				<button class='accredit-button accredit-button_one' form-type="submit" data-formkey='freecard'>免费创建理财顾问专业名片</button>
+			</form>
+		</scroll-view>
+		<view wx:else class='default-fzf' style='height: {{sH}}rpx;'>
+			<view class='chat-none-img'>
+				<image src='https://www.willsfintech.cn:9004/staticFile/image/latent-none.png' style='width: 179rpx;height: 185rpx;' />
+				<view style='margin-top:20rpx'>文章已删除 ! </view>
+			</view>
+		</view>
+	</view>
+	<view class='canvas-box'>
+    <canvas canvas-id="viewCanvas" style="width:750px;height:{{canvasHeight}}px"></canvas>
+  </view>
+	<view class="meng" wx:if="{{accreditType == 'toget' || accreditType == 'toset'}}" />
+	<view class='accredit' style="display: {{accreditType == 'toget' || accreditType == 'toset'? 'block' : 'none'}};">
+		<view class='accredit-box'>
+			<view style="display: {{accreditType == 'toget' ? 'none' : 'block'}};" class='accredit-close' bindtap='closeaccredit'>
+				<image src='../../../image/img/close.png' style='width:18rpx;height:18rpx;' />
+			</view>
+			<view class='accredit-title'>需要您的授权</view>
+			<view class='accredit-txt'>仅授权微信头像、微信昵称,授权后,您可以：</view>
+			<view class='accredit-item-box'>
+				<view class='accredit-txt-item'>
+					<view class='dian'>1</view>
+					获取名片
+				</view>
+				<view class='accredit-txt-item'>
+					<view class='dian'>2</view>
+					咨询顾问
+				</view>
+				<view class='accredit-txt-item'>
+					<view class='dian'>3</view>
+					阅读文章
+				</view>
+				<view class='accredit-txt-item'>
+					<view class='dian'>4</view>
+					查看产品
+				</view>
+			</view>
+			<form  report-submit="true" bindsubmit="accreditTo">
+				<button
+        class='accredit-button'
+				 form-type="submit"
+				 data-formkey='getUserInfo'
+				 style="display: {{accreditType == 'toget' ? 'flex' : 'none'}};"
+				 bindtap="closeaccredit"
+				 lang="zh_CN"
+				 bindgetuserinfo='onGotUserInfo'
+				 open-type="getUserInfo"
+				>前往授权
+				</button>
+				<button
+        class='accredit-button'
+				 form-type="submit"
+				 data-formkey='getUserInfo'
+				 style="display: {{accreditType == 'toset' ? 'flex' : 'none'}};"
+				 bindtap="closeaccredit"
+				 bindopensetting="opensetting"
+				 lang="zh_CN"
+				 open-type="openSetting"
+				>前往授权
+				</button>
+			</form>
+		</view>
+	</view>
+
+	<view wx:if="{{showOnlaunch && accreditType==null}}">
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one" style='padding-bottom:40rpx'>
+        <view bindtap="" class='guidance-close'>
+				<form report-submit="true" bindsubmit="closeOnlaunch" data-formkey='vipright'>
+            <button  form-type="submit"><image src="../../../image/img/close.png" class='guidance-close-img'/></button>
+          </form>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/mem-guide-fb.png" class='mem-guide-position' style='width:610rpx;height:542rpx;'/>
+        <image class="mem-guide-portrait" src="{{headimgbig}}"/>
+        <view class="guidance-box-one-text" style='width:520rpx;margin-top:65rpx'>
+          <text style='font-size:34rpx;font-weight:500;color:#333'>{{managerData.name}}为您服务</text>
+          <text class="guidance-box-one-text-two">正在查看“{{title}}”</text>
+        </view>
+        <view class='guidance-bottom-button'>
+          <form report-submit="true" bindsubmit="closeOnlaunch" data-formkey='vipright'>
+            <button class='guidance-button guidance-button_one' form-type="submit">立即查看</button>
+          </form>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

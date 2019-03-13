@@ -4,16 +4,17 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.2.4",
-	"appid": "wx0337b83b43d6fb7e",
-	"projectname": "qytest",
+	"libVersion": "2.3.0",
+	"appid": "wxe69e36171867e9c1",
+	"projectname": "MiniProgramH5",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -24,13 +25,39 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 1,
+			"list": [
+				{
+					"id": 0,
+					"name": "userData",
+					"pathName": "pages/clienta/protag/tagdetail/tagdetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "new",
+					"pathName": "pages/homeposter/homeposter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "new",
+					"pathName": "pages/accredit/accredit",
+					"query": "sharefrom=28&guidance=1",
+					"scene": null
+				}
+			]
 		}
 	}
 }

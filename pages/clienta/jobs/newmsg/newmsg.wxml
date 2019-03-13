@@ -1,0 +1,144 @@
+<!--pages/clienta/jobs/newmsg/newmsg.wxml-->
+<view class='container'>
+  <top-box text="资讯" backBox="true" delta="1"></top-box>
+  <view class='content' style='top:{{cH}}rpx'>
+    <view class='search-box'>
+      <image class='search-img' src='/image/img/search.png'></image>
+      <input bindinput="searchinput"></input>
+      <!-- <form report-submit="true" data-formkey='msgadd' bindsubmit="bindAdd" style='margin:0 auto'>
+        <button form-type="submit" class='msg-img-button'>
+          <image class='msg-img' src='https://www.willsfintech.cn:9004/staticFile/image/msg.png'></image>
+        </button>
+      </form> -->
+      <form report-submit="true" data-formkey='tag' bindsubmit="totags" >
+        <button form-type="submit" class="label-box" >标签</button>
+      </form>
+    </view>
+    <scroll-view scroll-y="{{scrolly}}" class='content-item-box' style='height:{{sH-100}}rpx'>
+      <view   class='content-ite-box' 
+      wx:for="{{list}}" wx:key="id" 
+      data-ind="{{index}}"  
+      bindtouchstart='touchS' bindtouchmove='touchM' bindtouchend='touchE'>
+        <view class="content-item" style='left:{{item.iteLeft}}rpx'>
+          <view style='display:flex' bindtap='toviewpage' data-id="{{item.id}}" data-ind="{{index}}">
+            <image class='content-item-img' lazy-load mode='aspectFill' src='{{item.img}}'></image>
+            <view class='content-item-ite'>
+              <view class='content-item-text'>{{item.text}}</view>
+              <view class='content-item-time'>{{item.time}}</view>
+            </view>
+          </view>
+          <view class="statistics-box">
+            <view class="statistics-box-img-box">
+              <image wx:for='{{item.statisticsPps}}' wx:for-item="ite" wx:key='index' class="statistics-box-img" src="{{ite}}" mode="aspectFill"/>
+            </view>
+            <form report-submit="true" catchsubmit="statisticsTo" data-formkey='statistics' data-id="{{item.id}}" data-ind="{{index}}">
+              <button form-type="submit" class="statistics-box-btn">浏览记录</button>
+            </form>
+          </view>
+        </view>
+        <view bindtap="deleteArticle" data-id="{{item.id}}" class='content-del' style='left:{{item.iteLeft}}rpx'>删除</view>
+      </view>
+    </scroll-view>
+    <view class='bottom-box' style='bottom:{{bm}}rpx'>
+      <form report-submit="true" data-formkey='add' bindsubmit="bindAdd">
+        <button form-type="submit" class='bottom-button'>
+          <image src='../../../../image/img/common-add.png' style='width:32rpx;height:32rpx;margin-right:12rpx;'></image>
+          <text style='font-size:32rpx;color:#333'>新增资讯</text>
+        </button>
+      </form>
+    </view>
+  </view>
+  <view class='meng' wx:if="{{addBoxShow || editButton}}" bindtap='clipboardClose'></view>
+  <view class='edit-button-box' wx:if="{{addBoxShow}}">
+    <form report-submit="true" data-formkey='msgclose' bindsubmit="clipboardClose" >
+      <button form-type="submit" class='text-add-close'>
+        <image class='text-add-img' src='../../../../image/img/close.png'></image>
+      </button>
+    </form>
+    <form report-submit="true" data-formkey='edit' bindsubmit="editCreate">
+      <button form-type='submit' class='edit-button' style='border-right:1rpx solid rgb(232, 232, 232) !important'>
+        <image style='width:66rpx;height:64rpx;margin:2rpx;' src='https://www.willsfintech.cn:9004/staticFile/image/creation.png'></image>
+        <view class='edit-button-txt'>开始创作</view>
+      </button>
+    </form>
+    <form report-submit="true" data-formkey='remark' bindsubmit="editBind">
+      <button form-type='submit' class='edit-button'>
+        <image style='width:68rpx;height:68rpx;' src='https://www.willsfintech.cn:9004/staticFile/image/comment.png'></image>
+        <view class='edit-button-txt'>点评与推荐</view>
+      </button>
+    </form>
+    <view wx:if="{{course3}}" class="guidance-box guidance-box_edit">
+      <view class='guidance-triangle guidance-triangle-bottom guidance-triangle_edit'></view>点击新增资讯
+    </view>
+  </view>
+  <view class='text-add-box' style="display:{{editButton?'block':'none'}}">
+    <form report-submit="true" data-formkey='clipboardClose' bindsubmit="clipboardClose" >
+      <button form-type="submit" class='text-add-close'>
+        <image class='text-add-img' src='../../../../image/img/close.png'></image>
+      </button>
+    </form>
+    <view class='text-add-title'>
+      添加文章链接
+    </view>
+    <view class='clipboard-box' bindtap='clipboard' bindtouchstart='clipboardS'>
+      <text class='clipboard-show' wx:if="{{clipboardShow}}">{{clipboardData}}</text>
+      <text wx:else>粘贴文章链接地址，推荐使用微信公众号文章链接</text>
+    </view> 
+    <form report-submit="true" data-formkey='save' bindsubmit="bindSave" >
+      <button form-type="submit" class='save-box' >
+        保存
+      </button>
+    </form>
+    <form report-submit="true" data-formkey='guide' bindsubmit="newmsgNone" >
+      <button form-type="submit" class='text-add-bottom' >
+        <view>如何获取公众号文章链接？</view>
+        <image style='width: 18rpx;height: 12rpx;' src='../../../../image/img/clipboard-path.png'></image>
+      </button>
+    </form>
+    <view wx:if="{{course3}}" class='guidance1-box' style='bottom:{{-300}}rpx'>
+    <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:134rpx;height:141rpx;'/>
+    <view class="guidance-box-one-text" style='width:400rpx;margin-left:14rpx;text-align:center;margin-top:0'>
+      <text style='font-size:34rpx;font-weight:500'>关闭小程序-复制你想要转发的微信公众号文章链接-回到这里-点击保存</text>
+    </view>
+   </view>
+  </view>
+  <view wx:if="{{guidance1}}" class="guidance-box guidance-box_four guidance-box_four-one" style='bottom:{{bm+100}}rpx'>
+    <view class='guidance-triangle guidance-triangle-bottom guidance-triangle_four-bottom guidance-triangle_four-bottom-one'></view>点击新增资讯</view>
+  <view wx:if="{{course4}}" class="guidance-box guidance-box_four" style='top:{{cH+20}}rpx;right:50%;transform: translateX(50%);'>
+    <view class='guidance-triangle guidance-triangle-bottom guidance-triangle_four-bottom' style='right:50%;transform: translateX(50%);'></view>点击刚刚新增的资讯</view>
+  <view wx:if="{{guidance1}}" class='guidance1-box guidance1-box-shadow guidance1-box_one-newmsg'>
+    <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;'/>
+    <view class="guidance-box-one-text" style='width:400rpx;margin-left:14rpx;margin-top:0'>
+      <text style='font-size:32rpx;font-weight:500'>转发文章那么多，客户看了吗？体现了你的专业吗？可以带来客户吗？</text>
+      <text style='margin-top:14rpx'>"YES"</text>
+      <text style='margin-top:14rpx'>新增一篇资讯试试吧</text>
+    </view>
+  </view>
+  <view wx:if="{{course4}}" class='guidance1-box'>
+    <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;'/>
+    <view class="guidance-box-one-text" style='width:400rpx;margin-left:14rpx;margin-top:0'>
+      <text style='font-size:32rpx;font-weight:500'>转发文章那么多，客户看了吗？体现了你的专业吗？可以带来客户吗？</text>
+      <text style='margin-top:14rpx'>"YES"</text>
+      <text style='margin-top:14rpx'>推荐一篇资讯试试吧</text>
+    </view>
+  </view>
+  <view wx:if='{{course3Done}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one guidance-box-padding">
+        <view bindtap="closeDone" class='guidance-close'>
+          <image src="../../../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;margin-top:25rpx'/>
+        <view class="guidance-box-one-text">
+          <text style='font-size:34rpx;font-weight:500'>{{donetitle}}</text>
+          <text style='margin-top:24rpx;text-align:center;color:rgb(118,113,113)'>{{donedesc}}</text>
+        </view>
+        <form report-submit="true" bindsubmit="toNextButton" data-formkey='guidanceDone'>
+          <button class='guidance-btn' style='width:485rpx' form-type="submit">{{donebutton}}</button>
+        </form>
+        <view class='guidance-bottom'>{{donerate}}</view>
+      </view>
+    </view>
+  </view>
+</view>

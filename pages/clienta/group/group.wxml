@@ -1,0 +1,148 @@
+<!--pages/clienta/group.wxml-->
+<view class='container'>
+  <top-box text="{{groupname}}" backBox delta="{{delta}}"></top-box>
+  <view class='content' style='top:{{cH}}rpx'>
+    <view class='group-box'>
+      <view class='group-portrait-box' wx:for="{{groupList}}" wx:key="{{index}}" hidden='{{index > 11}}'>
+        <!-- <view class='group-portrait' style="background-image: url({{item.portraitpath}});"></view> -->
+        <image class='group-portrait' src='{{item.portraitpath}}' mode='aspectFill'></image>
+      </view>
+      <view bindtouchend="toset" class='group-install'>设置</view>
+    </view>
+    <scroll-view bindscrolltoupper="scrolltoupper" scroll-y style='height:{{scrollBottom}}rpx' scroll-into-view="{{chrildId}}">
+      <view class='liubai'></view>
+      <view class='content-box' wx:key="{{index}}" wx:for="{{message}}">
+        <template is="content" data='{{item}}'></template>
+      </view>
+      <view style='width:100%;height:1rpx' id='liubaiBottom'></view>
+    </scroll-view>
+    <view class='input-bottom' style='bottom:{{inputBottom}}px'>
+      <image class='input-bottom-img' src='https://www.willsfintech.cn:9004/staticFile/image/heart.png' bindtouchstart='IncludedBind'></image>
+      <view style='float:left' class='input-bottom-center'>
+        <textarea style="display:{{tareaShow?'block':'none'}}" focus="{{tareaShow}}" bindinput='inputBind' confirm-type="send" confirm-hold="true" adjust-position="{{false}}" maxlength='-1' value="{{inputText}}" bindfocus="inputOn" bindblur="inputOut" auto-height fixed show-confirm-bar="{{false}}"></textarea>
+        <view style="display:{{tareaShow?'none':'block'}}" bindtap='textareaShow' class="textarea-view"></view>
+      </view>
+      <view wx:if="{{inputTrue}}" bindtap='inputconfirm'>
+        <view class='input-bottom-send'>发送</view>
+      </view>
+      <image wx:else class='input-bottom-img' bindtouchstart='extendBind' src='https://www.willsfintech.cn:9004/staticFile/image/realchatadd.png'></image>
+      <view class='meng-box' wx:if="{{mengShow}}" bindtouchstart='extendBind'></view>
+    </view>
+    <view class='input-extend' style="display:  {{ extendHid ? 'block' :  'none' }};bottom:{{bm}}rpx">
+      <view bindtap="menuclick" data-id="{{item.id}}" class='input-extend-item' wx:for="{{inputExtend}}" wx:key="{{index}}">
+        <view class='input-extend-icon' style="background-image:url({{item.img}});"></view>
+        {{item.text}}
+      </view>
+    </view>
+
+    <template name="content">
+      <view class='news-text-box' id="id{{item.timeline}}">
+        <view bindtap="resend" wx:if="{{item.senderr}}" data-content="{{item.content}}" data-timeline="{{item.timeline}}" class='send-err'>
+          <image src='../../../image/img/senderr.png' class='send-err-img'></image>
+        </view>
+        <view class='news-two' wx:if="{{item.contenttype == 'text'}}" data-content="{{item.content}}" bindlongtap="longTap">
+          {{item.content}}
+        </view>
+        <view class='news-time' wx:elif='{{item.contenttype == "create"}}'>创建群发</view>
+        <view wx:elif="{{item.contenttype=='img'}}">
+          <image class='news-img' lazy-load mode='aspectFit' lazy-load src="{{item.imgContent}}" data-img-path='{{item.imgContent}}' bindtap='previewImagebind' />
+        </view>
+				<view wx:elif="{{item.contenttype=='article'}}" class='news-box'>
+					<view class='msg-box product-card'>
+            <image mode='aspectFill' src='{{item.imgurl}}' style='min-width:140rpx;min-height:140rpx;max-width:140rpx;max-height:140rpx;margin-right:22rpx;'></image>
+            <view>
+              <view class='msg-title'>{{item.content.title}}</view>
+              <view class='msg-time'>{{item.content.timestr}}</view>
+            </view>
+					</view>
+				</view>
+				
+        <view wx:elif="{{item.contenttype=='product' && item.content.style =='1'}}" class='news-box'>
+          <view class='product-box-card product-card'>
+            <view class='product-title-card'><text>{{item.content.title}}</text></view>
+            <view style='height:199rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+              <view class='product-bright-card'>
+                <view class='product-bright-ite-card' >
+                  <view class='product-bright-ite-num-card'>{{item.content.key1}}</view>
+                  <view class='product-bright-ite-txt-card'>{{item.content.keyp1}}</view>
+                </view>
+              </view>
+              <view class='product-tag-card'>
+                <view class='product-tag-ite-card' wx:for='{{item.content.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+            </view>
+            <view class='producr-details-card'>{{item.content.profile}}</view>
+          </view>
+        </view>
+
+       <view wx:elif="{{item.contenttype=='product' && item.content.style =='2'}}" class='news-box'>
+        <view class='product-box-two-card product-card'>
+          <view class='product-title-two' ><text>{{item.content.title}}</text></view>
+          <view style='height:204rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+            <view class='product-tag-two'>
+              <view class='product-tag-ite-two' wx:for='{{item.content.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+            <view class='product-bright-two-card'>
+              <view class='product-bright-ite-two-card' style='border-right:1rpx solid #e5e5e5'>
+                <view class='product-bright-ite-num-two' style="color:#ff523b">{{item.content.key1}}</view>
+                <view class='product-bright-ite-txt-two'>{{item.content.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-two-card'>
+                <view class='product-bright-ite-num-two' >{{item.content.key2}}</view>
+                <view class='product-bright-ite-txt-two'>{{item.content.keyp2}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-two-card'>{{item.content.profile}}</view>
+        </view>
+      </view>
+
+       <view wx:elif="{{item.contenttype=='product' && item.content.style =='3'}}" class='news-box'>
+        <view class='product-box-the-card product-card'>
+          <view class='product-title-the'><text>{{item.content.title}}</text></view>
+          <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+            <view class='product-tag-the'>
+              <view class='product-tag-ite-the' wx:for='{{item.content.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+            <view class='product-bright-the-card'>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the-card' style="color:#ff523b">{{item.content.key1}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.content.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the-card' >{{item.content.key2}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.content.keyp2}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the-card' >{{item.content.key3}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.content.keyp3}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-the-card'>{{item.content.profile}}</view>
+        </view>
+      </view>
+
+
+      <view wx:elif="{{item.contenttype=='product' && item.content.style =='4'}}"  class='news-box'>
+        <view class='product-img-card product-card'>
+          <view class='product-img-content-card'>
+            <view class='product-img-title-box'>
+              <view class='product-img-title-card'><text>{{item.content.title}}</text></view>
+            </view>
+            <view class='product-img-text-box'>
+              <view class='product-img-text-card'>{{item.content.profile}}</view>
+            </view>
+            <view class='product-img-tag-card'>
+              <view class='product-img-tag-ite-card' wx:for="{{item.content.tagsarr}}" wx:key="{{index}}">{{item}}</view>
+            </view>
+          </view>
+          <image bindtap="imgobjImg" class='product-img-img-card' src='{{item.content.imgurl}}'></image>
+        </view>
+      </view>
+
+      </view>
+    </template>
+  </view>
+
+</view>

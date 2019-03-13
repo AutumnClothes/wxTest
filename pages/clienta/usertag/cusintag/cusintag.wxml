@@ -1,0 +1,25 @@
+<view>
+  <top-box text="{{tagName}}" backBox="true" detal="1"></top-box>
+  <view class='content' style='top:{{cH}}rpx;'>
+    <view class='add-box'>
+      <view bindtap='bindAdd'>
+        <image  class='item-check' src="{{checkAdd? 'https://www.willsfintech.cn:9004/staticFile/image/checkon.png' :'https://www.willsfintech.cn:9004/staticFile/image/checkout.png'}}"></image>
+      </view>
+      <view>全选</view>
+    </view>
+    <scroll-view scroll-y style='height:{{sH}}rpx'>
+      <view class='scroll-item-box' wx:for="{{list}}" wx:key="{{index}}" data-ind="{{index}}" bindtap='itemBind'>
+        <view><image  class='item-check' src="{{item.check == 1? 'https://www.willsfintech.cn:9004/staticFile/image/checkon.png' :'https://www.willsfintech.cn:9004/staticFile/image/checkout.png'}}"></image></view>
+        <view class='item-box'>
+          <view class='item-portrait' style='background-image:url({{item.portraitpath}})'></view>
+          <view class='item-name'>{{item.name?item.name:item.nickname}}</view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='true-button-box' bindtap='bindTrue' style='bottom:{{bm}}rpx'>
+      <image src='../../../../image/img/grouptrue.png' style='width:34rpx;height:34rpx;margin-right:10rpx;'></image>
+      完成
+    </view>
+    <view class='Ixliubai' style='background-color:#fff' wx:if="{{apple}}"></view>
+  </view>
+</view>

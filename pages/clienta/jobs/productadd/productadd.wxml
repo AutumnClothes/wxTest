@@ -1,0 +1,164 @@
+<view>
+  <top-box text="新增产品" backBox="true" delta="1"></top-box>
+  <view class='content' style='top:{{cH}}rpx;border-top:1rpx solid #f0f1f6'>
+    <scroll-view scroll-y style='height:{{sH}}rpx'>
+      <!--封面编辑-->
+      <!-- <view class='product-cover' > -->
+      <view class='product-cover' wx:if="{{product.style == 1}}">
+        <view class='product-cover-meng' bindtap='coverAdd'></view>
+        <view class='product-box'>
+          <view class='product-title'>{{product.title}}</view>
+          <view class='product-border-box'>
+            <view class='product-bright'>
+              <view class='product-bright-ite' >
+                <view class='product-bright-ite-num' style="color:#ff523b">{{product.key1}}</view>
+                <view class='product-bright-ite-txt'>{{product.keyp1}}</view>
+              </view>
+            </view>
+            <view class='product-tag'>
+              <view class='product-tag-ite' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+          </view>
+          <view class='producr-details'>{{product.profile}}</view>
+        </view>
+      </view>
+      <view class='product-cover' wx:elif="{{product.style == 2}}">
+        <view class='product-cover-meng' bindtap='coverAdd'></view>
+        <view class='product-box-two'>
+          <view class='product-title-two' style='font-size:34rpx'>{{product.title}}</view>
+          <view class='product-border-box'>
+            <view class='product-tag-two'>
+              <view class='product-tag-ite-two' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+            <view class='product-bright-two'>
+              <view class='product-bright-ite-two' style='border-right:1rpx solid #e5e5e5'>
+                <view class='product-bright-ite-num-two' style="color:#ff523b">{{product.key1}}</view>
+                <view class='product-bright-ite-txt-two'>{{product.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-two'>
+                <view class='product-bright-ite-num-two' >{{product.key2}}</view>
+                <view class='product-bright-ite-txt-two'>{{product.keyp2}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-two' style='font-size:24rpx'>{{product.profile}}</view>
+        </view>
+      </view>
+      <view class='product-cover' wx:elif="{{product.style == 3}}">
+        <view class='product-cover-meng' bindtap='coverAdd'></view>
+        <view class='product-box-the'>
+          <view class='product-title-the' style='font-size:34rpx'>{{product.title}}</view>
+          <view class='product-border-box'>
+            <view class='product-tag-the'>
+              <view class='product-tag-ite-the' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+            <view class='product-bright-the'>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the' style="color:#ff523b">{{product.key1}}</view>
+                <view class='product-bright-ite-txt-the'>{{product.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the' >{{product.key2}}</view>
+                <view class='product-bright-ite-txt-the'>{{product.keyp2}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the' >{{product.key3}}</view>
+                <view class='product-bright-ite-txt-the'>{{product.keyp3}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-the' style='font-size:24rpx'>{{product.profile}}</view>
+        </view>
+      </view>
+      <view class='product-cover' wx:elif="{{product.style == 4}}">
+        <view class='product-cover-meng' bindtap='coverAdd'></view>
+        <view class='product-img'>
+          <view class='product-img-content'>
+            <view class='product-img-title-box'>
+              <view class='product-img-title'>{{product.title}}</view>
+            </view>
+            <view class='product-img-text-box'>
+              <view class='product-img-text'>{{product.profile}}</view>
+            </view>
+            <view class='product-img-tag'>
+              <view class='product-img-tag-ite' wx:for="{{product.tagsarr}}" wx:key="index">{{item}}</view>
+            </view>
+          </view>
+          <image class='product-img-img' src='{{product.imgurl}}'></image>
+        </view>
+      </view>
+      <!--俩个关键字-->
+      
+      <!--三个关键字-->
+      
+      <!--图文-->
+      
+      <!--内容编辑-->
+      <view class='add-box' style='margin-top:{{mT}}rpx' wx:if="{{show}}">
+        <view class='add-select-box' hidden='{{addShow}}'>
+          <view class='add-select-item add-select-img' style='border-right:none;' bindtap='additem' data-keys='img' data-ind="0">
+            <image class='add-select-item-img' src='../../../../image/img/compileimg.png'></image>
+            <text>图片</text>
+          </view>
+          <view class='add-select-item add-select-txt'  bindtap='additem' data-keys='txt' data-ind="0">
+            <image class='add-select-item-img' src='../../../../image/img/compiletxt.png'></image>
+            <text>文字</text>
+          </view>
+          <view class='add-fan'></view>
+        </view>
+        <view class='add-img'>
+          <image style='width:50rpx;height:50rpx;' src='https://www.willsfintech.cn:9004/staticFile/image/compileadd.png' ></image>
+        </view>
+      </view>
+      <view wx:else>
+        <view wx:for="{{list}}" wx:key="{{index}}">
+          <view>
+            <view class='item-box' style='width:{{item.imgWidth}}rpx;height:{{item.imgHeight}}rpx' wx:if="{{item.keys == 'img'}}"  >
+              <image class='item-box-close' data-ind='{{index}}' bindtap='closeitem' src='../../../../image/img/close.png'></image>
+              <image style='width:{{item.imgWidth}}rpx;height:{{item.imgHeight}}rpx' data-ind='{{index}}' bindtap='imgModify' data-img='{{item.src}}' src='{{item.src}}'></image>
+            </view>
+            <view class='txt-box item-box' wx:if="{{item.keys == 'txt'}}">
+              <image class='item-box-close' data-ind='{{index}}' bindtap='closeitem' src='../../../../image/img/close.png'></image>
+              <view bindtap="edittext" data-ind='{{index}}'><text>{{item.content}}</text></view>
+            </view>
+            <view class='add-box'>
+              <view class='add-select-box' hidden='{{item.addShow}}'>
+                <view class='add-select-item add-select-img' style='border-right:none;' bindtap='additem' data-keys='img' data-ind="{{index}}">
+                  <image class='add-select-item-img' src='../../../../image/img/compileimg.png'></image>
+                  <text>图片</text>
+                </view>
+                <view class='add-select-item add-select-txt'  bindtap='additem' data-keys='txt' data-ind="{{index}}">
+                  <image class='add-select-item-img' src='../../../../image/img/compiletxt.png'></image>
+                  <text>文字</text>
+                </view>
+                <view class='add-fan'></view>
+              </view>
+              <view class='add-img' data-ind="{{index}}" bindtap='addshow'>
+                <image style='width:50rpx;height:50rpx;' src='https://www.willsfintech.cn:9004/staticFile/image/compileadd.png' ></image>
+              </view>
+              <view wx:if="{{item.sort}}" class='sort-box'  bindtap='bindsort' data-ind='{{index}}'>
+                <image style='width:50rpx;height:50rpx;' src='https://www.willsfintech.cn:9004/staticFile/image/compilesort.png'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='bottom-box' style='bottom:{{bm}}rpx'>
+      <form report-submit="true" data-formkey='save' bindsubmit="productSave">
+        <button form-type="submit" class='bottom-button'>
+          <image style='width:32rpx;height:32rpx;margin-right:12rpx' src='../../../../image/img/grouptrue.png'></image>
+          <text>完成</text>
+        </button>
+      </form>
+    </view>
+  </view>
+  <view wx:if="{{guidance}}" class='guidance-box guidance-box_one' style='top:{{cH+400}}rpx'>
+    <view class='guidance-triangle guidance-triangle-top guidance-triangle_one' />点击编辑封面</view>
+  <form wx:if="{{guidance1}}" report-submit="true" data-formkey='save' bindsubmit="productSave">
+    <button form-type="submit" class='guidance-button' style='bottom:{{bm}}rpx'>
+      <image style='width:32rpx;height:32rpx;margin-right:12rpx' src='../../../../image/img/grouptrue.png'></image>
+      <text>完成</text>
+    </button>
+  </form>
+</view>

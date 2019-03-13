@@ -1,0 +1,9 @@
+  <!--dist/topbar/topbar.wxml-->
+<view class='top-box top-box-style' style='margin-top:{{cH}}rpx'>
+  <form report-submit="true" data-formkey='pageback' bindsubmit="backTo" data-to-delta="{{delta}}" wx:if="{{backBox}}">
+    <button form-type="submit" class="back" >
+      <image class='back-box' src='../../image/img/backpath.png'></image>
+    </button>
+  </form>
+  <view class='top-text-box' style='height:{{tH}}rpx;line-height:{{tH}}rpx'>{{text}}</view>
+</view>

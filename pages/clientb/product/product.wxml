@@ -1,0 +1,100 @@
+<view>
+  <top-box text="产品及服务"></top-box>
+  <view class='content' style='top:{{cH}}rpx'>
+    <scroll-view
+    wx:if="{{onload}}"
+    scroll-y style='height:{{sH}}rpx'>
+      <view class='liubai'></view>
+      <view wx:if='{{list.length != 0}}' wx:for="{{list}}" wx:key="id" bindtap="toRead" data-p="public" data-i="{{index}}">
+        <!--一个关键字-->
+        <view wx:if="{{item.style == '1' }}" class='product-box'>
+          <view class='product-title'>{{item.title}}</view>
+          <view class='product-border-box'>
+            <view class='product-bright'>
+              <view class='product-bright-ite'>
+                <view class='product-bright-ite-num' style="color:#ff523b">{{item.key1}}</view>
+                <view class='product-bright-ite-txt'>{{item.keyp1}}</view>
+              </view>
+            </view>
+            <view class='product-tag'>
+              <view class='product-tag-ite' wx:for='{{item.tagsarr}}' wx:key='ind' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+          </view>
+          <view class='producr-details'>{{item.profile}}</view>
+        </view>
+        <!--俩个关键字-->
+        <view wx:elif="{{item.style == '2' }}" class='product-box-two'>
+          <view class='product-title-two' style='font-size:34rpx'>{{item.title}}</view>
+          <view class='product-border-box'>
+            <view class='product-tag-two'>
+              <view class='product-tag-ite-two' wx:for='{{item.tagsarr}}' wx:key='ind' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+            <view class='product-bright-two'>
+              <view class='product-bright-ite-two' style='border-right:1rpx solid #e5e5e5'>
+                <view class='product-bright-ite-num-two' style="color:#ff523b">{{item.key1}}</view>
+                <view class='product-bright-ite-txt-two'>{{item.keyp1==null?"":item.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-two'>
+                <view class='product-bright-ite-num-two'>{{item.key2}}</view>
+                <view class='product-bright-ite-txt-two'>{{item.keyp2}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-two' style='font-size:24rpx'>{{item.profile}}</view>
+        </view>
+        <!--三个关键字-->
+        <view wx:elif="{{item.style == '3' }}" class='product-box-the'>
+          <view class='product-title-the' style='font-size:34rpx'>{{item.title}}</view>
+          <view class='product-border-box'>
+            <view class='product-tag-the'>
+              <view class='product-tag-ite-the' wx:for='{{item.tagsarr}}' wx:key='ind' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+            <view class='product-bright-the'>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the' style="color:#ff523b">{{item.key1}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the'>{{item.key2}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.keyp2}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the'>{{item.key3}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.keyp3}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-the' style='font-size:24rpx'>{{item.profile}}</view>
+        </view>
+        <!--图文-->
+        <view wx:elif="{{item.style == '4' }}" class='product-img'>
+          <view class='product-img-content'>
+            <view class='product-img-title-box'>
+              <view class='product-img-title'>{{item.title}}</view>
+            </view>
+            <view class='product-img-text-box'>
+              <view class='product-img-text'>{{item.profile}}</view>
+            </view>
+            <view class='product-img-tag'>
+              <view class='product-img-tag-ite' wx:for="{{item.tagsarr}}" wx:key="index">{{item}}</view>
+            </view>
+          </view>
+          <image class='product-img-img' src='{{item.imgurl}}'></image>
+        </view>
+      </view>
+      <view wx:if="{{list.length == 0}}" class='chat-none-box' style='height:{{sH-40}}rpx'>
+        <view class='chat-none-img'>
+          <image src='https://www.willsfintech.cn:9004/staticFile/image/productb-none.png' style='width: 273rpx;height: 169rpx;'></image>
+          <view style='margin-top:20rpx;text-align:center'>
+            <text>
+              顾问的产品与服务供不应求啦
+
+              联系顾问，获得最适合您的产品或服务吧
+            </text>
+          </view>
+        </view>
+      </view>
+      <view class='liubai'></view>
+    </scroll-view>
+  </view>
+</view>

@@ -1,0 +1,16 @@
+/* pages/accredit/accredit.wxss */
+.pageView{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.accredit-txt{
+  width:500rpx;
+  font-size: 34rpx;
+  text-align: center;
+  color: rgb(51,51,51)
+}
+.guidance-btn{
+  width:540rpx;
+}

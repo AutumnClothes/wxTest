@@ -1,10 +1,9 @@
 //地址
-var BASE_URL = 'https://www.baidu.com';
+var BASE_URL = 'http://132.232.181.134:8081/willsBus/EnterServlet';
 
 //报头
 var header = {
-  'content-type': '*',
-  'settingCode': '*'
+  'centent-type': 'application/json'
 }
 
 function getReq(url, params) {
@@ -13,7 +12,6 @@ function getReq(url, params) {
     title: '加载中',
   })
 
-  //构造函数promise
   var promise = new Promise((resolve, reject) => {
     //发起网络请求
     wx.request({

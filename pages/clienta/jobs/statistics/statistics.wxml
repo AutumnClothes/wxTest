@@ -1,0 +1,186 @@
+<!--pages/clienta\jobs\statistics/statistics.wxml-->
+<view>
+  <top-box text="浏览记录" backBox="true" delta="1"></top-box>
+  <view class="content" style="top:{{cH}}rpx">
+    <view class="statistics-top-card">
+      <!--一个关键词-->
+      <view wx:if="{{product.style == '1'}}" class='product-box-card'>
+        <view class='product-title-card product-title-flex'><text style="text-align:center">{{product.title}}</text></view>
+        <view style='height:212rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+          <view class='product-bright-card'>
+            <view class='product-bright-ite-card' >
+              <view class='product-bright-ite-num-card'>{{product.key1}}</view>
+              <view class='product-bright-ite-txt-card'>{{product.keyp1}}</view>
+            </view>
+          </view>
+          <view class='product-tag-card'>
+            <view class='product-tag-ite-card' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+          </view>
+        </view>
+        <view class='producr-details-card'>{{product.profile}}</view>
+      </view>
+      <!--俩个关键词-->
+      <view wx:elif="{{product.style == '2'}}" class='product-box-two-card'>
+        <view class='product-title-two product-title-flex' ><text style="text-align:center">{{product.title}}</text></view>
+        <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+          <view class='product-tag-two'>
+            <view class='product-tag-ite-two' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+          </view>
+          <view class='product-bright-two-card'>
+            <view class='product-bright-ite-two-card' style='border-right:1rpx solid #e5e5e5'>
+              <view class='product-bright-ite-num-two' style="color:#ff523b">{{product.key1}}</view>
+              <view class='product-bright-ite-txt-two'>{{product.keyp1}}</view>
+            </view>
+            <view class='product-bright-ite-two-card'>
+              <view class='product-bright-ite-num-two' >{{product.key2}}</view>
+              <view class='product-bright-ite-txt-two'>{{product.keyp2}}</view>
+            </view>
+          </view>
+        </view>
+        <view class='producr-details-two-card'>{{product.profile}}</view>
+      </view>
+      <!--仨关键词-->
+      <view wx:elif="{{product.style == '3'}}" class='product-box-the-card'>
+        <view class='product-title-the product-title-flex'><text style="text-align:center">{{product.title}}</text></view>
+        <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+          <view class='product-tag-the'>
+            <view class='product-tag-ite-the' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+          </view>
+          <view class='product-bright-the-card'>
+            <view class='product-bright-ite-the'>
+              <view class='product-bright-ite-num-the-card' style="color:#ff523b">{{product.key1}}</view>
+              <view class='product-bright-ite-txt-the'>{{product.keyp1}}</view>
+            </view>
+            <view class='product-bright-ite-the'>
+              <view class='product-bright-ite-num-the-card' >{{product.key2}}</view>
+              <view class='product-bright-ite-txt-the'>{{product.keyp2}}</view>
+            </view>
+            <view class='product-bright-ite-the'>
+              <view class='product-bright-ite-num-the-card' >{{product.key3}}</view>
+              <view class='product-bright-ite-txt-the'>{{product.keyp3}}</view>
+            </view>
+          </view>
+        </view>
+        <view class='producr-details-the-card'>{{product.profile}}</view>
+      </view>
+      <!--图文-->
+      <view wx:elif="{{product.style == '4'}}" class='product-img-card'>
+        <view class='product-img-content-card'>
+          <view class='product-img-title-box'>
+            <view class='product-img-title-card'><text>{{product.title}}</text></view>
+          </view>
+          <view class='product-img-text-box'>
+            <view class='product-img-text-card'>{{product.profile}}</view>
+          </view>
+          <view class='product-img-tag-card'>
+            <view class='product-img-tag-ite-card' wx:for="{{product.tagsarr}}" wx:key="{{index}}">{{item}}</view>
+          </view>
+        </view>
+        <image bindtap="imgobjImg" class='product-img-img-card' src='{{product.imgurl}}'></image>
+      </view>
+      <!--资讯-->
+      <view class='msg-box' wx:else>
+        <image src='{{newmsg.img}}' style='min-width:140rpx;min-height:140rpx;max-width:140rpx;max-height:140rpx;margin-right:22rpx;' mode='aspectFill' />
+        <view>
+          <view class='msg-title'>{{newmsg.title}}</view>
+          <view class='msg-time'>{{newmsg.scratchTime}}</view>
+        </view>
+      </view>
+    </view>
+    <view class='tab-box'>
+      <view class='tab-box-title'>
+        <form report-submit="true" data-formkey='interact' bindsubmit="tabBind" data-id="0">
+          <button form-type="submit" class="tab-box-title-item  {{curr == 0?'tab-box-title-item-true':''}}" >浏览情况</button>
+        </form>
+        <form report-submit="true" data-formkey='tags' bindsubmit="tabBind" data-id="1">
+          <button form-type="submit" class="tab-box-title-item {{curr == 1?'tab-box-title-item-true':''}}" >推荐情况</button>
+        </form>
+        <form report-submit="true" data-formkey='tags' bindsubmit="tabBind" data-id="2">
+          <button form-type="submit" class="tab-box-title-item {{curr == 2?'tab-box-title-item-true':''}}" >{{tagTitle}}</button>
+        </form>
+      </view>
+      <view class="{{curr == 0?'tab-box-solid-zero':''}} {{curr == 1?'tab-box-solid-one':''}} {{curr == 2?'tab-box-solid-two':''}} "></view>
+    </view>
+    <swiper current="{{ current }}" bindchange="swiperChange" style="height:{{sT}}rpx">
+      <swiper-item>
+        <scroll-view 
+          wx:if="{{viewData.length != '0'}}"
+          lower-threshold='50rpx'
+          scroll-y
+          style='height:{{sT}}rpx;'>
+          <view bindtap='dynamicBind' data-id='{{item.cid}}' class='dynamic' wx:for="{{viewData}}" wx:key="index">
+            <image src="{{item.portraitpath}}" class='dynamic-portrait' mode='aspectFill'/>
+            <view class='dynamic-time'>{{item.date}}</view>
+            <view class='dynamic-text'>
+              <text class="dynamic-name-text">{{item.cname}}</text><text>查看了{{item.times}}次</text>
+              <view class='dynamic-text-last'>来源：{{item.tcname}}</view>
+            </view>
+          </view>
+          <view class='liubai'></view>
+        </scroll-view>
+        <view wx:else class="statistics-default-box" style="height:{{sT}}rpx">
+          <image src='https://www.willsfintech.cn:9004/staticFile/image/latent-none.png' style='width: 179rpx;height: 185rpx;margin-left:12rpx'></image>
+          <text  style='margin-top:20rpx;'>还没有客户阅读哦
+          赶紧分享给更多客户吧</text>
+          <view style='width:100%;height:88rpx'></view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view
+          wx:if="{{transferData.length != '0'}}"
+          scroll-y
+          style='height:{{sT}}rpx;'>
+          <view bindtap='dynamicBind' data-id='{{item.tcid}}' class='dynamic'  wx:for="{{transferData}}" wx:key="index">
+            <image src="{{item.portraitpath}}" class='dynamic-portrait' mode='aspectFill'/>
+            <view class='dynamic-time'></view>
+            <view class='dynamic-text'>
+              <text class="dynamic-name-text">{{item.tcname}}</text><text>分享{{item.tt}}次，推荐{{item.tc}}名客户</text>
+              <view class="dynamic-st-box-img-box" wx:for="{{item.pplist}}" wx:for-item="ite" wx:for-index="ind" wx:key="ind">
+                <image class="dynamic-st-box-img" src="{{ite}}" mode="aspectFill"/>
+              </view>
+            </view>
+          </view>
+          <view class='liubai'></view>
+        </scroll-view>
+        <view wx:else class="statistics-default-box"  style="height:{{sT}}rpx">
+          <image src='https://www.willsfintech.cn:9004/staticFile/image/dynamic-none.png' style='width: 275rpx;height: 204rpx;' />
+          <text style='margin-top:20rpx;'>客户“老带新”活动没法统计怎么
+            办？客户转发之后推荐了多少客
+            户都会显示在这哦。</text>
+          <view style='width:100%;height:88rpx'></view>
+        </view>
+      </swiper-item>
+      <swiper-item style="background-color:#fff">
+        <scroll-view
+          scroll-y
+          style='height:{{sT}}rpx;'>
+          <view class='tag-box' wx:for="{{taglist}}" wx:key="{{index}}">
+            <view class='tag-title-box'>
+              <view class='tag-color' style='background-color:{{item.color}}'></view>
+              <view class='tag-title'>{{item.groupname}}</view>
+            </view>
+            <view class='tag-ite'>
+              <view
+                wx:for="{{item.list}}" 
+                wx:key="ind" 
+                wx:for-item="ite" 
+                wx:for-index="ind">
+                <form report-submit="true" 
+                  bindsubmit="tagBind" 
+                  data-groupindex="{{index}}"
+                  data-tagindex="{{ind}}"
+                  data-tagid="{{ite.tagid}}"
+                  data-formkey='tag'
+                  >
+                  <button form-type="submit" class="tag-item-box {{ite.select?'tag-item-box-true':'tag-item-box-false'}}">
+                    {{ite.tagname}}
+                  </button>
+                </form>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

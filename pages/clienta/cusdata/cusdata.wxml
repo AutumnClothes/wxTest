@@ -1,0 +1,149 @@
+<!--pages/clienta/cusdata/cusdata.wxml-->
+<view>
+  <top-box text="客户资料" backBox="true" detal="1"></top-box>
+  <view class='content-top' style='top:{{cH}}rpx'>
+    <view class='cus-portrait-box'>
+      <view class='cus-portrait' style="background-image: url({{cusData.portraitpath}});" ></view>
+      <view class='cus-name'>{{cusData.name  ?cusData.name :cusData.nickname}}</view>
+    </view>
+    <view wx:if="{{guidance}}" class="guidance-box guidance-box_one" style='top:{{dH-28}}rpx'>
+      <view class='guidance-triangle guidance-triangle-right'></view>
+      <view>点此设置存量客户</view>
+    </view>
+    <view wx:if="{{guidance1}}" class="guidance-box guidance-box_two" style='top:{{dH+72}}rpx'>
+      <view class='guidance-triangle guidance-triangle-bottom guidance-triangle_two'></view>
+      <view>点此发消息</view>
+    </view>
+    <view class='cus-button-box'>
+      <view class='cus-button-item'>
+        <form report-submit="true" data-formkey='send' data-id='{{cusData.id}}' data-name="{{cusData.nickname}}" data-portraitpath="{{cusData.portraitpath}}"
+         bindsubmit="cusBindtoChat" >
+          <button form-type="submit">
+            <image class='cus-button-img' src='../../../image/img/news.png'></image>
+            <view class='cus-button-title'>发消息</view>
+          </button>
+        </form>
+      </view>
+      <view class='cus-button-item'>
+        <form report-submit="true" bindsubmit='cusBindCall' data-formkey='call' data-phone="{{cusData.mobilephone}}">
+          <button form-type="submit" class="input-bottom-send" >
+            <image class='cus-button-img' src='../../../image/img/telephone.png'></image>
+            <view class='cus-button-title'>打电话</view>
+          </button>
+        </form>
+      </view>
+      <view class='cus-button-item'>
+        <form report-submit="true" bindsubmit='cusBindto' data-formkey='detailed'>
+          <button form-type="submit" class="input-bottom-send" >
+            <image class='cus-button-img' src='../../../image/img/details.png'></image>
+            <view class='cus-button-title'>详细资料</view>
+          </button>
+        </form>
+      </view>
+    </view>
+    <view class='tab-box'>
+      <view class='tab-box-title'>
+        <form report-submit="true" data-formkey='interact' bindsubmit="tabBind" data-id="0">
+          <button form-type="submit" class="tab-box-title-l  {{curr == 0?'tab-box-title-r-true':''}}" >互动</button>
+        </form>
+        <form report-submit="true" data-formkey='tags' bindsubmit="tabBind" data-id="1">
+          <button form-type="submit" class="tab-box-title-r {{curr == 1?'tab-box-title-r-true':''}}" >标签</button>
+        </form>
+      </view>
+      <view class="{{curr == 0?'tab-box-solid':'tab-box-solid-false'}}"></view>
+    </view>
+  </view>
+  <form report-submit="true" data-formkey='stock' bindsubmit="depositBind" >
+    <button form-type="submit" class="deposit-box" style='top:{{dH}}rpx' >
+      <view class='deposit-switch' style="{{cusData.newcus == '1'?'background-image: linear-gradient( 90deg, rgb(255,186,23) 0%, rgb(255,160,25) 100%);':'background-color:#ccc'}}">
+        <view class='deposit-switch-ite' style="{{cusData.newcus == '1'?'left:15rpx':'left:-14rpx'}}"></view>
+      </view>
+      存量客户
+    </button>
+  </form>
+  <view style='top:{{sT}}rpx;' class='shadow-box'></view>
+  <swiper current="{{ current }}" bindchange="swiperChange" style="height:{{sH}}rpx;margin-top:{{sT}}rpx;">
+    <swiper-item>
+      <scroll-view 
+      lower-threshold='50rpx' bindscrolltolower="scrolltobottom"
+        scroll-y
+        style='height:{{sH}}rpx;'>
+        <view class='dynamic' wx:for="{{dynamicList}}" wx:key="timeline">
+          <image src="{{cusData.portraitpath}}" class='dynamic-portrait' mode='aspectFill'/>
+          <view class='dynamic-time'>
+            {{item.timestr}}
+          </view>
+          <view class='dynamic-text'>
+            <text>{{cusData.name?cusData.name:cusData.nickname}}</text><text style='color:#000;margin-right:10rpx;'>{{item.contenttype}}</text>
+            <text class='dynamic-text-last'>{{item.content}}</text>
+          </view>
+        </view>
+        <view class='liubai'></view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item style="background-color:#fff">
+      <scroll-view
+        scroll-y
+        style='height:{{sH}}rpx;'>
+        <view class='tag-box' wx:for="{{taglist}}" wx:key="{{index}}">
+          <view class='tag-title-box'>
+            <view class='tag-color' style='background-color:{{item.color}}'></view>
+            <view class='tag-title'>{{item.groupname}}</view>
+          </view>
+          <view class='tag-ite'>
+            <view
+              wx:for="{{item.list}}" 
+              wx:key="ind" 
+              wx:for-item="ite" 
+              wx:for-index="ind">
+              <form report-submit="true" 
+                bindsubmit="tagBind" 
+                data-groupindex="{{index}}"
+                data-tagindex="{{ind}}"
+                data-tagid="{{ite.tagid}}"
+                data-formkey='tag'
+                >
+                <button form-type="submit" class="tag-item-box {{ite.select?'tag-item-box-true':'tag-item-box-false'}}">
+                  {{ite.tagname}}
+                </button>
+              </form>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+  <view wx:if='{{vipView}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one" style='padding-bottom:40rpx'>
+        <view bindtap="closeVipView" class='guidance-close'>
+          <image src="../../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/mem-guide.png" class='mem-guide-position' style='width:610rpx;height:542rpx;'/>
+        <view class="guidance-box-one-text" style='width:520rpx;margin-top:265rpx'>
+          <text style='font-size:34rpx;font-weight:500;color:#333'>开通会员</text>
+          <text style='margin-top:30rpx;color:#333;font-size:28rpx;text-align:center'>即刻主动沟通客户，争取每一次交易机会</text>
+        </view>
+        <view class='guidance-bottom-button'>
+          <form report-submit="true" bindsubmit="freeMonth" data-freetext="{{freeText}}" data-formkey='vipLeft'>
+            <button class='guidance-btn-vip guidance-btn-left-vip' form-type="submit">{{freeText}}</button>
+          </form>
+          <form report-submit="true" bindsubmit="toVipPage" data-formkey='vipright'>
+            <button class='guidance-btn-vip guidance-btn-right-vip' form-type="submit">立即开通</button>
+          </form>
+        </view>
+        <form report-submit='true' bindsubmit="toVipPage" data-formkey='knowvip'>
+					<button form-type="submit" class='guidance-bottom-text'>了解更多会员特权></button>
+				</form>
+      </view>
+    </view>
+    <view class="guidance-box-one guidance-box-one_two" style='bottom:{{bm+50}}rpx'>
+      <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:134rpx;height:141rpx;'/>
+      <view style='margin-left:20rpx;text-align:center;font-size:28rpx;font-weight:500;'>
+        <view>完成新手教程</view>
+        <view>即可永久免费使用主动推送功能。</view>
+      </view>
+    </view>
+  </view>
+</view>

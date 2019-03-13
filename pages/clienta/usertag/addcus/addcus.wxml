@@ -1,0 +1,32 @@
+<view>
+  <top-box text="添加成员" backBox="true" detal="1"></top-box>
+  <view class="content" style="top:{{cH}}rpx">
+    <view class='input-box'>
+      <image src='../../../../image/img/grouppath.png' style='margin-left:30rpx;margin-right:15rpx;width: 32rpx;height: 32rpx;'></image>
+      <input placeholder="搜索" placeholder-class ="input-placeholder" class='input-class'
+        bindinput="inputM" ></input>
+    </view>
+    <view class='input-box' bindtap='bindTag'>
+      <image src='../../../../image/img/grouptag.png' style='margin-left:31rpx;margin-right:15rpx;width: 30rpx;height: 32rpx;'></image>
+      <view class='input-class'>标签</view>
+    </view>
+    <view class='check-box' style="height:{{sH}}rpx">
+      <scroll-view scroll-y style="height:{{sH-116}}rpx">
+        <view class='scroll-item-box' wx:for="{{showList}}" wx:key="{{index}}" data-ind="{{index}}" 
+				data-id="{{item.id}}" bindtap='{{item.store == "1" ? "":"itemBind" }}' >
+						<view wx:if="{{item.store == '1'}}"><image  class='item-check' src="https://www.willsfintech.cn:9004/staticFile/image/checkalways.png"></image></view>
+						<view  wx:else ><image  class='item-check' src="{{item.check == 1? 'https://www.willsfintech.cn:9004/staticFile/image/checkon.png' :'https://www.willsfintech.cn:9004/staticFile/image/checkout.png'}}"></image></view>
+						<view class='item-box'>
+							<!-- <view class='item-portrait' style='background-image:url({{item.portraitpath}})'></view> -->
+              <image class='item-portrait' src='{{item.portraitpath}}' mode='aspectFill'></image>
+							<view class='item-name'>{{item.name?item.name:item.nickname}}</view>
+						</view>
+        </view>
+      </scroll-view>
+      <view class='true-button-box' bindtap='bindTrue'>
+        <image src='../../../../image/img/grouptrue.png' style='width:34rpx;height:34rpx;margin-right:10rpx;'></image>
+        完成({{selectedNum}})
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+<!--pages/accredit/accredit.wxml-->
+<view class="pageView" style="height:{{H}}rpx;width:100%">
+  <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;'/>
+  <view class="accredit-txt">授权昵称与头像，开启全新工作体验</view>
+  <form report-submit="true" bindsubmit="setAccredit" data-formkey='setAccredit'>
+    <button class='guidance-btn' form-type="submit"  lang="zh_CN" bindopensetting="opensetting" lang="zh_CN" open-type="openSetting">去授权</button>
+  </form>
+</view>
+<view class="meng" wx:if="{{accreditType == 'toget' || accreditType == 'toset'}}"></view>
+  <view class='accredit' style="display: {{accreditType == 'toget' || accreditType == 'toset'? 'block' : 'none'}};">
+    <view class='accredit-box'>
+      <view style="display: {{accreditType == 'toget' ? 'none' : 'block'}};" class='accredit-close' bindtap='closeaccredit'>
+        <image src='../../image/img/close.png' style='width:18rpx;height:18rpx;'></image>
+      </view>
+      <view class='accredit-title'>需要您的授权</view>
+      <view class='accredit-txt'>仅授权微信头像、微信昵称,授权后,您可以：</view>
+      <view class='accredit-item-box'>
+        <view class='accredit-txt-item'>
+          <view class='dian'>1</view>获取名片</view>
+        <view class='accredit-txt-item'>
+          <view class='dian'>2</view>咨询顾问</view>
+        <view class='accredit-txt-item'>
+          <view class='dian'>3</view>阅读文章</view>
+        <view class='accredit-txt-item'>
+          <view class='dian'>4</view>查看产品</view>
+      </view>
+      <form  report-submit="true" >
+        <button class='accredit-button' form-type="submit" data-formkey='getUserInfo' style="display: {{accreditType == 'toget' ? 'flex' : 'none'}};" bindtap="closeaccredit" lang="zh_CN" bindgetuserinfo='onGotUserInfo' open-type="getUserInfo">前往授权</button>
+        <button class='accredit-button' form-type="submit" data-formkey='openSetting' style="display: {{accreditType == 'toset' ?  'flex' : 'none'}};" bindtap="closeaccredit" bindopensetting="opensetting" lang="zh_CN" open-type="openSetting">前往授权</button>
+      </form>
+    </view>
+  </view>

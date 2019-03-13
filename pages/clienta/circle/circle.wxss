@@ -1,0 +1,73 @@
+/* pages/clienta/circle/circle.wxss */
+.item-box{
+  display: flex;
+}
+.group-item-box{
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #f0f1f6;
+  background-color: #fff;
+  height:136rpx;
+  min-width:750rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size:34rpx;
+  line-height: 1;
+  color:#000;
+  position: relative;
+  transition: all 0.2s linear;
+}
+.portrait-box{
+  box-sizing: border-box;
+  border-radius: 50%;
+  height:100rpx;
+  width: 100rpx;
+  min-height:100rpx;
+  min-width: 100rpx;
+  margin:0 20rpx;
+}
+.group-out{
+  background-color:rgb(255, 74, 18);
+  color:#fff;
+  font-size:32rpx;
+  height:136rpx;
+  width:136rpx;
+  min-width:136rpx;
+  position: relative;
+  transition: all 0.2s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bottom-button{
+  width: 660rpx;
+  height: 88rpx;
+  line-height:1 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 160, 25);
+  font-size: 34rpx;
+  color: rgb(255, 255, 255);
+  border-radius: 8rpx;
+  position: fixed;
+  margin-left:45rpx;
+  margin-bottom: 20rpx;
+}
+.chat-none-box{
+  width:100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.chat-none-img{
+  width:600rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 34rpx;
+  color:#000;
+}

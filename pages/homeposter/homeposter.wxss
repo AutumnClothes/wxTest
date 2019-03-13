@@ -1,0 +1,49 @@
+/* pages/poster/poster.wxss */
+.content{
+  background-color: #f0f1f6;
+}
+.poster-img{
+  width:750rpx;
+  height:970rpx;
+  position: relative;
+  top:20rpx
+}
+.advert-title{
+  width:595rpx;
+  margin:20rpx auto;
+  height:80rpx;
+  font-size: 28rpx;
+  line-height: 42rpx;
+  text-align: center;
+  color:#676767;
+}
+.share-button{
+  width: 620rpx;
+  background-color: #ff8a01;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+  height:88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left:65rpx;
+  margin-bottom:12rpx;
+  z-index: 900;
+  line-height: 1;
+  font-size: 34rpx;
+  color:#fff;
+}
+.back{
+  position: absolute;
+  width:100rpx;
+  height:60rpx;
+}
+.back-box{
+  position: absolute;
+  width:20rpx;
+  height: 35rpx;
+  left:21rpx;
+  top:13.5rpx;
+  z-index: 999;
+}

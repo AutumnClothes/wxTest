@@ -1,0 +1,234 @@
+/* pages/clienta/jobs/column/column.wxss */
+@import '../../../style/productcard.wxss';
+
+.content{
+  border-top:1rpx solid #f0f1f6;
+  background-color: #f0f1f6;
+}
+.dynamic-item{
+  padding:40rpx 55rpx 25rpx 55rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  margin-bottom:20rpx;
+}
+.dynamic-title{
+  font-size: 34rpx;
+  color: #333;
+  margin-bottom: 30rpx;
+  position: relative;
+}
+.dynamic-item-title{
+  max-width:640rpx;
+  text-indent:75rpx;
+  line-height: 52rpx;
+  min-height:52rpx;
+  max-height:315rpx;
+  overflow: hidden;
+  text-align: justify;
+}
+.dynamic-item-full{
+  text-indent:0rpx;
+  height:60rpx;
+  width: 640rpx;
+  line-height: 60rpx;
+  background-color: #fff;
+  position: absolute;
+  top:260rpx;
+  color:#576b95;
+}
+.dynamic-item-dynamic{
+  position: absolute;
+  display: inline-block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  min-width: 65rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  border-radius: 2rpx;
+  font-size: 26rpx;
+  color:#fff;
+  margin-left:2rpx;
+  margin-top:10rpx;
+}
+.dynamic-item-img{
+  width:640rpx;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap:wrap;
+}
+.dynamic-item-img-ite{
+  width:23.5%;
+  height:150rpx;
+  min-width:23.5%;
+  min-height:150rpx;
+  border-radius: 0;
+  margin-bottom:12rpx;
+  margin-right:2%;
+}
+.dynamic-time{
+  margin-top:30rpx;
+  font-size: 24rpx;
+  color: #b2b2b2;
+}
+.dynamic-delete{
+  position: absolute;
+  bottom:5rpx;
+  right: 40rpx;
+  width:74rpx;
+  height:74rpx;
+  line-height: 1;
+  padding:20rpx !important;
+  box-sizing: border-box;
+}
+.dynamic-delete-img{
+  min-width: 34rpx;
+  min-height:34rpx;
+  max-width: 34rpx;
+  max-height:34rpx;
+}
+.bottom-box{
+  position: fixed;
+  bottom:0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  background-color: #fff;
+}
+.bottom-button{
+  height:100rpx;
+  width:750rpx;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*一个关键词*/
+.product-box-card{
+  width:640rpx;
+  margin:0;
+}
+
+/*俩个关键词*/
+.product-box-two-card{
+  width:640rpx;
+  margin:0;
+}
+
+/*仨关键词*/
+.product-box-the-card{
+  width:640rpx;
+  margin:0;
+}
+
+
+/*图文*/
+.product-img-card{
+  width:640rpx;
+  margin:0;
+}
+
+/*咨询*/
+.msg-box{
+  width:640rpx;
+  padding:30rpx 32rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 12rpx;
+  box-shadow: 0px 5rpx 40rpx 0px rgba(179, 179, 179, 0.33);
+  display: flex;
+}
+
+.chat-none-box{
+  font-size: 32rpx;
+  color: rgb(153, 153, 153);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chat-none-img{
+  width:400rpx;
+  position: absolute;
+  top:50%;
+  left:175rpx;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 28rpx;
+  line-height:42rpx;
+  color:#717173;
+}
+.guidance-box_one{
+  padding:25rpx 0 !important;
+  text-align: center;
+  width:400rpx;
+  left:50%;
+  transform: translateX(-50%);
+  color:#cfae82 !important;
+  background-color: rgb(25, 25, 25) !important;
+  background-image: none;
+}
+.guidance-triangle_one{
+  position: absolute;
+  bottom:-26rpx;
+  left:50%;
+  transform: translateX(-50%);
+  border-top-color:rgb(25, 25, 25) !important;
+}
+.guidance-box-padding{
+  padding:60rpx 30rpx 60rpx 30rpx
+}
+.guidance-box-one-text{
+  margin-top:34rpx
+}
+.guidance-btn{
+  position: relative;
+  z-index: 999
+}
+.edit-button-box{
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 8rpx;
+  border:1rpx solid #f0f1f6;
+  background-color: #fff;
+  padding:48rpx 0 30rpx 0;
+  z-index: 999;
+  display: flex;
+}
+.text-add-close{
+  position: absolute;
+  top:5rpx;
+  left:5rpx;
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text-add-img{
+  width: 22rpx;
+  height: 22rpx;
+}
+.edit-button-item{
+  border-radius: 0;
+  width:212rpx;
+  height:150rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top:20rpx !important;
+  box-sizing: border-box;
+  border-right:1px solid rgb(232, 232, 232);
+  font-size: 32rpx;
+  color:rgb(51,51,51);
+}

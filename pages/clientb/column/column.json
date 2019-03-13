@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "top-box": "../../../../dist/topbar/topbar"
+  }
+}

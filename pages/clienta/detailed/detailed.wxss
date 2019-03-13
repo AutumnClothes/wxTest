@@ -1,0 +1,141 @@
+/* pages/clienta/detailed/detailed.wxss */
+.modal-input-meng{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity:0.3;
+  z-index: 998;
+}
+.modal-title{
+  width: 100%;
+  text-align: center;
+  margin:27rpx 0 35rpx 0;
+  font-size: 34rpx;
+  color:#2d2e33;
+}
+.modal-input-box{
+  position: fixed;
+  top:40%;
+  width: 70%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border:1rpx solid #ccc;
+  background-color: #fff;
+  border-radius: 10rpx;
+  z-index: 999;
+}
+.modal-input{
+  padding: 20rpx 12rpx;
+  margin: 0 45rpx;
+  height:76rpx;
+  font-size: 32rpx;
+  box-sizing: border-box;
+  color: #383842;
+}
+.modal-button-box{
+  margin-top: 62rpx;
+  display: flex;
+  align-items: center;
+}
+.modal-button{
+  width: 50%;
+  box-sizing: border-box;
+  border-top:1rpx solid #ccc;
+  height:88rpx;
+  line-height: 88rpx;
+  text-align: center;
+}
+.modal-button-left{
+  color: #b0b3ba;
+}
+.modal-button-right{
+  border-left:1rpx solid #ccc;
+  color:#ff8a01;
+}
+.modal-textarea-box{
+  position: fixed;
+  top:200rpx;
+  width: 90%;
+  background-color: #fff;
+  left:50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  border-radius: 8rpx;
+  z-index: 999;
+}
+textarea{
+  margin:0 auto;
+}
+/**/
+.storage-box{
+  font-size: 24rpx;
+  color: rgb(255, 160, 25);
+  border: 1rpx solid rgb(255, 160, 25);
+  border-radius: 5rpx;
+  box-sizing: border-box;
+  width: 112rpx;
+  height: 48rpx;
+  text-align: center;
+  line-height: 48rpx;
+  z-index: 100;
+  float: right;
+}
+.cus-title{
+  font-size: 28rpx;
+  color: rgb(153, 153, 153);
+  height:120rpx;
+  line-height: 120rpx;
+  margin-left:35rpx;
+}
+.cus-list-box{
+  border-bottom: 1rpx solid #e5e5e5 ;
+  display: flex;
+  justify-content: center;
+  width: 715rpx;
+  font-size: 34rpx;
+  box-sizing: border-box;
+  min-height:120rpx;
+  align-items: flex-start;
+  margin-left:35rpx;
+}
+.item-title{
+  height:120rpx;
+  padding-top:40rpx;
+  box-sizing: border-box;
+  width: 30%;
+  min-width: 30%;
+  font-size: 34rpx;
+  color: rgb(102, 102, 102);
+}
+.item-text{
+  width: 70%;
+  min-width: 70%;
+  height:100%;
+  padding:40rpx 0;
+  padding-right:32rpx;
+  box-sizing: border-box;
+  font-size: 34rpx;
+  color: rgb(0, 0, 0);
+  word-break:break-all;
+}
+.fList-placeholder-class{
+  width: 70%;
+  height:100%;
+  padding:40rpx 0;
+  padding-right:32rpx;
+  box-sizing: border-box;
+  font-size: 34rpx;
+  color: rgb(153, 153, 153);
+}
+.liubai{
+  border-top:1rpx solid #e5e5e5;
+  height:108rpx;
+  width:100%;
+}
+picker {
+  line-height: 40rpx;
+  height:40rpx;
+}

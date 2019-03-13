@@ -1,0 +1,105 @@
+<view>
+  <top-box text="海报预览" backBox delta="1"></top-box>
+  <view class='content' style='top:{{cH}}rpx'>
+    <view class='top-title' wx:if='{{!advert}}'>
+      <view class='title-box'>{{txt}}</view>
+      <form report-submit="true" data-formkey='copy' bindsubmit="titleCopy">
+        <button form-type="submit" class='title-button'>复制文案</button>
+      </form>
+    </view>
+    <image wx:if='{{jobs || jobsb}}' mode='aspectFit' class='poster-img-jobs' src='{{imgPath}}' bindtap="preview" data-url='{{imgPath}}'></image>
+    <image wx:else mode='aspectFit' class='poster-img' src='{{imgPath}}'  bindtap="preview" data-url='{{imgPath}}' style="{{posterStyle}}"></image>
+    <view wx:if='{{advert}}' class='advert-title'>{{txt}}</view>
+    <view wx:if='{{jobs}}' class='bottom-button' style='bottom:{{bm}}rpx'>
+      <form report-submit="true" style="display:{{guidance?'none':'flex'}}" data-formkey='diy' bindsubmit="diyBind">
+        <button form-type="submit" class='jobs-diy'>{{posterTxt}}</button>
+      </form>
+      <form report-submit="true" style="margin-left:{{guidance?'240rpx':'0'}}" data-formkey='share' bindsubmit="shareBind" data-img='{{imgPath}}'>
+        <button form-type="submit" class='jobs-share'>保存图片发送到朋友圈</button>
+      </form>
+    </view>
+    <form wx:else report-submit="true" data-formkey='share' bindsubmit="shareBind" data-img='{{imgPath}}'>
+      <button form-type="submit" class='share-button' style='bottom:{{bm}}rpx'>{{buttontxt}}</button>
+    </form>
+  </view>
+  <view wx:if='{{guidance}}'>
+    <view class='guidance-meng'></view>
+    <view class='guidance1-box'>
+      <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;'/>
+      <view class="guidance-box-one-text" style='width:400rpx;margin-left:14rpx;margin-top:0'>
+        <text style='font-size:30rpx;font-weight:500'>在朋友圈发了那么多海报，如何知道谁感兴趣？给海报加上二维码，客户扫码立即跟进</text>
+        <text style='margin-top:14rpx;font-size:24rpx'>除了微信群和朋友圈，微博、论坛、贴吧等等，扫码海报都可获客哦</text>
+      </view>
+    </view>
+    <form report-submit="true" bindsubmit="iknow" data-formkey='diyknow'>
+      <button class='jobs-diy jobs-diy_know' form-type="submit">知道了</button>
+    </form>
+    <form wx:if="{{guidanceForm}}" report-submit="true" data-formkey='diy' bindsubmit="diyBind">
+      <button form-type="submit" class='jobs-diy jobs-diy_guidance' style='bottom:{{bm+12}}rpx'>自定义海报</button>
+    </form>
+  </view>
+
+  <view wx:if="{{guidance1 && jobs}}" class="guidance-box guidance-box_four" style='bottom:{{bm+120}}rpx;right:34%;transform:translateX(50%)'>
+    <view class='guidance-triangle guidance-triangle-bottom'></view>开始获客吧</view>
+  <view wx:if="{{guidance1 && !jobs}}" class="guidance-box guidance-box_four" style='bottom:{{bm+120}}rpx;right:50%;transform:translateX(50%)'>
+    <view class='guidance-triangle guidance-triangle-bottom'></view>开始获客吧</view>
+  <view class='canvas-box'>
+    <canvas canvas-id="viewCanvas" style="width:750px;height:{{canvasHeight}}px"></canvas>
+  </view>
+
+  <view wx:if='{{guidance2}}'>
+    <view class='guidance-meng'></view>
+    <view class='guidance1-box'>
+    <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:134rpx;height:141rpx;'/>
+      <view class="guidance-box-one-text" style='width:400rpx;margin-left:14rpx;margin-top:0;font-size:26rpx;font-weight:500;'>保存名片海报，发到朋友圈、微博、论坛、贴吧等等，扫码即可获客</view>
+    </view>
+    <form report-submit="true" bindsubmit="iknow" data-formkey='saveknow'>
+      <button class='jobs-diy jobs-diy_know' form-type="submit">知道了</button>
+    </form>
+  </view>
+  <view wx:if='{{courseDone}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one guidance-box-padding">
+        <view bindtap="closeDone" class='guidance-close'>
+          <image src="../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;margin-top:25rpx'/>
+        <view class="guidance-box-one-text">
+          <text style='font-size:34rpx;font-weight:500'>{{donetitle}}</text>
+          <text style='margin-top:24rpx;text-align:center;color:rgb(118,113,113)'>{{donedesc}}</text>
+        </view>
+        <form report-submit="true" bindsubmit="toNextButton" data-formkey='guidanceDone'>
+          <button class='guidance-btn' style='width:485rpx' form-type="submit">{{donebutton}}</button>
+        </form>
+        <view class='guidance-bottom'>{{donerate}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{vipView}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one">
+        <view bindtap="closeVipView" class='guidance-close'>
+          <image src="../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/mem-guide.png" class='mem-guide-position' style='width:610rpx;height:542rpx;'/>
+        <view class="guidance-box-one-text" style='width:520rpx;margin-top:260rpx'>
+          <text style='font-size:34rpx;font-weight:500;color:#333'>开通会员</text>
+          <text style='margin-top:30rpx;color:#333;font-size:28rpx;text-align:center'>给海报加上二维码，客户扫码立即跟进</text>
+        </view>
+        <view class='guidance-bottom-button'>
+          <form report-submit="true" bindsubmit="freeMonth" data-freetext="{{freeText}}" data-formkey='vipLeft'>
+            <button class='guidance-btn-vip guidance-btn-left-vip' form-type="submit">{{freeText}}</button>
+          </form>
+          <form report-submit="true" bindsubmit="toVipPage" data-formkey='vipright'>
+            <button class='guidance-btn-vip guidance-btn-right-vip' form-type="submit">立即开通</button>
+          </form>
+        </view>
+        <form report-submit='true' bindsubmit="toVipPage" data-formkey='knowvip'>
+					<button form-type="submit" class='guidance-bottom-text'>了解更多会员特权></button>
+				</form>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,34 @@
+<!--pages/clienta/usertag/usertag.wxml-->
+<view class='container'>
+  <top-box text="标签" backBox delta="1"></top-box>
+  <view class='content' style='top:{{cH}}rpx'>
+    <view style="box-sizing:border-box;display:block">
+      <scroll-view scroll-y style='height:{{sH}}rpx'>
+        <view class='content-box'>
+          <view class="usertag-ul" wx:for="{{tagList}}" wx:key="{{index}}">
+            <view class='usertag-li-f'>
+              {{item.groupname}}
+              <view class='usertag-li-icon' style='background-color:{{item.color}}'></view>
+            </view>
+            <view class='usertag-li-l' >
+              <view wx:for="{{item.list}}" wx:for-index="int"  wx:key="{{int}}" wx:for-item="ite">
+                <form report-submit="true" data-formkey="tagitem" bindsubmit="totagdetail" data-tagid="{{ite.tagid}}" data-tagname="{{ite.tagname}}">
+                  <button form-type="submit" class='usertag-li-v' >
+                    <view >{{ite.tagname}}<text wx:if="{{ite.quantity != 0}}">{{ite.quantity}}</text></view>
+                  </button>
+                </form>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <form report-submit="true" data-formkey="admintag" bindsubmit="adminTag">
+        <button style="display:{{fromEditor?'none':'flex'}};bottom:{{bm}}rpx" class="bottom-box bottom-box-one" form-type="submit">
+          <image src="../../../image/img/gear.png" style="width:33rpx;height:32rpx;margin-right:15rpx"/>
+          <text>管理标签</text>
+        </button>
+      </form>
+    </view>
+  </view>
+</view>
+

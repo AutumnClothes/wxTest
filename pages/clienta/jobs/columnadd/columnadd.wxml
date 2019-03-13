@@ -1,0 +1,125 @@
+<view>
+  <top-box text="{{pageTitle}}" backBox delta="1"></top-box>
+  <view class='content' style='top:{{cH}}rpx'>
+    <textarea class='text-area' maxlength='{{maxlength}}' placeholder='请输入点评内容' fixed placeholder-class='text-area-placeholder' bindinput='inputOn'>
+    </textarea>
+    <view wx:if="{{type == 'textandimages'}}" class='img-add-box'>
+      <form report-submit="true" data-formkey='imgDel' bindsubmit="imgDel" wx:for="{{imgList}}" wx:key="index" data-ind="{{index}}">
+        <button form-type="submit" class='img-add-item'>
+          <image src='{{item}}' mode='aspectFill' style='width:140rpx;height:140rpx;'></image>
+        </button>
+      </form>
+      <form report-submit="true" data-formkey='imgadd' bindsubmit="imgAdd" wx:if="{{imgAddShow}}">
+        <button form-type="submit" class='img-add-item'>
+          <image src='../../../../image/img/column-img-add.png' mode='aspectFill' style='width:140rpx;height:140rpx;'></image>
+        </button>
+      </form>
+    </view>
+    <view wx:elif="{{type == 'article'}}" class='msg-box'>
+      <image src='{{article.img}}' style='min-width:140rpx;min-height:140rpx;max-width:140rpx;max-height:140rpx;margin-right:22rpx;' mode='aspectFill'></image>
+      <view>
+        <view class='msg-title'>{{article.title}}</view>
+        <view class='msg-time'>{{article.timestr}}</view>
+      </view>
+    </view>
+    <!--一个关键词-->
+    <view wx:elif="{{type == 'product'  && product.style == '1'}}" class='product-box-card'>
+      <view class='product-title-card'>
+        <text>{{product.title}}</text>
+      </view>
+      <view style='height:212rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+        <view class='product-bright-card'>
+          <view class='product-bright-ite-card'>
+            <view class='product-bright-ite-num-card'>{{product.key1}}</view>
+            <view class='product-bright-ite-txt-card'>{{product.keyp1}}</view>
+          </view>
+        </view>
+        <view class='product-tag-card'>
+          <view class='product-tag-ite-card' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+        </view>
+      </view>
+      <view class='producr-details-card'>{{product.profile}}</view>
+    </view>
+    <!--俩个关键词-->
+    <view wx:elif="{{type == 'product'  && product.style == '2'}}" class='product-box-two-card'>
+      <view class='product-title-two'>
+        <text>{{product.title}}</text>
+      </view>
+      <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+        <view class='product-tag-two'>
+          <view class='product-tag-ite-two' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+        </view>
+        <view class='product-bright-two-card'>
+          <view class='product-bright-ite-two-card' style='border-right:1rpx solid #e5e5e5'>
+            <view class='product-bright-ite-num-two' style="color:#ff523b">{{product.key1}}</view>
+            <view class='product-bright-ite-txt-two'>{{product.keyp1}}</view>
+          </view>
+          <view class='product-bright-ite-two-card'>
+            <view class='product-bright-ite-num-two'>{{product.key2}}</view>
+            <view class='product-bright-ite-txt-two'>{{product.keyp2}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='producr-details-two-card'>{{product.profile}}</view>
+    </view>
+    <!--仨关键词-->
+    <view wx:elif="{{type == 'product'  && product.style == '3'}}" class='product-box-the-card'>
+      <view class='product-title-the'>
+        <text>{{product.title}}</text>
+      </view>
+      <view style='height:194rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+        <view class='product-tag-the'>
+          <view class='product-tag-ite-the' wx:for='{{product.tagsarr}}' wx:key='{{ind}}' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+        </view>
+        <view class='product-bright-the-card'>
+          <view class='product-bright-ite-the'>
+            <view class='product-bright-ite-num-the-card' style="color:#ff523b">{{product.key1}}</view>
+            <view class='product-bright-ite-txt-the'>{{product.keyp1}}</view>
+          </view>
+          <view class='product-bright-ite-the'>
+            <view class='product-bright-ite-num-the-card'>{{product.key2}}</view>
+            <view class='product-bright-ite-txt-the'>{{product.keyp2}}</view>
+          </view>
+          <view class='product-bright-ite-the'>
+            <view class='product-bright-ite-num-the-card'>{{product.key3}}</view>
+            <view class='product-bright-ite-txt-the'>{{product.keyp3}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='producr-details-the-card'>{{product.profile}}</view>
+    </view>
+    <!--图文-->
+    <view wx:elif="{{type == 'product'  && product.style == '4'}}" class='product-img-card'>
+      <view class='product-img-content-card'>
+        <view class='product-img-title-box'>
+          <view class='product-img-title-card'>
+            <text>{{product.title}}</text>
+          </view>
+        </view>
+        <view class='product-img-text-box'>
+          <view class='product-img-text-card'>{{product.profile}}</view>
+        </view>
+        <view class='product-img-tag-card'>
+          <view class='product-img-tag-ite-card' wx:for="{{product.tagsarr}}" wx:key="{{index}}">{{item}}</view>
+        </view>
+      </view>
+      <image bindtap="imgobjImg" class='product-img-img-card' src='{{product.imgurl}}'></image>
+    </view>
+    <view class='bottom-box' style='bottom:{{bm}}rpx'>
+      <form report-submit="true" data-formkey='dynamicAdd' bindsubmit="dynamicAdd">
+        <button form-type="submit" class='bottom-button'>
+          <image src='../../../../image/img/release.png' style='width:32rpx;height:32rpx;margin-right:12rpx;'></image>
+          <text style='font-size:32rpx;color:#333'>发布</text>
+        </button>
+      </form>
+    </view>
+  </view>
+  <view wx:if="{{guidance}}" class='guidance1-box' style='bottom:{{bm+300}}rpx'>
+    <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:134rpx;height:141rpx;'/>
+    <view class="guidance-box-one-text" style='width:400rpx;margin-left:14rpx;margin-top:0'>
+      <text style='font-size:28rpx;font-weight:500'>除了图文动态，还可以将资讯通过底部【分享文章】按钮发至专栏</text>
+    </view>
+  </view>
+  <view wx:if="{{guidance}}" class='guidance-box guidance-box_one' style='bottom:{{bm+114}}rpx'>
+    <view class='guidance-triangle guidance-triangle-bottom guidance-triangle_one' />点此发布第一篇动态</view>
+</view>

@@ -1,0 +1,116 @@
+<view>
+	<top-box bindback="bindback"
+		 backmethod='back' text="会员免费领"   backBox delta="1" />
+	<view class='content' style='top:{{cH}}rpx'>
+    <scroll-view scroll-y style='height:{{sH-bm-88}}rpx' class='receive-scroll'>
+      <image src="https://www.willsfintech.cn:9004/staticFile/image/receive-img.png" class='receive-img' />
+      <view class='content-text'>推荐给同事，3名同事查看后24小时内成功创</view>
+      <view class='content-text' style='margin-top:20rpx'>建名片，即可免费领取一年会员。推荐更多同</view>
+      <view class='content-text' style='margin-top:20rpx'>事，每位赠送会员30天。</view>
+      <view class='content-numsarr-box'>
+        <view class='content-text' style='margin-right:8rpx;'>已有</view>
+        <view wx:for='{{numsArr}}' wx:key="index"  class='numsarr-box'>{{item}}</view>
+        <view class='content-text'style='margin-left:8rpx;'>人领取</view>
+      </view>
+      <button open-type="share" class='recommend-btn'>推荐给同事</button>
+      <view class='colleague-txt'>有下列同事关注了你，赶紧邀请他们创建名片吧</view>
+      <view wx:if='{{colleague.length != 0}}' class='colleague-box'>
+        <view wx:for='{{colleague}}' wx:key="index" class='colleague-item-box'>
+          <image src='{{item.portrait}}' class='colleague-portrait'></image>
+          <view class='colleague-item-keys'>
+            <view wx:if="{{item.keys == 'img'}}">
+              <image wx:if="{{item.img}}" class="colleague-boolean-true" src="../../../image/img/true.png"/>
+              <image wx:else class="colleague-boolean-false" src="../../../image/img/false.png"/>
+            </view>
+            <text wx:if="{{item.keys == 'time'}}">{{item.time}}</text>  
+          </view>
+        </view>
+      </view>
+      <view wx:else class='colleague-box'>
+        <view class='colleague-item-box'>
+          <view class='colleague-portrait colleague-portrait-radius'></view>
+          <view class='colleague-item-keys'></view>
+        </view>
+        <view class='colleague-item-box'>
+          <view class='colleague-portrait colleague-portrait-radius'></view>
+          <view class='colleague-item-keys'></view>
+        </view>
+        <view class='colleague-item-box'>
+          <view class='colleague-portrait colleague-portrait-radius'></view>
+          <view class='colleague-item-keys'></view>
+        </view>
+      </view>
+      <view style='width:100%;height:20rpx'></view>
+    </scroll-view>
+    <view class='bottom-btn' style='bottom:{{bm}}rpx'>
+      <view bindtap="subscribePublic" class='bottom-btn-left'>活动说明</view>
+      <view wx:if='{{recommended}}' class='bottom-btn-right'>已领取</view>
+      <view wx:else>
+        <view wx:if='{{num != 0}}' class='bottom-btn-right'>还差<text style='color:#f51f1f'>{{num}}</text>名同事就可以免费获取一年会员啦</view>
+        <form wx:else report-submit='true' data-formkey='oneYear' bindsubmit='oneYearBind'>
+          <button form-type="submit" class='bottom-btn-right bottom-btn-right-font'>恭喜，获得一年免费会员，马上领取</button>
+        </form>
+      </view>
+    </view>
+	</view>
+  <view wx:if='{{guidance}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one">
+        <view bindtap="closeGuidance" class='guidance-close'>
+          <image src="../../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/mem-guide.png" class='mem-guide-position' style='width:610rpx;height:542rpx;'/>
+        <view class="guidance-box-one-text" style='width:520rpx'>
+          <text style='font-size:34rpx'>会员领取成功</text>
+          <text style='margin-top:24rpx'>推荐更多同事，每位赠送会员30天</text>
+        </view>
+        <form class='guidance-bottom-button' report-submit="true" bindsubmit="accreditTo">
+          <button form-type="submit" data-formkey='share' open-type="share" class='guidance-btn guidance-btn-receive'>推荐到同事群</button>
+        </form>
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{guidance1}}'>
+    <view class='guidance-meng'></view>
+    <view class='guidance-gzh-box'>
+      <view class='guidance-close' bindtap='subscribePublic'>
+        <image src='../../../image/img/close.png' style='width:18rpx;height:18rpx;'></image>
+      </view>
+      <view class='public-content-box'>
+        <view class='public-content'>关注公众号，回复“HY”查看详细活动说明。</view>
+      </view>
+      <view bindtap="openpublic" class='guidance-gzh'>点此关注公众号</view>
+    </view>
+  </view>
+  <view class='meng' wx:if='{{guidancemeng}}'></view>
+  <view class='public-guide' wx:if='{{guidancePublic}}'>
+    <view class='public-guide-one'>1.点击<image src="https://www.willsfintech.cn:9004/staticFile/image/guide-capsule.png" style='width:174rpx;height:64rpx;margin-left:22rpx'/></view>
+    <view class='public-guide-two'>
+      <view>2.点击「关于为斯顾问」</view>
+      <view class='public-guide-two-ite' style='border-top:none;margin-top:20rpx'>转发</view>
+      <view class='public-guide-two-ite'>添加到我的小程序</view>
+      <view class='public-guide-two-ite'>关于为斯顾问</view>
+    </view>
+    <view  class='public-guide-three'>
+      <view>3.点击相关公众号，进行关注</view>
+      <view class='public-guide-three-img'>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/guide-logo.png" style='width:68rpx;height:68rpx;'/>
+        <view class='public-guide-three-img-title'>为斯顾问</view>
+        <view class='public-guide-three-img-txt'>一款为理财顾问打造的私人CRM助手。行业不限于证券、银行、保险、基金、财富管理、独立顾问。</view>
+      </view>
+      <view class='public-guide-three-img-tail'>
+        <view>相关公众号</view>
+        <view class='public-guide-three-img-tail-right'>
+          <image src="https://www.willsfintech.cn:9004/staticFile/image/guide-logo.png" style='width:44rpx;height:44rpx;'/>
+          <view class='public-guide-three-img-tail-right-txt'>为斯顾问</view>
+          <image src="../../../image/img/path.png" style='width:10rpx;height:20rpx;'/>
+        </view>
+      </view>
+      <form report-submit="true" bindsubmit="openpublic" data-formkey='know'>
+        <button class='public-guide-button' form-type="submit">我知道了</button>
+      </form>
+    </view>
+  </view>
+</view>
+

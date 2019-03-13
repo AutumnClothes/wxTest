@@ -1,0 +1,244 @@
+<view>
+  <top-box text="产品及服务" backBox="true" delta="1"></top-box>
+  <view class='content' style='top:{{cH}}rpx;border-top:1rpx solid #f0f1f6;'>
+    <scroll-view 
+    wx:if="{{onload}}"
+    class='scrollview' scroll-y style='height:{{often?sH+100:sH}}rpx'>
+      <view wx:if="{{list.length != 0}}" class='liubai'></view>
+      <view wx:if="{{list.length != 0}}" wx:for="{{list}}" wx:key="id">
+        <view style='display:flex' bindtap="toRead" data-p="public" data-i="{{index}}">
+          <!--一个关键字-->
+          <view wx:if="{{item.style == '1' }}" class='product-box'>
+            <view class='product-title'>{{item.title}}</view>
+            <view class='product-border-box'>
+              <view class='product-bright'>
+                <view class='product-bright-ite'>
+                  <view class='product-bright-ite-num' style="color:#ff523b">{{item.key1}}</view>
+                  <view class='product-bright-ite-txt'>{{item.keyp1}}</view>
+                </view>
+              </view>
+              <view class='product-tag'>
+                <view class='product-tag-ite' wx:for='{{item.tagsarr}}' wx:key='ind' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+            </view>
+            <view class='producr-details'>{{item.profile}}</view>
+          </view>
+          <!--俩个关键字-->
+          <view wx:elif="{{item.style == '2' }}" class='product-box-two'>
+            <view class='product-title-two' style='font-size:34rpx'>{{item.title}}</view>
+            <view class='product-border-box'>
+              <view class='product-tag-two'>
+                <view class='product-tag-ite-two' wx:for='{{item.tagsarr}}' wx:key='ind' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+              <view class='product-bright-two'>
+                <view class='product-bright-ite-two' style='border-right:1rpx solid #e5e5e5'>
+                  <view class='product-bright-ite-num-two' style="color:#ff523b">{{item.key1}}</view>
+                  <view class='product-bright-ite-txt-two'>{{item.keyp1==null?"":item.keyp1}}</view>
+                </view>
+                <view class='product-bright-ite-two'>
+                  <view class='product-bright-ite-num-two'>{{item.key2}}</view>
+                  <view class='product-bright-ite-txt-two'>{{item.keyp2}}</view>
+                </view>
+              </view>
+            </view>
+            <view class='producr-details-two' style='font-size:24rpx'>{{item.profile}}</view>
+          </view>
+          <!--三个关键字-->
+          <view wx:elif="{{item.style == '3' }}" class='product-box-the'>
+            <view class='product-title-the' style='font-size:34rpx'>{{item.title}}</view>
+            <view class='product-border-box'>
+              <view class='product-tag-the'>
+                <view class='product-tag-ite-the' wx:for='{{item.tagsarr}}' wx:key='ind' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+              <view class='product-bright-the'>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the' style="color:#ff523b">{{item.key1}}</view>
+                  <view class='product-bright-ite-txt-the'>{{item.keyp1}}</view>
+                </view>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the'>{{item.key2}}</view>
+                  <view class='product-bright-ite-txt-the'>{{item.keyp2}}</view>
+                </view>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the'>{{item.key3}}</view>
+                  <view class='product-bright-ite-txt-the'>{{item.keyp3}}</view>
+                </view>
+              </view>
+            </view>
+            <view class='producr-details-the' style='font-size:24rpx'>{{item.profile}}</view>
+          </view>
+          <!--图文-->
+          <view wx:elif="{{item.style == '4' }}" class='product-img'>
+            <view class='product-img-content'>
+              <view class='product-img-title-box'>
+                <view class='product-img-title'>{{item.title}}</view>
+              </view>
+              <view class='product-img-text-box'>
+                <view class='product-img-text'>{{item.profile}}</view>
+              </view>
+              <view class='product-img-tag'>
+                <view class='product-img-tag-ite' wx:for="{{item.tagsarr}}" wx:key="index">{{item}}</view>
+              </view>
+            </view>
+            <image class='product-img-img' src='{{item.imgurl}}'></image>
+          </view>
+        </view>
+        <view class="statistics-box" catchtap='catchtap'>
+          <view class="statistics-box-img-box">
+            <image class="statistics-box-img" wx:for="{{item.pps}}" wx:for-item="ite" wx:key='ind' src="{{ite}}" mode="aspectFill"/>
+          </view>
+          <form report-submit="true" catchsubmit="statisticsTo" data-formkey='statistics' data-p="public" data-i="{{index}}">
+            <button form-type="submit" class="statistics-box-btn">浏览记录</button>
+          </form>
+        </view>
+      </view>
+      <view wx:if="{{list.length == 0 }}" class='chat-none-box'>
+        <view class='chat-none-img'>
+          <image src='https://www.willsfintech.cn:9004/staticFile/image/product-none.png' style='width: 259rpx;height: 154rpx;'></image>
+          <view style='margin-top:20rpx;text-align:center'>
+            <text>
+              你还没有设置公开产品哦, 要知道, 客户已经等不及了
+
+              设置步骤：产品 — 操作 — 设为公开
+            </text>
+          </view>
+        </view>
+      </view>
+      <!--私密-->
+      <view wx:if="{{private_show}}" class='private-line'>
+        <view class='line-box'></view>
+        <view class='private-box'>
+          <image src='../../../../image/img/private.png' style='width:29rpx;height:36rpx;margin-right:12rpx'></image>
+          <text style='font-size:32rpx;color:#333'>私密产品</text>
+        </view>
+      </view>
+      <view  wx:for="{{privatelist}}" wx:key="id" data-p="private" data-i="{{index}}" bindtap="toRead">
+        <!--一个关键字-->
+        <view wx:if="{{item.style == '1' }}" class='product-box'>
+          <view class='product-title'>{{item.title}}</view>
+          <view class='product-border-box'>
+            <view class='product-bright'>
+              <view class='product-bright-ite'>
+                <view class='product-bright-ite-num' style="color:#ff523b">{{item.key1}}</view>
+                <view class='product-bright-ite-txt'>{{item.keyp1}}</view>
+              </view>
+            </view>
+            <view class='product-tag'>
+              <view class='product-tag-ite' wx:for='{{item.tagsarr}}' wx:key='ind' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+          </view>
+          <view class='producr-details'>{{item.profile}}</view>
+        </view>
+        <!--俩个关键字-->
+        <view wx:elif="{{item.style == '2' }}" class='product-box-two'>
+          <view class='product-title-two' style='font-size:34rpx'>{{item.title}}</view>
+          <view class='product-border-box'>
+            <view class='product-tag-two'>
+              <view class='product-tag-ite-two' wx:for='{{item.tagsarr}}' wx:key='ind' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+            <view class='product-bright-two'>
+              <view class='product-bright-ite-two' style='border-right:1rpx solid #e5e5e5'>
+                <view class='product-bright-ite-num-two' style="color:#ff523b">{{item.key1}}</view>
+                <view class='product-bright-ite-txt-two'>{{item.keyp1==null?"":item.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-two'>
+                <view class='product-bright-ite-num-two'>{{item.key2}}</view>
+                <view class='product-bright-ite-txt-two'>{{item.keyp2}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-two' style='font-size:24rpx'>{{item.profile}}</view>
+        </view>
+        <!--三个关键字-->
+        <view wx:elif="{{item.style == '3' }}" class='product-box-the'>
+          <view class='product-title-the' style='font-size:34rpx'>{{item.title}}</view>
+          <view class='product-border-box'>
+            <view class='product-tag-the'>
+              <view class='product-tag-ite-the' wx:for='{{item.tagsarr}}' wx:key='ind' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+            </view>
+            <view class='product-bright-the'>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the' style="color:#ff523b">{{item.key1}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.keyp1}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the'>{{item.key2}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.keyp2}}</view>
+              </view>
+              <view class='product-bright-ite-the'>
+                <view class='product-bright-ite-num-the'>{{item.key3}}</view>
+                <view class='product-bright-ite-txt-the'>{{item.keyp3}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='producr-details-the' style='font-size:24rpx'>{{item.profile}}</view>
+        </view>
+        <!--图文-->
+        <view wx:elif="{{item.style == '4' }}" class='product-img'>
+          <view class='product-img-content'>
+            <view class='product-img-title-box'>
+              <view class='product-img-title'>{{item.title}}</view>
+            </view>
+            <view class='product-img-text-box'>
+              <view class='product-img-text'>{{item.profile}}</view>
+            </view>
+            <view class='product-img-tag'>
+              <view class='product-img-tag-ite' wx:for="{{item.tagsarr}}" wx:key="index">{{item}}</view>
+            </view>
+          </view>
+          <image class='product-img-img' src='{{item.imgurl}}'></image>
+        </view>
+        <view class="statistics-box"  catchtap='catchtap'>
+          <view class="statistics-box-img-box">
+            <image class="statistics-box-img" wx:for="{{item.pps}}" wx:for-item="ite" wx:key='ind' src="{{ite}}" mode="aspectFill"/>
+          </view>
+          <form report-submit="true" catchsubmit="statisticsTo" data-formkey='statistics' data-p="private" data-i="{{index}}">
+            <button form-type="submit" class="statistics-box-btn">浏览记录</button>
+          </form>
+        </view>
+      </view>
+      <view style='width:100%;height:1rpx;'></view>
+    </scroll-view>
+    <view class='bottom-box' style='bottom:{{bm}}rpx' hidden='{{often}}'>
+      <form report-submit="true" data-formkey='add' bindsubmit="productAdd">
+        <button form-type="submit" class='bottom-button'>
+          <image src='../../../../image/img/common-add.png' style='width:32rpx;height:32rpx;margin-right:12rpx;'></image>
+          <text style='font-size:32rpx;color:#333'>新增产品</text>
+        </button>
+      </form>
+    </view>
+  </view>
+  <view wx:if="{{guidance}}" class='guidance-box guidance-box_one' style='bottom:{{bm+114}}rpx'>
+    <view class='guidance-triangle guidance-triangle-bottom guidance-triangle_one' />点此新增第一款产品</view>
+  <view wx:if='{{guidance1}}'>
+    <view class='guidance-meng'></view>
+    <view class='guidance1-box'>
+    <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:134rpx;height:141rpx;'/>
+      <view class="guidance-box-one-text" style='width:400rpx;margin-left:14rpx;margin-top:0'>
+        <text style='font-size:26rpx;font-weight:500;text-align:center'>新增的产品只有自己可见，在产品里【操作】-【设为公开】，客户才能在名片里看见哦</text>
+      </view>
+    </view>
+    <form report-submit="true" bindsubmit="iknow" data-formkey='know'>
+      <button class='jobs-diy jobs-diy_know' form-type="submit">知道了</button>
+    </form>
+  </view>
+  <view wx:if='{{course6Done}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one guidance-box-padding">
+        <view bindtap="closeDone" class='guidance-close'>
+          <image src="../../../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:191rpx;height:201rpx;margin-top:25rpx'/>
+        <view class="guidance-box-one-text">
+          <text style='font-size:34rpx;font-weight:500'>{{donetitle}}</text>
+          <text style='margin-top:24rpx;text-align:center;color:rgb(118,113,113)'>{{donedesc}}</text>
+        </view>
+        <form report-submit="true" bindsubmit="toNextButton" data-formkey='guidanceDone'>
+          <button class='guidance-btn' style='width:485rpx' form-type="submit">{{donebutton}}</button>
+        </form>
+        <view class='guidance-bottom'>{{donerate}}</view>
+      </view>
+    </view>
+  </view>
+</view>

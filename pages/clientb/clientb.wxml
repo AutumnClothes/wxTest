@@ -1,0 +1,34 @@
+<view>
+  <view class='canvas-box'>
+    <canvas canvas-id="shareCanvas" style="width:750px;height:1080px"></canvas>
+  </view>
+  <tabone bindaddManager="addManager" bindposterBind="posterBind" bindtoMomentList="toMomentList" bindtoproductlist="toproductlist" style="display:  {{ current == 'card'? 'block' :  'none' }}" tab1="{{taboneKey}}" id="tabone"></tabone>
+  <tabthr style="display:  {{ current == 'product'? 'block' :  'none' }}" tab3="{{tabthrKey}}" id="tabthr"></tabthr>
+  <tabfour style="display:  {{ current == 'column'? 'block' :  'none' }}" tab4="{{tabfourKey}}" id="tabfour"></tabfour>
+  <view class='tabbar-box' style='bottom:{{bm}}rpx'>
+    <i-tab-bar current="{{ current }}" bindchange="handleChange">
+      <i-tab-bar-item key="card" img="../../image/icon/card.png" current-img="../../image/icon/card-btn.png" title="名片"></i-tab-bar-item>
+      <i-tab-bar-item count="{{count}}" key="consult" img="../../image/icon/consult.png" current-img="../../image/icon/consult-btn.png" title="咨询"></i-tab-bar-item>
+      <i-tab-bar-item key="product" img="../../image/icon/product.png" current-img="../../image/icon/product-btn.png" title="产品"></i-tab-bar-item>
+      <i-tab-bar-item key="column" img="../../image/icon/column.png" current-img="../../image/icon/column-btn.png" title="专栏"></i-tab-bar-item>
+    </i-tab-bar>
+  </view>
+	 <view class="meng"  wx:if="{{accreditType == 'toget' || accreditType == 'toset'}}"></view>
+  <view class='accredit'  style="display: {{accreditType == 'toget' || accreditType == 'toset'? 'block' : 'none'}};"  >
+    <view class='accredit-box'>
+      <view class='accredit-close' bindtap='closeaccredit'><image src='../../../../../image/img/close.png' style='width:18rpx;height:18rpx;'></image></view>
+      <view class='accredit-title'>需要您的授权</view>
+      <view class='accredit-txt'>仅授权微信头像、微信昵称,授权后,您可以：</view>
+      <view class='accredit-item-box'>
+        <view class='accredit-txt-item'><view class='dian'>1</view>获取名片</view>
+        <view class='accredit-txt-item'><view class='dian'>2</view>咨询顾问</view>
+        <view class='accredit-txt-item'><view class='dian'>3</view>阅读文章</view>
+        <view class='accredit-txt-item'><view class='dian'>4</view>查看产品</view>
+      </view>
+      <form report-submit="true" bindsubmit="accreditTo">
+			 <button class='accredit-button' form-type="submit" data-formkey='getUserInfo' style="display: {{accreditType == 'toget' ? 'flex' : 'none'}};"  bindtap="closeaccredit"  lang="zh_CN"  bindgetuserinfo='onGotUserInfo' open-type="getUserInfo">前往授权</button>
+			<button class='accredit-button' form-type="submit" data-formkey='openSetting' style="display: {{accreditType == 'toset' ?  'flex' : 'none'}};" bindtap="closeaccredit" bindopensetting="opensetting"  lang="zh_CN" open-type="openSetting">前往授权</button> 
+			</form>
+    </view>
+  </view>
+</view>

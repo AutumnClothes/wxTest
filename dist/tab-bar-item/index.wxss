@@ -1,0 +1,11 @@
+.i-tab-bar-item{
+  display:flex;
+  width:100%;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+}
+.i-tab-bar-item-icon{display:flex;justify-content:center;align-items:center;box-sizing:border-box;color:#80848f}
+.i-tab-bar-item-icon-current{color:#2d8cf0}
+.i-tab-bar-item-img{margin-top:13rpx;width:44rpx;height:44rpx;box-sizing: border-box;}
+.i-tab-bar-item-title{font-size:20rpx;box-sizing:border-box;color:#80848f}.i-tab-bar-item-title-current{color:#ffa019}

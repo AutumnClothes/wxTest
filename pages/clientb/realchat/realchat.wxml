@@ -1,0 +1,185 @@
+<!--pages/clienta/realchat/realchat.wxml-->
+<view>
+  <top-box text="{{target}}" backBox="true" delta="1"></top-box>
+  <view class='content' style='top:{{cH}}rpx;'>
+    <scroll-view  bindscrolltoupper="scrolltoupper"  scroll-y style='height:{{scrollBottom}}rpx' scroll-into-view="{{chrildId}}">
+      <view class='liubai'></view>
+      <view id="t{{item.timeline}}" wx:for="{{chatData}}" wx:key="timeline">
+        <!-- {{index}}: {{item.content}} :{{item.direction}}:{{item.contenttype}}:{{item.timeline}} -->
+        <template data="{{item,index:index}}" is="text"></template>
+      </view>
+      <view style='width:100%;height:1rpx' id='liubaiBottom'></view>
+    </scroll-view>
+    <view class='input-bottom' style='bottom:{{inputBottom}}px'>
+      <image class='input-bottom-img' bindtap='bindOperate' src='https://www.willsfintech.cn:9004/staticFile/image/thr-spot.png'></image>
+      <view style='float:left' class='input-bottom-center'>
+        <textarea style="display:{{tareaShow?'block':'none'}}" focus="{{tareaShow}}" bindinput='inputBind' confirm-type="send" maxlength='-1' confirm-hold="true" adjust-position="{{false}}" value="{{inputText}}" bindfocus="inputOn" bindblur="inputOut" auto-height fixed show-confirm-bar="{{false}}"></textarea>
+        <view style="display:{{tareaShow?'none':'block'}}" bindtap='textareaShow' class="textarea-view"></view>
+      </view>
+      <view wx:if="{{inputTrue}}">
+        <form report-submit="true" data-formkey='send' bindsubmit="inputconfirm">
+          <button form-type="submit" class="input-bottom-send">发送</button>
+        </form>
+      </view>
+      <image wx:else class='input-bottom-img' bindtouchstart='extendBind' src='https://www.willsfintech.cn:9004/staticFile/image/realchatadd.png'></image>
+      <view class='meng-box' wx:if="{{mengShow}}" style='top:{{cH}}rpx;bottom:{{mBottom}}rpx' bindtouchstart='mengBind'></view>
+    </view>
+    <view class='appleX-liubai' style='height:{{inputBottom}}px'></view>
+    <view class='input-extend' style="display:  {{ extendHid ? 'block' :  'none' }}">
+      <view class='input-extend-item' wx:for="{{inputExtend}}" wx:key="{{index}}">
+        <view id="{{item.key}}" bindtap="menuClick" class='input-extend-icon' style="background-image:url({{item.img}});"></view>
+        {{item.text}}
+      </view>
+    </view>
+    <view class='operate-box' style="bottom:{{inputBottom}}px;display:{{operateShow?'block':'none'}}">
+      <form report-submit='true' data-formkey='call' bindsubmit='bindCall'>
+        <button form-type='submit' class='operate-button operate-button-bottom'>
+          <image style='min-width:30rpx;width:30rpx;min-height:26rpx;height:26rpx;margin-right:20rpx' src='../../../image/img/telephone.png'></image>
+          拨打电话
+        </button>
+      </form>
+      <form report-submit='true' data-formkey='followgzh' bindsubmit='followGzh'>
+        <button form-type='submit' class='operate-button operate-button-bottom'>
+          <image style='min-width:30rpx;width:30rpx;min-height:30rpx;height:30rpx;margin-right:20rpx' src='../../../image/img/follow.png'></image>
+          关注公众号
+        </button>
+      </form>
+      <form report-submit='true' data-formkey='rejection'  bindsubmit='rejection'>
+        <button form-type='submit' class='operate-button'>
+          <image style='min-width:30rpx;width:30rpx;min-height:33rpx;height:33rpx;margin-right:20rpx' src='../../../image/img/un-news.png'></image>
+          拒收通知
+        </button>
+      </form>
+      <view class='operate-triangle'></view>
+    </view>
+  </view>
+</view>
+<template name="text">
+  <view wx:if="{{item.contenttype == 'update'}}" class='news-time'>{{item.content}}</view>
+  <view wx:if="{{item.contenttype != 'update'}}">
+    <view wx:if="{{item.direction=='send'}}">
+      <view style='justify-content: flex-end' id="id{{item.timeline}}" class='news-box'>
+        <view class='send-err-box'>
+          <view wx:if="{{item.senderr}}" bindtap="resend" data-content="{{item.content}}" data-contenttype="{{item.contenttype}}" data-timeline="{{item.timeline}}" class='send-err'>
+            <image src='../../../image/img/senderr.png' class='send-err-img' style=''></image>
+          </view>
+          <image wx:if="{{item.sending}}" src='https://www.willsfintech.cn:9004/staticFile/image/sending.gif' class='send-err-gif' style='width:32rpx;height:32rpx;'></image>
+          <view wx:if="{{item.contenttype=='text'}}" class='news-two' data-content="{{item.content}}" bindlongtap="longTap">
+            <view>{{item.content}}</view>
+            <image class='news-two-self-tail' src='../../../image/img/tailright.png'></image>
+          </view>
+          <view wx:elif="{{item.contenttype=='img'}}">
+            <image class='news-img' lazy-load mode='aspectFit' lazy-load src="{{item.imgContent}}" data-img-path='{{item.imgContent}}' bindtap='previewImagebind' />
+          </view>
+        </view>
+        <image class='self-portrait' src='{{item.selfProtrait}}' mode='aspectFill'></image>
+      </view>
+    </view>
+    <view wx:else>
+      <view style='justify-content: flex-start' class='news-box'>
+        <!-- <view bindtap="tocusdatapage" class='target-portrait' style='background-image:url({{item.targetPortrait}})'></view> -->
+        <image bindtap="tocusdatapage" class='target-portrait' src='{{item.targetPortrait}}' mode='aspectFill'></image>
+        <view wx:if="{{item.contenttype=='text'}}" class='target-news' data-content="{{item.content}}" bindlongtap="longTap">
+          <view>{{item.content}}</view>
+          <image class='news-two-target-tail' src='../../../image/img/tailleft.png'></image>
+        </view>
+        <view wx:elif="{{item.contenttype=='img'}}">
+          <image class='news-img' lazy-load style='float:left' mode='aspectFit' lazy-load src="{{item.imgContent}}" data-img-path='{{item.imgContent}}' bindtap='previewImagebind' />
+        </view>
+        <view bindtap="toarticleview" data-index="{{index}}" hidden="" wx:elif="{{item.contenttype=='article'}}">
+          <!-- <view class='self-portrait' style='background-image:url({{item.selfProtrait}})'></view> -->
+          <view class='msg-box'>
+            <image mode='aspectFill' src='{{item.content.titleimg}}' style='min-width:140rpx;min-height:140rpx;max-width:140rpx;max-height:140rpx;margin-right:22rpx;'></image>
+            <view>
+              <view class='msg-title'>{{item.content.title}}</view>
+              <view class='msg-time'>{{item.content.showtime}}</view>
+            </view>
+          </view>
+        </view>
+        <!---一个关键词-->
+        <view bindtap="toproductview" data-index="{{index}}"  wx:elif="{{item.contenttype=='product' && item.content.style == '1'}}">
+          <view class='product-box-card'>
+            <view class='product-title-card'>{{item.content.title}}</view>
+            <view style='height:176rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+              <view class='product-bright-card'>
+                <view class='product-bright-it-card'>
+                  <view class='product-bright-ite-num-card'>{{item.content.key1}}</view>
+                  <view class='product-bright-ite-txt-card'>{{item.content.keyp1}}</view>
+                </view>
+              </view>
+              <view class='product-tag-card'>
+                <view class='product-tag-ite-card' wx:for='{{item.content.tagsarr}}' wx:key='index' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+            </view>
+            <view class='producr-details-card'>{{item.content.profile}}</view>
+          </view>
+        </view>
+        <!---俩个关键词-->
+        <view bindtap="toproductview" data-index="{{index}}"  wx:elif="{{item.contenttype=='product' && item.content.style == '2'}}">
+          <view class='product-box-two-card'>
+            <view class='product-title-card' >{{item.content.title}}</view>
+            <view style='height:161rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+              <view class='product-tag-two'>
+                <view class='product-tag-ite-card' wx:for='{{item.content.tagsarr}}' wx:key='index' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+              <view class='product-bright-two-card'>
+                <view class='product-bright-ite-two-card' style='border-right:1rpx solid #e5e5e5'>
+                  <view class='product-bright-ite-num-two'  style="color:#ff523b">{{item.content.key1}}</view>
+                  <view class='product-bright-ite-txt-two'>{{item.content.keyp1}}</view>
+                </view>
+                <view class='product-bright-ite-two-card'>
+                  <view class='product-bright-ite-num-two'>{{item.content.key2}}</view>
+                  <view class='product-bright-ite-txt-two'>{{item.content.keyp2}}</view>
+                </view>
+              </view>
+            </view>
+            <view class='producr-details-card' style='margin-top:33rpx;padding-top:15rpx'>{{item.content.profile}}</view>
+          </view>
+        </view>
+        <!---仨关键词-->
+        <view bindtap="toproductview" data-index="{{index}}"  wx:elif="{{item.contenttype=='product' && item.content.style == '3'}}">
+          <view class='product-box-the-card'>
+            <view class='product-title-card'>{{item.content.title}}</view>
+            <view style='height:161rpx;display:flex;flex-direction: column;align-items: center;justify-content: center;'>
+              <view class='product-tag-the'>
+                <view class='product-tag-ite-the' wx:for='{{item.content.tagsarr}}' wx:key='index' wx:for-index='ind' wx:for-item='ite'>{{ite}}</view>
+              </view>
+              <view class='product-bright-the-card'>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the-card' style="color:#ff523b">{{item.content.key1}}</view>
+                  <view class='product-bright-ite-txt-the'>{{item.content.keyp1}}</view>
+                </view>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the-card' >{{item.content.key2}}</view>
+                  <view class='product-bright-ite-txt-the'>{{item.content.keyp2}}</view>
+                </view>
+                <view class='product-bright-ite-the'>
+                  <view class='product-bright-ite-num-the-card' >{{item.content.key3}}</view>
+                  <view class='product-bright-ite-txt-the'>{{item.content.keyp3}}</view>
+                </view>
+              </view>
+            </view>
+            <view class='producr-details-the-card'>{{item.content.profile}}</view>
+          </view>
+        </view>
+        <!---图文-->
+        <view bindtap="toproductview" data-index="{{index}}" wx:elif="{{item.contenttype=='product' && item.content.style == '4'}}">
+          <view class='product-img-card'>
+            <view class='product-img-content-card'>
+              <view  class='product-img-title-box'>
+                <view class='product-img-title-card'>{{item.content.title}}</view>
+              </view>
+              <view class='product-img-text-box'>
+                <view class='product-img-text-card'>{{item.content.profile}}</view>
+              </view>
+              <view class='product-img-tag-card'>
+                <view class='product-img-tag-ite-card' wx:for="{{item.content.tagsarr}}" wx:key="index">{{item}}</view>
+              </view>
+            </view>
+            <image class='product-img-img-card' src='{{item.content.imgurl}}'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

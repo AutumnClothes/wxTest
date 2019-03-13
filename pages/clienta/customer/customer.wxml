@@ -1,0 +1,150 @@
+<!--pages/customer/customer.wxml-->
+<view class='container'>
+  <top-box text="通讯录"></top-box>
+  <view class='content' style='top:{{cH}}rpx'>
+    <view class='search-box'>
+      <view class='search'>
+        <view class='input-box'>
+          <icon type='search' size='14'></icon>
+          <input placeholder='输入姓名搜索客户' bindinput="inputentry" bindfocus="inputfocus" bindblur="inputblur" bindconfirm="inputconfirm" value='{{inputValue}}'></input>
+        </view>
+        <form report-submit="true" data-formkey='tag' bindsubmit="nextTo" >
+				  <button form-type="submit" class="label-box" >标签</button>
+				</form>
+        <view hidden='{{hidden}}'>
+          <form report-submit="true" data-formkey='souclose' bindsubmit="cancelbind" >
+            <button form-type="submit" class="label-box-cancel" >取消</button>
+          </form>
+        </view>
+      </view>
+    </view>
+    <view class='soulist-box' style='top:{{sT}}rpx' hidden='{{hidden}}'>
+      <scroll-view scroll-y style='height:{{scH}}rpx'>
+        <view wx:for="{{souList}}" wx:key="item">
+          <view class='i-index-demo-item'>
+            <view data-id='{{item.id}}' data-name='{{item.nickname}}' data-portraitpath='{{item.portraitpath}}' class='soulist-item-box' bindtap='toChat'>
+              <image class='portrait-box' src='{{item.portraitpath}}' mode='aspectFill'></image>
+              <rich-text nodes="{{item.nickname}}"></rich-text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class='soutrue-box' hidden='{{souTrue}}'>没有找到“{{souValue}}”</view>
+    </view>
+    <view class='tab-box'>
+      <view class='tab-box-title'>
+        <form report-submit="true" data-formkey='stock' bindsubmit="tabBind" data-id="0">
+          <button form-type="submit" class="tab-box-title-l {{curr== 0?'tab-box-title-r-true':''}}">存量客户</button>
+        </form>
+        <form bindsubmit="true" data-formkey='latent' bindsubmit="tabBind" data-id="1">
+          <button form-type="submit" class="tab-box-title-r">
+            <view class="{{curr == 1?'tab-box-title-r-true':''}}">潜在客户</view>
+            <view style="display:{{topreddot?'block':'none'}} ;"   class='red-dian'></view>
+          </button>
+        </form>
+      </view>
+      <view class="{{curr == 0?'tab-box-solid':'tab-box-solid-false'}}"></view>
+    </view>
+    <view  style="width:100rpx;" wx:if='{{indexShow}}' class='i-index-fixed'>
+      <view style="width:100rpx;display:flex;justify-content:flex-end"
+        wx:for="{{stockWords}}" 
+        wx:key="index" 
+        data-index="{{index}}"
+        catchtouchstart="handlerToouchStart" 
+        catchtouchmove="handlerTouchMove" 
+        catchtouchend='handlerTouchEnd'>
+          <view class="{{indextrue==index?'i-index-fixed-item-true':'i-index-fixed-item'}}">{{item}}</view>
+        </view>
+    </view>
+    <view style="width:100rpx;" wx:else class='i-index-fixed'>
+      <view style="width:100rpx;display:flex;justify-content:flex-end"
+        catchtouchstart="handlerToouchStart" 
+        catchtouchmove="handlerTouchMove" 
+        catchtouchend='handlerTouchEnd' 
+        wx:for="{{latentWords}}" 
+        wx:key="index" 
+        data-index="{{index}}">
+        <view class="{{indextrue==index?'i-index-fixed-item-true':'i-index-fixed-item'}}" >{{item}}</view>
+        </view>
+    </view>
+    <swiper 
+      current="{{ current }}"
+      style="height:{{sH -13}}rpx;"
+      bindchange="swiperUpData"
+      >
+      <swiper-item>
+        <scroll-view bindscroll='scrollOn' scroll-y scroll-into-view='{{iteind}}' class="i-index-demo" style='height:100%' wx:if='{{stock.length != 0}}'>
+          <view wx:for='{{stock}}' wx:key='index'>
+            <view class='i-index-item-header-stock' id="{{item.key+'0'}}">{{item.key}}</view>
+            <view style='padding-left:20rpx'>
+              <view 
+                class="i-index-demo-item" 
+                style='display:flex;align-items: center'
+                wx:for="{{item.list}}" 
+                wx:for-index="in" 
+                wx:key="{{in}}" 
+                wx:for-item="it"
+                data-id='{{it.id}}' 
+                bindtap='toChat'>
+                <image class='portrait-box' src='{{it.portraitpath}}' mode='aspectFill'></image>
+                {{it.name}}
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+        <view wx:if='{{stock.length == 0 && onload}}' class='chat-none-box' style='height: {{sH -13}}rpx;'>
+          <view  class='chat-none-img'>
+            <image src='https://www.willsfintech.cn:9004/staticFile/image/stock-none.png' style='width: 252rpx;height: 188rpx;margin-right:20rpx;'></image>
+            <view style='margin-top:20rpx'>
+              <text>居然还没有存量客户？
+              多分享多互动，总有客户需要你！</text>
+            </view>
+            <view style='width:10%;height:188rpx'></view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view bindscroll='scrollOn' scroll-y scroll-into-view='{{iteind}}'  class="i-index-demo" style='height:100%' wx:if="{{latent.length != 0}}">
+          <view wx:for='{{latent}}' wx:key='index'>
+            <view class='i-index-item-header-latent'  id="{{item.key+'1'}}">{{item.key}}</view>
+            <view style='padding-left:20rpx'>
+              <view 
+                class="i-index-demo-item" 
+                style='display:flex;align-items: center'
+                wx:for="{{item.list}}" 
+                wx:for-index="in" 
+                wx:key="{{in}}" 
+                wx:for-item="it"
+                data-id='{{it.id}}' 
+                bindtap='toChat'>
+                <view wx:if="{{it.reddot}}" class='red-dian-it'></view>
+                <image class='portrait-box' src='{{it.portraitpath}}' mode='aspectFill'></image>
+                {{it.name}}
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+        <view wx:else class='chat-none-box' style='height: {{sH+2}}rpx;'>
+          <view class='chat-none-img'>
+            <image src='https://www.willsfintech.cn:9004/staticFile/image/latent-none.png' style='width: 179rpx;height: 185rpx;margin-left:12rpx'></image>
+            <view style='margin-top:20rpx;width:400rpx'>
+              <text>居然还没有潜在客户? 
+              赶紧分享, 不加好友即可立即沟通, 跟进那些正在关注你的客户
+              
+              @同事查看名片试试吧</text>
+            </view>
+            <view style='height:185rpx'>
+              <button class='chat-none-text' open-type="share" >分享名片@同事</button>
+            </view>
+          </view>
+        </view>
+        <view class='guidance1-box' wx:if='{{guidance}}'>
+          <image src="https://www.willsfintech.cn:9004/staticFile/image/guidance-box-one.png" style='width:134rpx;height:141rpx;'/>
+          <view class="guidance-box-one-text" style='width:400rpx;margin-left:14rpx;margin-top:0'>
+            <view style='font-size:28rpx;text-align: justify;font-weight:500;'>根据教程内获客方法，完善名片后，获得5名潜在客户，即可完成任务</view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

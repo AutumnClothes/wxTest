@@ -1,0 +1,68 @@
+<view>
+  <top-box text="选择发送对象" backBox="true" delta="{{delta}}"></top-box>
+  <view class='content' style='top:{{cH}}rpx;'>
+    <view class='top-box' style='border-bottom:1rpx solid #f0f1f6'>
+      <image style='width:32rpx;height:32rpx;margin-right:13rpx' src='../../../image/img/search.png'></image>
+      <input class='search-input' placeholder="搜索" placeholder-class="input-placeholder-class" bindfocus="inputF" value="{{value}}" bindinput="inputO"></input>
+      <view bindtap='inputB' wx:if="{{show}}" class='inputB-box'>取消</view>
+    </view>
+    <view bindtap="totagspage" class='top-box' style='border-bottom:1rpx solid #e5e5e5'>
+      <image style='width: 26rpx;height: 28rpx;margin:1rpx 14rpx 0 1rpx' src='../../../image/img/grouptag.png'></image>
+      <view>标签</view>
+    </view>
+    <scroll-view scroll-y style='height:{{sH}}rpx;'>
+      <view wx:for="{{list}}" wx:key="{{index}}" style="display:{{show?'none':'block'}}">
+        <view class='linkman-box' data-groupid='{{item.groupid}}' data-groupname='{{item.groupname}}' data-id='{{item.id}}' data-name="{{item.name?item.name:item.nickname}}" data-portraitpath="{{item.portrait}}" bindtap='tosend' data-name='{{item.name?item.name:item.nickname}}'>
+          <image class='linkman-portrait' mode='aspectFill' src='{{item.portrait}}'></image>
+          <view class='linkman-text'>
+            <view wx:if="{{item.nickname.length != 0}}" class='linkman-text-title'>{{item.name?item.name:item.nickname}}</view>
+          </view>
+        </view>
+      </view>
+      <view style="display:{{show?'block':'none'}}">
+        <view class='sou-title' wx:if="{{gsList.length != 0}}">群发</view>
+        <view wx:for="{{gsList}}" wx:key="{{index}}">
+          <view class='linkman-box' data-groupid='{{item.groupid}}' data-groupname='{{item.groupname}}' data-id='{{item.id}}' data-name="{{item.name?item.name:item.nickname}}" data-portraitpath="{{item.portrait}}" bindtap='tosend' data-name='{{item.nickname?item.nickname:item.groupname}}'>
+            <image class='linkman-portrait' mode='aspectFill' src='{{item.portrait}}'></image>
+            <view class='linkman-text'>
+              <view wx:if=" {{item.nickname.length !=0 }} " class='linkman-text-title'>
+                <rich-text nodes="{{item.nickname?item.nickname:item.groupname}}"></rich-text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='sou-title' wx:if="{{csList.length != 0}}">联系人</view> 
+        <view class='cuslist-box' wx:for="{{csList}}" wx:key="{{index}}" data-groupid='{{item.groupid}}' data-groupname='{{item.groupname}}' data-id='{{item.id}}' data-name="{{item.name?item.name:item.nickname}}" data-portraitpath="{{item.portrait}}" bindtap='tosend' data-name='{{item.name?item.name:item.nickname}}'> 
+          <image class='cuslist-img' src='{{item.portraitpath}}'></image> 
+          <rich-text nodes="{{item.name?item.name:item.nickname}}"></rich-text> 
+        </view> 
+      </view>
+    </scroll-view>
+  </view>
+  <view wx:if='{{vipView}}'>
+    <view class='guidance-meng' style='z-index:998'></view>
+    <view class='guidance-box-one-box'>
+      <view class="guidance-box-one">
+        <view bindtap="closeVipView" class='guidance-close'>
+          <image src="../../../image/img/close.png" class='guidance-close-img'/>
+        </view>
+        <image src="https://www.willsfintech.cn:9004/staticFile/image/mem-guide.png" class='mem-guide-position' style='width:610rpx;height:542rpx;'/>
+        <view class="guidance-box-one-text" style='width:520rpx;margin-top:260rpx'>
+          <text style='font-size:34rpx;font-weight:500;color:#333'>开通会员</text>
+          <text style='margin-top:30rpx;color:#333;font-size:28rpx;text-align:center'>优质资讯、产品直达精准客户群，主动服务不再难。</text>
+        </view>
+        <view class='guidance-bottom-button'>
+          <form report-submit="true" bindsubmit="freeMonth" data-freetext="{{freeText}}" data-formkey='vipLeft'>
+            <button class='guidance-btn-vip guidance-btn-left-vip' form-type="submit">{{freeText}}</button>
+          </form>
+          <form report-submit="true" bindsubmit="toVipPage" data-formkey='vipright'>
+            <button class='guidance-btn-vip guidance-btn-right-vip' form-type="submit">立即开通</button>
+          </form>
+        </view>
+        <form report-submit='true' bindsubmit="toVipPage" data-formkey='knowvip'>
+					<button form-type="submit" class='guidance-bottom-text'>了解更多会员特权></button>
+				</form>
+      </view>
+    </view>
+  </view>
+</view>

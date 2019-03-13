@@ -1,0 +1,139 @@
+/* pages/clienta/grouphair/grouphair.wxss */
+@import '../../../style/productcard.wxss';
+
+.content{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f0f1f6;
+}
+.crowd-name view{box-sizing:border-box}
+.crowd-name{
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1rpx solid #e5e5e5;
+  margin-top:20rpx;
+  padding:0 20rpx 0 30rpx;
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 34rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.crowd-name-title{
+  width:50%;
+  color: rgb(102, 102, 102);
+}
+.crowd-name-text{
+  width:50%;
+  text-align: right;
+  color: rgb(153, 153, 153);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 32rpx;
+}
+.crowd-name-input-null{
+  text-align: right;
+  color: rgb(153, 153, 153);
+}
+.crowd-name-input{
+  text-align: right;
+  color: rgb(102, 102, 102);
+}
+.crowd-name-text image{
+  width:33rpx;
+  height:33rpx;
+  margin-right: 15rpx;
+}
+.item-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+.crowd-item-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 730rpx;
+  font-size: 34rpx;
+  color: rgb(0, 0, 0);
+  position: relative;
+  transition: all 0.2s linear;
+}
+.crowd-item-portrait{
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+  box-sizing: border-box;
+  border-radius: 50%;
+  width: 75rpx;
+  height: 75rpx;
+  margin:20rpx 20rpx 20rpx 0;
+}
+.crowd-item-del{
+  position: relative;
+  height: 115rpx;
+  width: 160rpx;
+  background-color: #f0f1f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s linear;
+}
+/*一个关键词*/
+.product-box-card{
+  width:640rpx;
+  margin:20rpx auto;
+}
+
+/*俩个关键词*/
+.product-box-two-card{
+  width:640rpx;
+  margin:20rpx auto;
+}
+
+/*仨关键词*/
+.product-box-the-card{
+  width:640rpx;
+  margin:20rpx auto;
+}
+
+
+/*图文*/
+.product-img-card{
+  width:640rpx;
+  margin:20rpx auto;
+}
+.msg-box{
+  margin:20rpx auto;
+  width:640rpx;
+  padding:30rpx 32rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 12rpx;
+  box-shadow: 0px 5rpx 40rpx 0px rgba(179, 179, 179, 0.33);
+  display: flex;
+  border:1rpx solid #f0f1f6;
+}
+.dynamic-delete{
+  position: absolute;
+  bottom:25rpx;
+  right: 60rpx;
+  width:74rpx;
+  height:74rpx;
+  line-height: 1;
+  padding:20rpx !important;
+  box-sizing: border-box;
+}
+.dynamic-delete-img{
+  min-width: 34rpx;
+  min-height:34rpx;
+  max-width: 34rpx;
+  max-height:34rpx;
+}

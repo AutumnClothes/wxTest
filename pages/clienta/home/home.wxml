@@ -1,0 +1,92 @@
+<view>
+  <scroll-view scroll-y style="height:{{sH}}rpx" bindscroll='scrollBind'>
+    <view class='top' style=";background-image:url('https://www.willsfintech.cn:9004/staticFile/image/city.svg')"></view>
+    <view class="home-newmsg-box" style="padding-top:{{cH}}rpx;height:{{sH}}rpx">
+      <view class="home-top-box" style="height:{{332-cH}}rpx">
+        <view class="home-title-box">
+          <view class="home-title-top">理财顾问都在用的</view>
+          <view class="home-title-bottom">营销服务工具</view>
+        </view>
+        <form report-submit="true" bindsubmit="toManagerCard" data-formkey='homecard'>
+          <button form-type="submit" class="home-mycard">
+            <image class="home-mycard-portrait" src="{{managerPortrait}}" mode="aspectFill" />
+            <view class="home-mycard-text">我的名片</view>
+          </button>
+        </form>
+      </view>
+      <view class="hone-func-box">
+        <form report-submit="true" bindsubmit="toInformationNews" data-formkey='unreadNews'>
+          <button form-type="submit" class="hone-func-ite">
+            <view class="hone-func-itee-top">{{unreadNews}}</view>
+            <view class="hone-func-ite-bottom">未读消息</view>
+          </button>
+        </form>
+        <form report-submit="true" bindsubmit="toInformationDynamic" data-formkey='cusDynamic'>
+          <button form-type="submit" class="hone-func-ite">
+            <view class="hone-func-itee-top">{{cusDynamic}}</view>
+            <view class="hone-func-ite-bottom">客户动态</view>
+          </button>
+        </form>
+      </view>
+      <view class='label-box'>
+        <view wx:for="{{labelList}}" wx:key="index">
+          <form report-submit="true"
+            data-label-itm="{{item.name}}"
+            data-index="{{index}}"
+            bindsubmit="labelBind"
+            data-formkey='dynamicitem'
+            >
+            <button form-type="submit" class='label-itm' style="width:{{index == 0?'140rpx':'534rpx'}}">
+              {{item.name}}
+            </button>
+          </form>
+        </view>
+      </view>
+      <view class="tabTitleList-box {{topKeys?'tabTitleList-box-false':''}}" style="top:{{cH+20}}rpx">
+        <form wx:for='{{tabTitleList}}' wx:key='key' report-submit="true" bindsubmit="tabTitleBind" data-ind='{{index}}' data-formkey='tabTitle' style="position: relative;">
+          <button form-type="submit" class="tabTitleList-box-ite {{tabTitleInd==index?'tabTitleList-box-ite-true':''}}">{{item}}</button>
+          <view wx:if="{{index == 0}}" style="left:{{indLeft}}rpx" class="tabTitleList-solid"></view>
+        </form>
+      </view>
+      <view style="width:100%;height:72rpx;" hidden="{{!topKeys}}"></view>
+      <swiper class="" current="{{current}}" bindchange="swiperChange" style="height:{{swiperHeight}}rpx">
+        <swiper-item wx:for="{{tabTitleList}}" wx:key="index" class="" item-id="{{index}}">
+          <view class="content-item" wx:for="{{msgList}}" wx:key='{{item.id}}'>
+            <view style='display:flex' bindtap='toviewpage' data-id="{{item.id}}" data-ind="{{index}}">
+              <image class='content-item-img' lazy-load mode='aspectFill' src='{{item.img}}'></image>
+              <view class='content-item-ite'>
+                <view class='content-item-text'>{{item.text}}</view>
+                <view class='content-item-time'>{{item.time}}</view>
+              </view>
+            </view>
+          </view>
+          <view style='width:100%;height:20rpx' id='getId'></view>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class='sticky-top' style="display:{{topKeys?'block':'none'}};height:{{cH+20}}rpx">
+      <form report-submit="true" data-formkey='group' bindsubmit="groupToMsg">
+        <button form-type="submit" class="group-box" style='left:{{7*gH}}rpx;top:{{H}}rpx;height:{{32*gH}}rpx;border:{{1*gH}}rpx solid #cacaca'>
+          <view class='group-img'></view>
+          <view class='group-text'>我的资讯</view>
+        </button>
+      </form>
+    </view>
+  </scroll-view>
+  <view class="" wx:if='{{advert}}'>
+    <view class="meng"></view>
+    <view class="public-box">
+      <view class='public-close' bindtap="closeBind">
+        <image src="../../../image/img/close.png" class='public-close-img'/>
+      </view>
+      <view class='public-content-box'>
+        <image class='public-img public-img-left' src="../../../image/img/public-topleft.png"/>
+        <view class='public-content'>{{advertTxt}}</view>
+        <image class='public-img public-img-right' src="../../../image/img/public-botright.png"/>
+      </view>
+      <form report-submit="true" bindsubmit="publicGuide" >
+        <button class='public-button public-button_one' form-type="submit" open-type='contact'>{{advertBtn}}</button>
+      </form>
+    </view>
+  </view>
+</view>

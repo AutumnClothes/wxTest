@@ -1,0 +1,11 @@
+<!--pages/clienta/mine/uploadhi/uploadhi.wxml-->
+<view>
+  <top-box text="{{title}}" backBox delta="1" style="top:{{H}}rpx"></top-box>
+  <view class='content' style='top:{{cH}}rpx'>
+    <image class='head-img-box' src='{{headimg}}' mode='aspectFit'></image>
+    <view bindtap='picBindOn' class='content-bottom'>
+      <view class='content-bottom-border'></view>
+      {{txt}}
+    </view>
+  </view>
+</view>

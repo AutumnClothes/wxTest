@@ -1,0 +1,88 @@
+/* pages/clienta/grouphair/grouphair.wxss */
+.content{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f0f1f6;
+}
+.crowd-name{
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1rpx solid #e5e5e5;
+  margin-top:20rpx;
+  padding:0 20rpx 0 30rpx;
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 34rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.crowd-name-title{
+  color: rgb(102, 102, 102);
+  width:50%;
+}
+.crowd-name-text{
+  text-align: right;
+  color: rgb(153, 153, 153);
+  display: flex;
+  align-items: center;
+}
+.crowd-name-input-null{
+  text-align: right;
+  color: rgb(153, 153, 153);
+}
+.crowd-name-input{
+  text-align: right;
+  color: rgb(102, 102, 102);
+}
+.crowd-name-text image{
+  width:33rpx;
+  height:33rpx;
+  margin-right: 15rpx;
+}
+.item-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 910rpx;
+  background-color:#fff;
+}
+.crowd-item-box{
+  display: flex;
+  align-items: center;
+  margin-left:20rpx;
+  width: 730rpx;
+  font-size: 34rpx;
+  color: rgb(0, 0, 0);
+  border-bottom: 1rpx solid #e5e5e5;
+  position: relative;
+  transition: all 0.1s linear
+}
+.crowd-item-portrait{
+  box-sizing: border-box;
+  border-radius: 50%;
+  width: 75rpx;
+  height: 75rpx;
+  min-width: 75rpx;
+  min-height: 75rpx;
+  margin:20rpx 20rpx 20rpx 0;
+}
+.crowd-item-del{
+  position: relative;
+  height: 115rpx;
+  width: 160rpx;
+  background-color: #f0f1f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s linear
+}
+.crowd-item-name{
+  width: 560rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

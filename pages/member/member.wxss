@@ -1,0 +1,126 @@
+/* pages/member/member.wxss */
+.table-box{
+  border-top:1rpx solid #b8bccd;
+  width: 680rpx;
+  margin:0 auto;
+  font-size: 24rpx;
+  line-height: 36rpx;
+}
+.table-item{
+  border-bottom:1px solid #b8bccd;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height:64rpx;
+  max-height:64rpx;
+  box-sizing: border-box;
+}
+.table-ite{
+  width:268rpx;
+  height:64rpx;
+  max-height:64rpx;
+  box-sizing: border-box;
+  padding-left:20rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.table-can{
+  width:205rpx;
+  height:64rpx;
+  max-height:64rpx;
+  box-sizing: border-box;
+  text-align: center;
+  border-left:1px solid #b8bccd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.table-item-font{
+  font-size: 20rpx;
+  color:#999;
+}
+.bottom-button{
+  position: fixed;
+  width:750rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.botton-item{
+  height:88rpx;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8rpx;
+}
+.botton-left{
+  width:240rpx;
+  margin-right:20rpx;
+  border:1rpx solid #3b3b3b;
+}
+.botton-right{
+  width:420rpx;
+  background-color: #ffa019;
+  color:#fff;
+}
+.meng-box{
+  position: fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color: #000;
+  opacity: 0.6;
+  z-index: 900;
+}
+.mem-box{
+  z-index: 999;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  background-color: #fff;
+  border-radius: 14rpx;
+  padding:58rpx 70rpx 44rpx 70rpx;
+}
+.mem-box-title{
+  width:400rpx;
+  margin-bottom:32rpx;
+  font-size: 38rpx;
+  color:#333;
+  line-height:34rpx;
+  text-align: center;
+}
+.mem-box-text{
+  width:400rpx;
+  margin-bottom:15rpx;
+  font-size: 30rpx;
+  color:#333;
+  line-height:42rpx;
+  text-align: center;
+}
+.mem-box-close{
+  width:88rpx;
+  height:88rpx;
+  position: absolute;
+  top:10rpx;
+  left:10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.guidance-btn{
+  position: fixed;
+  left:406rpx;
+  transform: translateX(-50%);
+  margin-top:0;
+  font-size: 26rpx;
+  line-height:1;
+  height:56rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:0 15rpx;
+  width:auto;
+}
